@@ -1,36 +1,36 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Plane, Briefcase, Compass, PartyPopper, MapPin, Clock, Users, Shield } from 'lucide-react';
+import { Plane, Briefcase, Compass, PartyPopper, Clock, Users, Shield, MapPin } from 'lucide-react';
 
 const services = [
   {
     icon: Plane,
-    title: 'Airport Transfers',
-    description: 'Seamless pick-up and drop-off at Nice, Marseille, and all regional airports. Flight tracking included.',
+    title: 'Transferts Aéroport',
+    description: 'Prise en charge et dépose fluides aux aéroports de Nice, Marseille et toute la région. Suivi des vols inclus.',
   },
   {
     icon: Briefcase,
-    title: 'Business Travel',
-    description: 'Professional transportation for corporate events, meetings, and executive travel throughout the region.',
+    title: 'Voyages d\'Affaires',
+    description: 'Transport professionnel pour événements corporate, réunions et déplacements exécutifs dans toute la région.',
   },
   {
     icon: Compass,
-    title: 'Private Excursions',
-    description: 'Discover the French Riviera and Provence with curated sightseeing tours and wine country adventures.',
+    title: 'Excursions Privées',
+    description: 'Découvrez la Côte d\'Azur et la Provence avec des circuits sur mesure et des escapades œnologiques.',
   },
   {
     icon: PartyPopper,
-    title: 'Special Events',
-    description: 'Elegant transportation for weddings, galas, and exclusive celebrations with white-glove service.',
+    title: 'Événements Spéciaux',
+    description: 'Transport élégant pour mariages, galas et célébrations exclusives avec un service irréprochable.',
   },
 ];
 
 const highlights = [
-  { icon: Clock, text: 'Punctuality Guaranteed' },
-  { icon: Shield, text: 'Discreet & Professional' },
-  { icon: Users, text: 'Multilingual Chauffeurs' },
-  { icon: MapPin, text: '24/7 Availability' },
+  { icon: Clock, text: 'Ponctualité Garantie' },
+  { icon: Shield, text: 'Discret & Professionnel' },
+  { icon: Users, text: 'Chauffeurs Multilingues' },
+  { icon: MapPin, text: 'Disponible 24h/24' },
 ];
 
 const ServicesSection = () => {
@@ -38,7 +38,7 @@ const ServicesSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="services" className="section-padding noise-overlay bg-card" ref={ref}>
+    <section id="services" className="section-padding texture-overlay bg-secondary" ref={ref}>
       <div className="container-narrow">
         {/* Section Header */}
         <motion.div
@@ -47,16 +47,17 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold text-primary tracking-wider uppercase mb-4 block">
-            Our Services
+          <div className="divider-elegant mx-auto mb-6" />
+          <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-4 block">
+            Nos Services
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Premium Transportation{' '}
-            <span className="gradient-text">Tailored to You</span>
+          <h2 className="text-3xl md:text-5xl font-serif mb-6">
+            Un Transport Premium{' '}
+            <span className="text-gold">Sur Mesure</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            From airport transfers to bespoke itineraries, we deliver exceptional 
-            private transportation experiences across the South of France.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg font-light leading-relaxed">
+            Des transferts aéroport aux itinéraires personnalisés, nous offrons des expériences 
+            de transport d'exception dans le Sud de la France.
           </p>
         </motion.div>
 
@@ -68,16 +69,13 @@ const ServicesSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative glass rounded-2xl p-8 card-hover"
+              className="card-elegant rounded-2xl p-8"
             >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <service.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-6">
+                <service.icon className="w-7 h-7 text-gold" />
               </div>
+              <h3 className="text-xl font-serif mb-3">{service.title}</h3>
+              <p className="text-muted-foreground font-light leading-relaxed">{service.description}</p>
             </motion.div>
           ))}
         </div>
@@ -87,12 +85,12 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap justify-center gap-6 md:gap-10"
+          className="flex flex-wrap justify-center gap-8 md:gap-12"
         >
           {highlights.map((highlight, index) => (
             <div key={index} className="flex items-center gap-3 text-sm text-muted-foreground">
-              <highlight.icon className="w-5 h-5 text-primary" />
-              <span className="font-medium">{highlight.text}</span>
+              <highlight.icon className="w-5 h-5 text-gold" />
+              <span className="font-light tracking-wide">{highlight.text}</span>
             </div>
           ))}
         </motion.div>
