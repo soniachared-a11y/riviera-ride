@@ -60,7 +60,7 @@ function ScrollingBanner() {
     <div className="w-full overflow-hidden bg-white" style={{ height: '140px' }}>
       <div 
         className="flex items-center h-full"
-        style={{ width: 'fit-content', animation: 'scroll 20s linear infinite' }}
+        style={{ width: 'fit-content', animation: 'scroll 40s linear infinite' }}
       >
         {duplicatedItems.map((item, index) => (
           <div key={index} className="flex flex-col items-center justify-center text-center flex-shrink-0" style={{ minWidth: '280px', padding: '24px', gap: '12px' }}>
@@ -120,7 +120,7 @@ export default function ServicesSection() {
               <div 
                 className="bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-black hover:shadow-xl transition-all duration-300 mx-auto"
                 style={{ 
-                  width: '380px', 
+                  width: '360px', 
                   height: '500px',
                   boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
                 }}
