@@ -45,7 +45,7 @@ const VehicleSection = () => {
             TESLA MODEL Y
           </h2>
           <p 
-            className="text-white/70 font-extralight max-w-md mx-auto"
+            className="text-white/70 font-extralight max-w-lg mx-auto mb-3"
             style={{
               fontSize: '14px',
               letterSpacing: '1px',
@@ -54,6 +54,16 @@ const VehicleSection = () => {
             }}
           >
             Une expérience de voyage premium à bord du véhicule électrique le plus avancé de sa catégorie.
+          </p>
+          <p 
+            className="text-white/55 font-extralight max-w-md mx-auto"
+            style={{
+              fontSize: '13px',
+              lineHeight: '1.7',
+              fontFamily: 'Inter, system-ui, sans-serif'
+            }}
+          >
+            Toit panoramique intégral, silence absolu et connectivité à bord. Profitez d'un espace de travail mobile ou d'une bulle de détente.
           </p>
         </motion.div>
 
