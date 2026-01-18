@@ -1,16 +1,23 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Zap, Wifi, Shield, Leaf, ThermometerSnowflake, Sparkles } from 'lucide-react';
+import { Zap, Wifi, Shield, Leaf, Sparkles, Battery, Check } from 'lucide-react';
 import teslaExterior from '@/assets/hero-tesla-riviera.jpg';
 import teslaInterior from '@/assets/tesla-interior.jpg';
 
 const features = [
-  { icon: Zap, label: '100% Électrique', description: 'Zéro émission' },
-  { icon: Shield, label: 'Sécurité Avancée', description: 'Autopilot inclus' },
-  { icon: Wifi, label: 'Connectivité', description: 'Wi-Fi & USB' },
-  { icon: ThermometerSnowflake, label: 'Climatisation', description: 'Confort optimal' },
-  { icon: Sparkles, label: 'Intérieur Premium', description: 'Cuir & toit panoramique' },
-  { icon: Leaf, label: 'Éco-Responsable', description: 'Transport durable' },
+  { icon: Zap, label: '100% Électrique' },
+  { icon: Shield, label: 'Sécurité Maximale' },
+  { icon: Wifi, label: 'Wi-Fi Gratuit' },
+  { icon: Battery, label: 'Autonomie 500km' },
+  { icon: Sparkles, label: 'Intérieur Premium' },
+  { icon: Leaf, label: 'Éco-Responsable' },
+];
+
+const specs = [
+  { label: 'Passagers', value: '4 personnes' },
+  { label: 'Bagages', value: '3 grandes valises' },
+  { label: 'Écran', value: '15" tactile' },
+  { label: 'Toit', value: 'Panoramique' },
 ];
 
 const FleetSection = () => {
@@ -18,94 +25,115 @@ const FleetSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="fleet" className="section-padding" ref={ref}>
-      <div className="container-narrow">
-        {/* Section Header */}
+    <section id="fleet" className="section-light relative overflow-hidden" ref={ref}>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <div className="divider-elegant mx-auto mb-6" />
-          <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-4 block">
+          <span className="accent-line mb-6 block mx-auto" />
+          <span className="text-sm font-light tracking-[0.2em] uppercase text-charcoal-light block mb-4">
             Notre Flotte
           </span>
-          <h2 className="text-3xl md:text-5xl font-serif mb-6">
-            Voyagez en{' '}
-            <span className="text-gold">Tesla Model Y 2025</span>
+          <h2 className="mb-6">
+            Tesla Model Y{' '}
+            <span className="text-gold">2025</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            L'alliance parfaite entre technologie de pointe, luxe durable 
-            et confort absolu dans notre flotte électrique premium.
+          <p className="text-lg text-charcoal-light max-w-2xl mx-auto font-light">
+            L'alliance parfaite entre technologie de pointe, confort absolu 
+            et responsabilité environnementale.
           </p>
         </motion.div>
 
-        {/* Fleet Showcase */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
-          {/* Main Image */}
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
+          {/* Left - Main Image */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative group"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="lg:col-span-7 relative"
           >
-            <div className="absolute -inset-2 bg-gradient-to-br from-gold/10 to-transparent rounded-2xl blur-xl" />
-            <div className="relative overflow-hidden rounded-2xl shadow-xl">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
               <img
                 src={teslaExterior}
-                alt="Tesla Model Y 2025 sur la Côte d'Azur"
-                className="w-full h-80 lg:h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
+                alt="Tesla Model Y 2025"
+                className="w-full h-[400px] lg:h-[500px] object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-charcoal/90 to-transparent">
-                <h3 className="text-xl font-serif text-white">Tesla Model Y 2025</h3>
-                <p className="text-white/70 text-sm font-light">SUV Électrique Premium</p>
+              <div className="img-overlay" />
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <span className="badge-premium mb-4">
+                  Flotte Premium
+                </span>
+                <h3 className="text-white text-3xl mb-2">Tesla Model Y</h3>
+                <p className="text-white/70 font-light">SUV 100% Électrique • 2025</p>
               </div>
             </div>
-          </motion.div>
 
-          {/* Interior + Features */}
-          <div className="flex flex-col gap-6">
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative overflow-hidden rounded-2xl group shadow-lg"
-            >
-              <img
-                src={teslaInterior}
-                alt="Intérieur premium Tesla Model Y 2025"
-                className="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 to-transparent" />
-              <div className="absolute bottom-4 left-4">
-                <span className="text-sm font-light text-white">Intérieur Premium</span>
-              </div>
-            </motion.div>
-
-            {/* Features Grid */}
+            {/* Features Grid Overlay */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-2 gap-4 flex-1"
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="absolute -right-4 lg:-right-8 top-8 grid grid-cols-2 gap-3"
             >
-              {features.map((feature, index) => (
+              {features.slice(0, 4).map((feature, i) => (
                 <div
-                  key={index}
-                  className="card-elegant rounded-xl p-4 flex items-start gap-3"
+                  key={i}
+                  className="card-float !p-4 flex items-center gap-3"
                 >
-                  <feature.icon className="w-5 h-5 text-gold mt-0.5 shrink-0" />
-                  <div>
-                    <div className="font-medium text-sm mb-0.5">{feature.label}</div>
-                    <div className="text-xs font-light text-muted-foreground">{feature.description}</div>
-                  </div>
+                  <feature.icon className="w-5 h-5 text-gold" />
+                  <span className="text-sm font-light text-charcoal whitespace-nowrap">{feature.label}</span>
                 </div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
+
+          {/* Right - Details */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="lg:col-span-5 space-y-8"
+          >
+            {/* Interior Image */}
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <img
+                src={teslaInterior}
+                alt="Intérieur Tesla Model Y"
+                className="w-full h-48 object-cover"
+              />
+            </div>
+
+            {/* Specs */}
+            <div className="card-float !p-8">
+              <h4 className="font-serif text-xl mb-6">Caractéristiques</h4>
+              <div className="space-y-4">
+                {specs.map((spec, i) => (
+                  <div key={i} className="flex items-center justify-between py-3 border-b border-stone/50 last:border-0">
+                    <span className="text-charcoal-light font-light">{spec.label}</span>
+                    <span className="font-medium text-charcoal">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Included */}
+            <div className="space-y-3">
+              <h4 className="font-serif text-lg mb-4">Toujours inclus</h4>
+              {['Eau minérale fraîche', 'Chargeurs USB-C', 'Climatisation premium'].map((item, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-success/10 flex items-center justify-center">
+                    <Check className="w-3 h-3 text-success" />
+                  </div>
+                  <span className="text-charcoal-light font-light">{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
