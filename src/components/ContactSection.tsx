@@ -8,7 +8,7 @@ const ACCENT_BLUE = '#0E4D64';
 
 const ContactSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +23,7 @@ const ContactSection = () => {
   return (
     <section 
       id="contact" 
-      className="relative min-h-[90vh] flex items-center overflow-hidden py-20 md:py-28"
+      className="relative overflow-hidden py-12 md:py-16"
       ref={ref}
     >
       {/* Background Image */}
@@ -33,123 +33,127 @@ const ContactSection = () => {
       />
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/50" />
+      <div className="absolute inset-0 bg-black/60" />
       
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10 w-full">
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-12 items-center">
           
-          {/* Left Column - Text Content */}
+          {/* Left Column - Text Content (40%) */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-left"
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-2 text-left"
           >
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="font-serif text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-6"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight mb-4"
             >
-              Votre Tesla est Prête.
+              Voyagez l'Esprit Libre.
               <br />
-              <span className="text-white/90">Réservez l'Excellence Maintenant.</span>
+              <span className="text-white/90">L'Excellence du Transport Privé.</span>
             </motion.h2>
             
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-gray-300 font-light text-base md:text-lg leading-relaxed max-w-xl"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-gray-300 font-light text-sm md:text-base leading-relaxed"
             >
-              Disponibilité 24h/24 et 7j/7 pour tous vos déplacements vers gares, 
-              aéroports et trajets privés en Provence. Confirmation immédiate.
+              Ne laissez plus vos déplacements au hasard. Que ce soit pour un transfert 
+              aéroportuaire stratégique ou un retour tardif de gare TGV, nous garantissons 
+              une ponctualité absolue et une discrétion totale. Votre chauffeur vous attendra 
+              personnellement, avec un tarif fixé à l'avance et sans mauvaise surprise. 
+              Profitez d'un service sur-mesure, disponible 24h/24, pensé pour votre tranquillité.
             </motion.p>
           </motion.div>
 
-          {/* Right Column - Floating Form */}
+          {/* Right Column - Floating Form (60%) */}
           <motion.div
-            initial={{ opacity: 0, x: 40, y: 20 }}
-            animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="lg:col-span-3"
           >
             <form 
               onSubmit={handleSubmit} 
-              className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 lg:p-10"
-              style={{ boxShadow: '0 25px 60px rgba(0,0,0,0.3)' }}
+              className="bg-white rounded-xl shadow-xl p-5 md:p-6"
+              style={{ boxShadow: '0 15px 40px rgba(0,0,0,0.25)' }}
             >
               <h3 
-                className="font-serif text-2xl md:text-3xl mb-8 text-center"
+                className="font-serif text-xl md:text-2xl mb-5 text-center"
                 style={{ color: ACCENT_BLUE }}
               >
-                Planifier Votre Course
+                Réservez votre Chauffeur
               </h3>
 
-              <div className="space-y-5">
-                {/* Departure Address */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
-                    Adresse de départ
-                  </label>
-                  <div className="relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="text"
-                      name="departure"
-                      required
-                      maxLength={200}
-                      className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800"
-                      placeholder="Ex: Aéroport Marseille Provence"
-                    />
-                  </div>
-                </div>
-
-                {/* Arrival Address */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
-                    Adresse d'arrivée
-                  </label>
-                  <div className="relative">
-                    <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="text"
-                      name="arrival"
-                      required
-                      maxLength={200}
-                      className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800"
-                      placeholder="Ex: Hôtel Le Pigonnet, Aix-en-Provence"
-                    />
-                  </div>
-                </div>
-
-                {/* Date & Time - Split Row */}
-                <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                {/* Departure & Arrival - Side by side on larger screens */}
+                <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-2">
-                      Date
+                    <label className="block text-xs font-medium text-gray-500 mb-1.5">
+                      Adresse de départ
                     </label>
                     <div className="relative">
-                      <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
-                        type="date"
-                        name="date"
+                        type="text"
+                        name="departure"
                         required
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800"
+                        maxLength={200}
+                        className="w-full pl-10 pr-3 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800 text-sm"
+                        placeholder="Ex: Aéroport Marseille"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-600 mb-2">
+                    <label className="block text-xs font-medium text-gray-500 mb-1.5">
+                      Adresse d'arrivée
+                    </label>
+                    <div className="relative">
+                      <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input
+                        type="text"
+                        name="arrival"
+                        required
+                        maxLength={200}
+                        className="w-full pl-10 pr-3 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800 text-sm"
+                        placeholder="Ex: Aix-en-Provence"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Date & Time */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500 mb-1.5">
+                      Date
+                    </label>
+                    <div className="relative">
+                      <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                      <input
+                        type="date"
+                        name="date"
+                        required
+                        className="w-full pl-10 pr-3 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800 text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-500 mb-1.5">
                       Heure
                     </label>
                     <div className="relative">
-                      <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                      <Clock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                       <input
                         type="time"
                         name="time"
                         required
-                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800"
+                        className="w-full pl-10 pr-3 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-[#0E4D64] focus:ring-2 focus:ring-[#0E4D64]/20 outline-none transition-all text-gray-800 text-sm"
                       />
                     </div>
                   </div>
@@ -159,10 +163,10 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl text-white font-medium text-base tracking-wide transition-all duration-300 flex items-center justify-center gap-3 mt-4 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 rounded-lg text-white font-medium text-sm tracking-wide transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ 
                     backgroundColor: ACCENT_BLUE,
-                    boxShadow: '0 4px 16px rgba(14,77,100,0.3)'
+                    boxShadow: '0 4px 14px rgba(14,77,100,0.3)'
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor = '#0a3d50';
@@ -173,13 +177,13 @@ const ContactSection = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       <span>Traitement...</span>
                     </>
                   ) : (
                     <>
-                      <span>Estimation & Réservation Instantanée</span>
-                      <ArrowRight className="w-5 h-5" />
+                      <span>Obtenir mon Tarif & Réserver</span>
+                      <ArrowRight className="w-4 h-4" />
                     </>
                   )}
                 </button>
