@@ -1,97 +1,119 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Plane, Briefcase, Compass, PartyPopper, Clock, Users, Shield, MapPin } from 'lucide-react';
+import { Plane, Briefcase, Compass, PartyPopper, ArrowUpRight } from 'lucide-react';
 
 const services = [
   {
     icon: Plane,
     title: 'Transferts Aéroport',
-    description: 'Prise en charge et dépose fluides aux aéroports de Nice, Marseille et toute la région. Suivi des vols inclus.',
+    description: 'Prise en charge ponctuelle aux aéroports de Nice, Marseille, Monaco. Suivi des vols en temps réel.',
+    features: ['Suivi des vols', 'Accueil personnalisé', 'Bagages inclus'],
   },
   {
     icon: Briefcase,
     title: 'Voyages d\'Affaires',
-    description: 'Transport professionnel pour événements corporate, réunions et déplacements exécutifs dans toute la région.',
+    description: 'Transport exécutif pour réunions, conférences et événements corporate dans toute la région.',
+    features: ['Wi-Fi embarqué', 'Discrétion totale', 'Facturation entreprise'],
   },
   {
     icon: Compass,
     title: 'Excursions Privées',
-    description: 'Découvrez la Côte d\'Azur et la Provence avec des circuits sur mesure et des escapades œnologiques.',
+    description: 'Découvrez la Côte d\'Azur et la Provence avec des circuits sur mesure et des guides locaux.',
+    features: ['Itinéraires personnalisés', 'Guides locaux', 'Demi-journée ou journée'],
   },
   {
     icon: PartyPopper,
     title: 'Événements Spéciaux',
-    description: 'Transport élégant pour mariages, galas et célébrations exclusives avec un service irréprochable.',
+    description: 'Mariages, galas, anniversaires. Un service d\'exception pour vos moments inoubliables.',
+    features: ['Décoration possible', 'Champagne offert', 'Coordination événement'],
   },
-];
-
-const highlights = [
-  { icon: Clock, text: 'Ponctualité Garantie' },
-  { icon: Shield, text: 'Discret & Professionnel' },
-  { icon: Users, text: 'Chauffeurs Multilingues' },
-  { icon: MapPin, text: 'Disponible 24h/24' },
 ];
 
 const ServicesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
+
   return (
-    <section id="services" className="section-padding texture-overlay bg-secondary" ref={ref}>
-      <div className="container-narrow">
-        {/* Section Header */}
+    <section id="services" className="section-cream relative overflow-hidden" ref={ref}>
+      {/* Decorative grid */}
+      <div className="absolute inset-0 deco-grid opacity-30" />
+      
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <div className="divider-elegant mx-auto mb-6" />
-          <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-4 block">
+          <span className="accent-line mb-6 block mx-auto" />
+          <span className="text-sm font-light tracking-[0.2em] uppercase text-charcoal-light block mb-4">
             Nos Services
           </span>
-          <h2 className="text-3xl md:text-5xl font-serif mb-6">
-            Un Transport Premium{' '}
+          <h2 className="mb-6">
+            Des Solutions de Transport{' '}
             <span className="text-gold">Sur Mesure</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            Des transferts aéroport aux itinéraires personnalisés, nous offrons des expériences 
-            de transport d'exception dans le Sud de la France.
+          <p className="text-lg text-charcoal-light max-w-2xl mx-auto font-light">
+            Chaque trajet est pensé pour répondre à vos exigences les plus élevées. 
+            Découvrez notre gamme complète de services premium.
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {services.map((service, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          className="grid md:grid-cols-2 gap-6 lg:gap-8"
+        >
+          {services.map((service) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="card-elegant rounded-2xl p-8"
+              variants={itemVariants}
+              className="card-premium p-8 lg:p-10 group"
             >
-              <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-6">
-                <service.icon className="w-7 h-7 text-gold" />
+              <div className="flex items-start justify-between mb-6">
+                <div className="icon-box group-hover:scale-110 transition-transform duration-500">
+                  <service.icon className="w-6 h-6 text-gold" />
+                </div>
+                <ArrowUpRight className="w-5 h-5 text-gold opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
-              <h3 className="text-xl font-serif mb-3">{service.title}</h3>
-              <p className="text-muted-foreground font-light leading-relaxed">{service.description}</p>
-            </motion.div>
-          ))}
-        </div>
 
-        {/* Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap justify-center gap-8 md:gap-12"
-        >
-          {highlights.map((highlight, index) => (
-            <div key={index} className="flex items-center gap-3 text-sm text-muted-foreground">
-              <highlight.icon className="w-5 h-5 text-gold" />
-              <span className="font-light tracking-wide">{highlight.text}</span>
-            </div>
+              <h3 className="mb-3 group-hover:text-gold transition-colors">{service.title}</h3>
+              <p className="text-charcoal-light font-light mb-6 leading-relaxed">
+                {service.description}
+              </p>
+
+              <ul className="flex flex-wrap gap-2">
+                {service.features.map((feature, i) => (
+                  <li
+                    key={i}
+                    className="text-xs font-light tracking-wide px-3 py-1.5 rounded-full bg-stone/50 text-charcoal-light"
+                  >
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           ))}
         </motion.div>
       </div>
