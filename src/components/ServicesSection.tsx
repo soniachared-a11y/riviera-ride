@@ -1,4 +1,28 @@
 import { motion } from 'framer-motion';
+import { Award, Users, MapPin, Heart } from 'lucide-react';
+
+const scrollingItems = [
+  {
+    icon: Award,
+    title: "Excellence",
+    text: "Nous maintenons les plus hauts standards à chaque trajet."
+  },
+  {
+    icon: Users,
+    title: "Discrétion",
+    text: "Votre vie privée est notre priorité absolue."
+  },
+  {
+    icon: MapPin,
+    title: "Expertise Locale",
+    text: "Une connaissance approfondie du Sud de la France."
+  },
+  {
+    icon: Heart,
+    title: "Service Personnalisé",
+    text: "Chaque voyage est adapté à vos préférences."
+  }
+];
 
 const services = [
   {
@@ -40,28 +64,52 @@ const services = [
 ];
 
 export default function ServicesSection() {
-  return (
-    <section className="relative bg-white py-16 md:py-24 px-6" aria-label="Nos Services">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-14"
-        >
-          <h2 className="font-serif text-4xl md:text-5xl font-light text-black mb-4 tracking-tight">
-            Nos Services Premium
-          </h2>
-          <p className="font-serif text-base md:text-lg font-light text-gray-600 max-w-2xl mx-auto">
-            De l'aéroport aux événements, notre Tesla Model Y 2025 vous accompagne avec élégance.
-          </p>
-        </motion.div>
+  // Duplicate items for seamless loop
+  const duplicatedItems = [...scrollingItems, ...scrollingItems, ...scrollingItems, ...scrollingItems];
 
-        {/* Grid of 6 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+  return (
+    <section className="relative bg-white py-20 md:py-20" aria-label="Nos Services">
+      
+      {/* Scrolling Banner */}
+      <div className="w-full overflow-hidden mb-16" style={{ backgroundColor: '#F9FAFB', height: '180px' }}>
+        <motion.div
+          className="flex items-center h-full"
+          animate={{
+            x: ['0%', '-50%']
+          }}
+          transition={{
+            x: {
+              duration: 20,
+              repeat: Infinity,
+              ease: 'linear'
+            }
+          }}
+          style={{ gap: '60px', paddingLeft: '60px' }}
+        >
+          {duplicatedItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-start justify-center flex-shrink-0"
+              style={{ minWidth: '350px', padding: '32px' }}
+            >
+              <item.icon size={40} strokeWidth={1.5} className="text-black mb-3" />
+              <h3 className="font-serif text-xl font-medium text-black mb-2">
+                {item.title}
+              </h3>
+              <p className="font-serif text-sm font-light text-gray-500">
+                {item.text}
+              </p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Cards Grid */}
+      <div className="max-w-7xl mx-auto px-20">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center"
+          style={{ gap: '40px' }}
+        >
           {services.map((service, index) => (
             <motion.article
               key={service.id}
@@ -85,14 +133,14 @@ export default function ServicesSection() {
                 <h3 className="font-serif text-lg font-medium text-black mb-2">
                   {service.title}
                 </h3>
-                <div className="w-10 h-px bg-black mb-3" />
+                <div className="w-3 h-px bg-black mb-3" />
                 <p className="font-serif text-xs text-gray-600 leading-relaxed">
                   {service.description}
                 </p>
               </div>
 
               {/* Right side - Image */}
-              <div className="w-1/2 overflow-hidden">
+              <div className="w-1/2 h-full overflow-hidden">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -118,8 +166,8 @@ export default function ServicesSection() {
             Réserver maintenant : 07 84 62 86 40
           </a>
         </motion.div>
-
       </div>
+
     </section>
   );
 }
