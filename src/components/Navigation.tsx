@@ -62,8 +62,7 @@ const Navigation = () => {
             </a>
             <a 
               href="#contact" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-light tracking-wide text-white rounded-md transition-all duration-300 hover:opacity-90"
-              style={{ backgroundColor: '#0E4D64' }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-light tracking-wide text-white bg-charcoal rounded-md transition-all duration-300 hover:bg-charcoal/90"
             >
               <span>Réserver</span>
               <ChevronRight className="w-4 h-4" />
@@ -125,8 +124,7 @@ const Navigation = () => {
               >
                 <a 
                   href="#contact" 
-                  className="flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-light tracking-wide text-white rounded-md transition-all duration-300"
-                  style={{ backgroundColor: '#0E4D64' }}
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-light tracking-wide text-white bg-charcoal rounded-md transition-all duration-300 hover:bg-charcoal/90"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <span>Réserver</span>
