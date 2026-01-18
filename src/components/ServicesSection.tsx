@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 // Import images localement
@@ -66,12 +66,6 @@ export default function ServicesSection() {
     return () => clearInterval(interval);
   }, [totalSlides]);
 
-  // Get current visible cards
-  const getVisibleCards = () => {
-    const startIndex = currentIndex * cardsPerView;
-    return services.slice(startIndex, startIndex + cardsPerView);
-  };
-
   return (
     <section id="services" className="bg-white py-16">
       <div className="container mx-auto px-4 md:px-8">
@@ -87,7 +81,7 @@ export default function ServicesSection() {
             className="font-serif text-black mb-4 inline-block relative"
             style={{ fontSize: '42px', fontWeight: 300, letterSpacing: '0.03em' }}
           >
-            L'Excellence au Service de vos Déplacements
+            Votre Satisfaction est Notre Priorité
             <motion.span
               className="absolute bottom-0 left-0 h-0.5 bg-black"
               initial={{ width: 0 }}
@@ -100,86 +94,79 @@ export default function ServicesSection() {
             className="font-serif text-black/70 max-w-3xl mx-auto mt-6"
             style={{ fontSize: '17px', fontWeight: 300, lineHeight: 1.8 }}
           >
-            Notre Tesla Model Y 2025 incarne notre engagement envers l'innovation et le confort. 
-            Ponctualité, discrétion et disponibilité 24h/24 de Marseille à Monaco.
+            Basé à Aix-en-Provence, Taxi Malacrida allie rigueur et excellence pour vous mener à bon port. 
+            Disponibilité 24/7 dans toute la région PACA, ponctualité et tranquillité d'esprit garanties.
           </p>
         </motion.div>
 
         {/* Carousel Container */}
         <div className="relative overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="grid gap-8"
-              style={{
-                gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)'
-              }}
-            >
-              {getVisibleCards().map((service, index) => (
-                <div
-                  key={`${currentIndex}-${index}`}
-                  className="overflow-hidden"
+          <motion.div
+            className="flex gap-8"
+            animate={{ x: `-${currentIndex * (100 / totalSlides)}%` }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="overflow-hidden flex-shrink-0"
+                style={{
+                  background: '#000000',
+                  borderRadius: '12px',
+                  height: '600px',
+                  width: isMobile ? 'calc(100% - 0px)' : 'calc(50% - 16px)'
+                }}
+              >
+                {/* Image - 360px height */}
+                <img
+                  src={service.image}
+                  alt={service.title}
                   style={{
-                    background: '#000000',
-                    borderRadius: '12px',
-                    height: '600px'
+                    width: '100%',
+                    height: '360px',
+                    objectFit: 'cover'
                   }}
-                >
-                  {/* Image - 360px height */}
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    style={{
-                      width: '100%',
-                      height: '360px',
-                      objectFit: 'cover'
+                />
+                
+                {/* Contenu texte avec padding 32px */}
+                <div style={{ padding: '32px', color: '#FFFFFF' }}>
+                  <h3 
+                    className="font-serif"
+                    style={{ 
+                      fontSize: '28px', 
+                      fontWeight: 400, 
+                      marginBottom: '16px',
+                      color: '#FFFFFF'
                     }}
+                  >
+                    {service.title}
+                  </h3>
+                  
+                  {/* Ligne blanche - 60px width, 2px height */}
+                  <div 
+                    style={{ 
+                      width: '60px', 
+                      height: '2px', 
+                      background: '#FFFFFF', 
+                      marginBottom: '20px' 
+                    }} 
                   />
                   
-                  {/* Contenu texte avec padding 32px */}
-                  <div style={{ padding: '32px', color: '#FFFFFF' }}>
-                    <h3 
-                      className="font-serif"
-                      style={{ 
-                        fontSize: '28px', 
-                        fontWeight: 400, 
-                        marginBottom: '16px',
-                        color: '#FFFFFF'
-                      }}
-                    >
-                      {service.title}
-                    </h3>
-                    
-                    {/* Ligne blanche - 60px width, 2px height */}
-                    <div 
-                      style={{ 
-                        width: '60px', 
-                        height: '2px', 
-                        background: '#FFFFFF', 
-                        marginBottom: '20px' 
-                      }} 
-                    />
-                    
-                    <p 
-                      className="font-serif"
-                      style={{ 
-                        fontSize: '15px', 
-                        fontWeight: 300, 
-                        lineHeight: 1.7,
-                        color: '#FFFFFF'
-                      }}
-                    >
-                      {service.description}
-                    </p>
-                  </div>
+                  <p 
+                    className="font-serif"
+                    style={{ 
+                      fontSize: '15px', 
+                      fontWeight: 300, 
+                      lineHeight: 1.7,
+                      color: '#FFFFFF'
+                    }}
+                  >
+                    {service.description}
+                  </p>
                 </div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+              </div>
+            ))}
+          </motion.div>
 
           {/* Dots indicator */}
           <div className="flex justify-center gap-2 mt-8">
