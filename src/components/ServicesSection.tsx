@@ -1,8 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Award, Users, MapPin, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const scrollingItems = [
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+// Scrolling banner items
+const bannerItems = [
   {
     icon: Award,
     title: "Excellence",
@@ -25,208 +32,266 @@ const scrollingItems = [
   }
 ];
 
+// Service cards data
 const services = [
   {
     id: 1,
     title: "Transferts Aéroports",
     description: "Marseille-Provence, Nice Côte d'Azur, Toulon Hyères. Ponctualité garantie, suivi de vol en temps réel, prise en charge directe au terminal.",
-    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/voiture%20en%20route%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS92b2l0dXJlIGVuIHJvdXRlIC5wbmciLCJpYXQiOjE3Njg3NTc3MTUsImV4cCI6MTgwMDI5MzcxNX0.iTqRqep4pCNN5bL_VLXw0LvfsNDrx8fT4LaONKYuGdw"
+    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/voiture%20en%20route%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS92b2l0dXJlIGVuIHJvdXRlIC5wbmciLCJpYXQiOjE3Njg3NTc3MTUsImV4cCI6MTgwMDI5MzcxNX0.iTqRqep4pCNN5bL_VLXw0LvfsNDrx8fT4LaONKYuGdw",
+    alt: "Tesla Model Y route aéroport Marseille-Provence coucher soleil"
   },
   {
     id: 2,
     title: "Service à la journée",
     description: "Bénéficiez d'un chauffeur privé pour la journée entière, idéal pour vos rendez-vous professionnels ou vos activités personnelles.",
-    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/gare.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9nYXJlLnBuZyIsImlhdCI6MTc2ODc1NzU3NCwiZXhwIjoxODAwMjkzNTc0fQ.QIwDTb1biOFIXpjMZ5yuUTiEbHdcxb0wxATFblSeTVQ"
+    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/gare.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9nYXJlLnBuZyIsImlhdCI6MTc2ODc1NzU3NCwiZXhwIjoxODAwMjkzNTc0fQ.QIwDTb1biOFIXpjMZ5yuUTiEbHdcxb0wxATFblSeTVQ",
+    alt: "Famille avec bagages chauffeur VTC gare TGV"
   },
   {
     id: 3,
     title: "Shopping & Sorties",
     description: "Nos chauffeurs vous accompagnent confortablement pour vos séances shopping, avec ponctualité et attention à vos besoins.",
-    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/Gemini_Generated_Image_wwvf4pwwvf4pwwvf.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9HZW1pbmlfR2VuZXJhdGVkX0ltYWdlX3d3dmY0cHd3dmY0cHd3dmYucG5nIiwiaWF0IjoxNzY4NzU3NjU3LCJleHAiOjE4MDAyOTM2NTd9.-3IiV9rjs7IHSjYNTcI1Q78z8PTValRc8nJz7w64mTA"
+    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/Gemini_Generated_Image_wwvf4pwwvf4pwwvf.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9HZW1pbmlfR2VuZXJhdGVkX0ltYWdlX3d3dmY0cHd3dmY0cHd3dmYucG5nIiwiaWF0IjoxNzY4NzU3NjU3LCJleHAiOjE4MDAyOTM2NTd9.-3IiV9rjs7IHSjYNTcI1Q78z8PTValRc8nJz7w64mTA",
+    alt: "Couple élégant shopping sacs luxe devant Tesla"
   },
   {
     id: 4,
     title: "Côte d'Azur",
     description: "Nice, Cannes, Monaco. Découvrez les plus beaux paysages de la Méditerranée lors de vos trajets avec vue sur la mer.",
-    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/avion%20nice%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9hdmlvbiBuaWNlIC5wbmciLCJpYXQiOjE3Njg3NTc1MjgsImV4cCI6MTgwMDI5MzUyOH0.223Q28L3arFQ1_Y_UamI_GpMylA-zZDvQ0NYqo_qFaQ"
+    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/avion%20nice%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9hdmlvbiBuaWNlIC5wbmciLCJpYXQiOjE3Njg3NTc1MjgsImV4cCI6MTgwMDI5MzUyOH0.223Q28L3arFQ1_Y_UamI_GpMylA-zZDvQ0NYqo_qFaQ",
+    alt: "Avion au-dessus Nice Côte d'Azur mer turquoise"
   },
   {
     id: 5,
     title: "Transferts Gares",
-    description: "TGV Aix-en-Provence, Marseille Saint-Charles. Prise en charge directe à quai, aide aux bagages, départ immédiat après votre arrivée.",
-    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/gare.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9nYXJlLnBuZyIsImlhdCI6MTc2ODc1NzU3NCwiZXhwIjoxODAwMjkzNTc0fQ.QIwDTb1biOFIXpjMZ5yuUTiEbHdcxb0wxATFblSeTVQ"
+    description: "TGV Aix-en-Provence, Marseille Saint-Charles. Prise en charge directe à quai, aide aux bagages, départ immédiat.",
+    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=800&h=600&fit=crop&q=80",
+    alt: "Chauffeur professionnel VTC élégant"
   },
   {
     id: 6,
     title: "Location à l'heure",
-    description: "Réservez notre service à l'heure pour tous vos besoins, que ce soit pour un trajet rapide ou une journée complète de déplacements.",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop&q=80"
+    description: "Réservez notre service à l'heure pour tous vos besoins, que ce soit pour un trajet rapide ou une journée complète.",
+    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop&q=80",
+    alt: "Passagers détendus Tesla premium"
   }
 ];
 
-export default function ServicesSection() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = 2; // 6 cards / 3 visible = 2 pages
-  
-  // Duplicate items for seamless loop
-  const duplicatedItems = [...scrollingItems, ...scrollingItems, ...scrollingItems, ...scrollingItems];
-
-  const nextPage = useCallback(() => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
-  }, []);
-
-  const prevPage = useCallback(() => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-  }, []);
-
-  // Auto-scroll every 8 seconds
-  useEffect(() => {
-    const interval = setInterval(nextPage, 8000);
-    return () => clearInterval(interval);
-  }, [nextPage]);
+// Scrolling Banner Component
+function ScrollingBanner() {
+  const duplicatedItems = [...bannerItems, ...bannerItems, ...bannerItems, ...bannerItems];
 
   return (
-    <section className="relative bg-white pt-5 pb-10 px-10" aria-label="Nos Services">
+    <div 
+      className="w-full overflow-hidden bg-white"
+      style={{ height: '140px' }}
+      aria-label="Valeurs de l'entreprise"
+    >
+      <div 
+        className="flex items-center h-full animate-scroll"
+        style={{ 
+          width: 'fit-content',
+          animation: 'scroll 20s linear infinite'
+        }}
+      >
+        {duplicatedItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center justify-center text-center flex-shrink-0"
+            style={{ minWidth: '280px', padding: '24px', gap: '12px' }}
+          >
+            <item.icon size={36} strokeWidth={1.5} className="text-black" aria-hidden="true" />
+            <span className="font-serif text-lg font-medium text-black">
+              {item.title}
+            </span>
+            <span className="font-serif text-[13px] font-light text-gray-500">
+              {item.text}
+            </span>
+          </div>
+        ))}
+      </div>
       
-      {/* Scrolling Banner - White background, close to hero */}
-      <div className="w-full overflow-hidden mb-10 bg-white" style={{ height: '180px' }}>
-        <motion.div
-          className="flex items-center h-full"
-          animate={{
-            x: ['0%', '-50%']
-          }}
-          transition={{
-            x: {
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear'
-            }
-          }}
-          style={{ gap: '60px', paddingLeft: '60px' }}
+      <style>{`
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+// Service Card Component
+function ServiceCard({ service }: { service: typeof services[0] }) {
+  return (
+    <article
+      className="group flex flex-col md:flex-row bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300 h-auto md:h-[440px] w-full"
+      style={{
+        boxShadow: '0 0 20px rgba(0, 0, 0, 0.15)',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = '0 0 30px rgba(0, 0, 0, 0.25)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.15)';
+      }}
+    >
+      {/* Left side - Text */}
+      <div className="w-full md:w-1/2 p-6 md:py-8 md:px-6 flex flex-col justify-center bg-white">
+        <span 
+          className="font-serif text-[11px] text-gray-400 uppercase tracking-widest mb-3"
+          aria-hidden="true"
         >
-          {duplicatedItems.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-start justify-center flex-shrink-0"
-              style={{ minWidth: '350px', padding: '32px' }}
-            >
-              <item.icon size={40} strokeWidth={1.5} className="text-black mb-3" />
-              <h3 className="font-serif text-xl font-medium text-black mb-2">
-                {item.title}
-              </h3>
-              <p className="font-serif text-sm font-light text-gray-500">
-                {item.text}
-              </p>
-            </div>
-          ))}
-        </motion.div>
+          {String(service.id).padStart(2, '0')}
+        </span>
+        <h3 className="font-serif text-xl md:text-[22px] font-normal text-black mb-3">
+          {service.title}
+        </h3>
+        <div className="w-4 h-px bg-black mb-4" aria-hidden="true" />
+        <p className="font-serif text-sm font-light text-gray-500 leading-relaxed">
+          {service.description}
+        </p>
       </div>
 
-      {/* Carousel Section */}
+      {/* Right side - Image */}
+      <figure className="w-full md:w-1/2 h-[280px] md:h-full relative overflow-hidden bg-gray-50">
+        <img
+          src={service.image}
+          alt={service.alt}
+          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      </figure>
+    </article>
+  );
+}
+
+export default function ServicesSection() {
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <section 
+      id="services"
+      className="relative bg-white"
+      style={{ paddingTop: '20px', paddingBottom: '80px', paddingLeft: '40px', paddingRight: '40px' }}
+      aria-labelledby="services-heading"
+    >
+      <h2 id="services-heading" className="sr-only">Nos Services</h2>
+
+      {/* Scrolling Banner */}
+      <ScrollingBanner />
+
+      {/* Carousel Container */}
       <div className="max-w-7xl mx-auto relative" style={{ marginTop: '60px' }}>
         
-        {/* Navigation Arrows */}
+        {/* Custom Navigation Buttons */}
         <button
-          onClick={prevPage}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-10 w-10 h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:border-black hover:bg-gray-50 transition-all duration-300"
-          aria-label="Précédent"
+          ref={prevRef}
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-14 z-10 w-8 h-8 md:w-10 md:h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:border-black hover:bg-gray-50 transition-all duration-300"
+          aria-label="Service précédent"
         >
-          <ChevronLeft size={20} className="text-black" />
+          <ChevronLeft size={18} className="text-black" />
         </button>
         
         <button
-          onClick={nextPage}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-10 w-10 h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:border-black hover:bg-gray-50 transition-all duration-300"
-          aria-label="Suivant"
+          ref={nextRef}
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-14 z-10 w-8 h-8 md:w-10 md:h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:border-black hover:bg-gray-50 transition-all duration-300"
+          aria-label="Service suivant"
         >
-          <ChevronRight size={20} className="text-black" />
+          <ChevronRight size={18} className="text-black" />
         </button>
 
-        {/* Cards Container */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex"
-            style={{ gap: '32px' }}
-            animate={{ x: `calc(-${currentPage * 100}% - ${currentPage * 32}px)` }}
-            transition={{ duration: 0.6, ease: 'easeInOut' }}
-          >
-            {services.map((service, index) => (
-              <motion.article
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group flex flex-shrink-0 bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300"
-                style={{
-                  width: 'calc((100% - 64px) / 3)',
-                  height: '400px',
-                  boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
-                }}
-                whileHover={{
-                  boxShadow: '0 0 30px rgba(0, 0, 0, 0.5)',
-                }}
-              >
-                {/* Left side - Text */}
-                <div className="w-1/2 p-5 flex flex-col justify-center bg-white">
-                  <span className="font-serif text-sm text-gray-400 mb-2">
-                    {String(service.id).padStart(2, '0')}
-                  </span>
-                  <h3 className="font-serif text-lg font-medium text-black mb-2">
-                    {service.title}
-                  </h3>
-                  <div className="w-3 h-px bg-black mb-3" />
-                  <p className="font-serif text-xs text-gray-600 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* Right side - Image with contain */}
-                <div className="w-1/2 h-full overflow-hidden flex items-center justify-center bg-gray-50 p-2">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Pagination Indicators */}
-        <div className="flex justify-center gap-3 mt-8">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentPage(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentPage === index 
-                  ? 'bg-black' 
-                  : 'bg-gray-300 hover:bg-gray-400'
-              }`}
-              aria-label={`Page ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Footer CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-center mt-10"
+        {/* Swiper Carousel */}
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={32}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 8000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+            el: '.services-pagination',
+            bulletClass: 'swiper-bullet',
+            bulletActiveClass: 'swiper-bullet-active',
+          }}
+          navigation={{
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          onBeforeInit={(swiper) => {
+            if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }
+          }}
+          breakpoints={{
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 32,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 32,
+            },
+          }}
+          className="services-swiper"
         >
+          {services.map((service) => (
+            <SwiperSlide key={service.id}>
+              <ServiceCard service={service} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* Custom Pagination */}
+        <div className="services-pagination flex justify-center gap-3 mt-8" />
+
+        {/* CTA Button */}
+        <div className="text-center mt-10">
           <a 
             href="tel:0784628640"
             className="inline-block px-8 py-3.5 bg-black text-white font-serif text-sm font-light rounded-full hover:bg-gray-900 transition-all duration-300"
           >
             Réserver maintenant : 07 84 62 86 40
           </a>
-        </motion.div>
+        </div>
       </div>
 
+      {/* Custom Swiper Styles */}
+      <style>{`
+        .services-swiper {
+          padding: 10px 5px;
+        }
+        
+        .swiper-bullet {
+          width: 12px;
+          height: 12px;
+          background: #D1D5DB;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: inline-block;
+        }
+        
+        .swiper-bullet:hover {
+          background: #9CA3AF;
+        }
+        
+        .swiper-bullet-active {
+          background: #000000 !important;
+        }
+
+        @media (max-width: 768px) {
+          .services-swiper .swiper-slide {
+            height: auto;
+          }
+        }
+      `}</style>
     </section>
   );
 }
