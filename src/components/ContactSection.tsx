@@ -32,8 +32,8 @@ const ContactSection = () => {
         style={{ backgroundImage: `url(${contactBgImage})` }}
       />
       
-      {/* Gradient Overlay - Dark on left for text, transparent on right for image visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black/40 lg:bg-gradient-to-r lg:from-black/90 lg:via-black/50 lg:to-transparent" />
+      {/* Subtle Gradient Overlay - Only behind text area, image stays clear */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-transparent lg:bg-gradient-to-r lg:from-black/60 lg:via-black/25 lg:to-transparent" />
       
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10 w-full">
@@ -50,8 +50,8 @@ const ContactSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight mb-4 drop-shadow-lg"
-              style={{ textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6)' }}
+              className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight mb-4 drop-shadow-2xl"
+              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.9), 0 0 30px rgba(0,0,0,0.7)' }}
             >
               Voyagez l'Esprit Libre.
               <br />
@@ -62,8 +62,8 @@ const ContactSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-gray-200 font-light text-sm md:text-base leading-relaxed drop-shadow-md"
-              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7)' }}
+              className="text-white font-light text-sm md:text-base leading-relaxed drop-shadow-xl"
+              style={{ textShadow: '0 3px 15px rgba(0,0,0,0.95), 0 1px 6px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.6)' }}
             >
               Ne laissez plus vos déplacements au hasard. Que ce soit pour un transfert 
               aéroportuaire stratégique ou un retour tardif de gare TGV, nous garantissons 
