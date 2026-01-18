@@ -44,33 +44,20 @@ const services = [
   }
 ];
 
-// Animated border component that draws around the title
-const AnimatedBorder = ({ isInView }: { isInView: boolean }) => {
+// Animated underline component
+const AnimatedUnderline = ({ isInView }: { isInView: boolean }) => {
   return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ top: '-12px', left: '-16px', width: 'calc(100% + 32px)', height: 'calc(100% + 24px)' }}
-    >
-      <motion.rect
-        x="1"
-        y="1"
-        rx="4"
-        ry="4"
-        fill="none"
-        stroke={ACCENT_BLUE}
-        strokeWidth="2"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={isInView ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
-        transition={{ 
-          pathLength: { duration: 1.5, ease: [0.65, 0, 0.35, 1] },
-          opacity: { duration: 0.3 }
-        }}
-        style={{ 
-          width: '100%', 
-          height: '100%'
-        }}
-      />
-    </svg>
+    <motion.div
+      className="absolute bottom-0 left-0 h-1 rounded-full"
+      style={{ backgroundColor: ACCENT_BLUE }}
+      initial={{ width: '0%' }}
+      animate={isInView ? { width: '100%' } : { width: '0%' }}
+      transition={{ 
+        duration: 1.2, 
+        ease: [0.65, 0, 0.35, 1],
+        delay: 0.2
+      }}
+    />
   );
 };
 
@@ -172,15 +159,15 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mb-8 md:mb-12 px-2"
         >
-          {/* Title with animated border */}
-          <div className="inline-block relative px-6 py-3">
-            <AnimatedBorder isInView={isTitleInView} />
+          {/* Title with animated underline */}
+          <div className="inline-block relative pb-4">
             <h2 
               ref={titleRef}
-              className="font-serif text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-[#1a1a1a] relative z-10"
+              className="font-serif text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-[#1a1a1a]"
             >
               Votre <span style={{ color: ACCENT_BLUE }}>Satisfaction</span> est Notre Priorité
             </h2>
+            <AnimatedUnderline isInView={isTitleInView} />
           </div>
           
           <p className="font-serif text-black/70 max-w-3xl mx-auto mt-6 md:mt-8 text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
