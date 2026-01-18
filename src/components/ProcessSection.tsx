@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const steps = [
@@ -28,31 +28,42 @@ const ACCENT_BLUE = '#0E4D64';
 
 const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const mobileTimelineRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  
+  // Scroll progress for mobile timeline
+  const { scrollYProgress } = useScroll({
+    target: mobileTimelineRef,
+    offset: ["start 80%", "end 40%"]
+  });
+  
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section 
       ref={sectionRef}
-      className="py-20 md:py-28 bg-white overflow-hidden"
+      className="py-16 md:py-28 bg-white overflow-hidden"
       aria-labelledby="process-title"
     >
       <div className="container mx-auto px-6 max-w-[1200px]">
-        {/* Title */}
+        {/* Title & Subtitle */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-12 md:mb-20"
         >
           <h2 
             id="process-title"
-            className="font-serif text-[28px] md:text-[42px] lg:text-[48px] font-light tracking-[0.02em] leading-tight"
+            className="font-serif text-[26px] md:text-[42px] lg:text-[48px] font-light tracking-[0.02em] leading-tight mb-4"
           >
             <span className="text-[#1a1a1a]">Réservez votre trajet avec </span>
             <span style={{ color: ACCENT_BLUE }}>Taxi Malacrida</span>
           </h2>
+          <p className="font-sans text-[14px] md:text-[16px] text-[#666666] font-light max-w-xl mx-auto">
+            Une organisation fluide et transparente pour votre tranquillité d'esprit.
+          </p>
         </motion.div>
-
         {/* Desktop Zig-Zag Layout */}
         <div className="hidden lg:block relative">
           {/* Animated SVG Roadmap */}
@@ -192,65 +203,70 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* Mobile Layout - Vertical with Blue Line */}
-        <div className="md:hidden relative">
-          {/* Vertical Blue Dashed Line */}
-          <motion.div 
-            className="absolute left-8 top-6 bottom-6 w-1"
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.5 }}
+        {/* Mobile Layout - Vertical with Animated Progress Line */}
+        <div ref={mobileTimelineRef} className="md:hidden relative">
+          {/* Vertical Dashed Line (Background) */}
+          <div 
+            className="absolute left-7 top-4 bottom-4 w-0.5"
             style={{ 
-              backgroundImage: `repeating-linear-gradient(to bottom, transparent, transparent 6px, ${ACCENT_BLUE} 6px, ${ACCENT_BLUE} 14px)`,
-              transformOrigin: 'top',
-              opacity: 0.5
+              backgroundImage: `repeating-linear-gradient(to bottom, transparent, transparent 4px, #d1d5db 4px, #d1d5db 10px)`,
+            }}
+          />
+          
+          {/* Animated Solid Blue Line (Progress) */}
+          <motion.div 
+            className="absolute left-7 top-4 w-0.5 origin-top"
+            style={{ 
+              height: lineHeight,
+              backgroundColor: ACCENT_BLUE,
             }}
           />
 
-          <div className="space-y-6 pl-20">
-            {steps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, x: 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
-                className="relative"
-              >
-                {/* Number Circle */}
+          <div className="space-y-3 pl-16">
+            {steps.map((step, index) => {
+              const stepProgress = (index + 1) / steps.length;
+              
+              return (
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 + index * 0.15 }}
-                  className="absolute -left-[72px] top-4 w-14 h-14 rounded-full bg-white border-2 flex items-center justify-center"
-                  style={{
-                    borderColor: ACCENT_BLUE,
-                    boxShadow: '0 4px 15px rgba(14,77,100,0.15)'
-                  }}
+                  key={step.number}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.12 }}
+                  className="relative"
                 >
-                  <span 
-                    className="font-serif text-[1.25rem] font-light"
-                    style={{ color: ACCENT_BLUE }}
+                  {/* Number Circle with scroll-activated state */}
+                  <motion.div
+                    className="absolute -left-[60px] top-3 w-11 h-11 rounded-full bg-white border-2 flex items-center justify-center transition-all duration-300"
+                    style={{
+                      borderColor: ACCENT_BLUE,
+                      boxShadow: '0 3px 12px rgba(14,77,100,0.15)'
+                    }}
                   >
-                    {step.number}
-                  </span>
-                </motion.div>
+                    <span 
+                      className="font-serif text-[1.1rem] font-light"
+                      style={{ color: ACCENT_BLUE }}
+                    >
+                      {step.number}
+                    </span>
+                  </motion.div>
 
-                {/* Card */}
-                <div 
-                  className="bg-white border border-[#e5e5e5] rounded-lg p-5"
-                  style={{
-                    boxShadow: '0 2px 12px rgba(0,0,0,0.05)'
-                  }}
-                >
-                  <h3 className="font-serif text-[16px] font-normal text-[#1a1a1a] mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-[13px] font-light text-[#4a4a4a] leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                  {/* Card - Compact */}
+                  <div 
+                    className="bg-white border border-[#e5e5e5] rounded-lg px-4 py-3"
+                    style={{
+                      boxShadow: '0 2px 10px rgba(0,0,0,0.04)'
+                    }}
+                  >
+                    <h3 className="font-serif text-[15px] font-normal text-[#1a1a1a] mb-1.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-[12px] font-light text-[#4a4a4a] leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
