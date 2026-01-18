@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 // Import images localement
 import voitureEnRoute from '@/assets/services/voiture-en-route.png';
@@ -44,10 +44,43 @@ const services = [
   }
 ];
 
+// Animated border component that draws around the title
+const AnimatedBorder = ({ isInView }: { isInView: boolean }) => {
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{ top: '-12px', left: '-16px', width: 'calc(100% + 32px)', height: 'calc(100% + 24px)' }}
+    >
+      <motion.rect
+        x="1"
+        y="1"
+        rx="4"
+        ry="4"
+        fill="none"
+        stroke={ACCENT_BLUE}
+        strokeWidth="2"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={isInView ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
+        transition={{ 
+          pathLength: { duration: 1.5, ease: [0.65, 0, 0.35, 1] },
+          opacity: { duration: 0.3 }
+        }}
+        style={{ 
+          width: '100%', 
+          height: '100%'
+        }}
+      />
+    </svg>
+  );
+};
+
 export default function ServicesSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const isTitleInView = useInView(titleRef, { once: true, margin: "-100px" });
 
   // Detect mobile
   useEffect(() => {
@@ -59,26 +92,74 @@ export default function ServicesSection() {
 
   // Cards per view: 2 on desktop, 1 on mobile
   const cardsPerView = isMobile ? 1 : 2;
-  const totalSlides = Math.ceil(services.length / cardsPerView);
+  const totalSlides = services.length; // Each card is a slide now
+
+  // Calculate card width including gap
+  const getCardWidth = useCallback(() => {
+    if (!carouselRef.current) return 0;
+    const containerWidth = carouselRef.current.offsetWidth;
+    const gap = isMobile ? 16 : 24; // gap-4 = 16px, gap-6 = 24px
+    if (isMobile) {
+      return containerWidth;
+    } else {
+      return (containerWidth - gap) / 2;
+    }
+  }, [isMobile]);
 
   // Auto-scroll every 3 seconds
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+      setCurrentIndex((prev) => {
+        const maxIndex = isMobile ? services.length - 1 : services.length - 2;
+        return prev >= maxIndex ? 0 : prev + 1;
+      });
     }, 3000);
     return () => clearInterval(interval);
-  }, [totalSlides]);
+  }, [isMobile]);
 
-  // Scroll to current index with snap
+  // Scroll to current index - disable snap during programmatic scroll
   useEffect(() => {
-    if (carouselRef.current) {
-      const scrollAmount = currentIndex * carouselRef.current.offsetWidth;
-      carouselRef.current.scrollTo({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
+    if (!carouselRef.current) return;
+    
+    const carousel = carouselRef.current;
+    const cardWidth = getCardWidth();
+    const gap = isMobile ? 16 : 24;
+    const scrollTarget = currentIndex * (cardWidth + gap);
+    
+    // Disable snap during auto-scroll
+    setIsAutoScrolling(true);
+    carousel.style.scrollSnapType = 'none';
+    
+    carousel.scrollTo({
+      left: scrollTarget,
+      behavior: 'smooth'
+    });
+
+    // Re-enable snap after scroll completes
+    const timeout = setTimeout(() => {
+      carousel.style.scrollSnapType = 'x mandatory';
+      setIsAutoScrolling(false);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [currentIndex, getCardWidth, isMobile]);
+
+  // Handle manual scroll
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (isAutoScrolling) return;
+    
+    const target = e.target as HTMLDivElement;
+    const cardWidth = getCardWidth();
+    const gap = isMobile ? 16 : 24;
+    const newIndex = Math.round(target.scrollLeft / (cardWidth + gap));
+    const maxIndex = isMobile ? services.length - 1 : services.length - 2;
+    
+    if (newIndex !== currentIndex && newIndex >= 0 && newIndex <= maxIndex) {
+      setCurrentIndex(newIndex);
     }
-  }, [currentIndex]);
+  };
+
+  const maxDots = isMobile ? services.length : services.length - 1;
 
   return (
     <section id="services" className="bg-white py-10 md:py-16">
@@ -91,44 +172,38 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mb-8 md:mb-12 px-2"
         >
-          <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-light tracking-wide mb-4 inline-block relative text-[#1a1a1a]">
-            Votre <span style={{ color: ACCENT_BLUE }}>Satisfaction</span> est Notre Priorité
-            <motion.span
-              className="absolute bottom-0 left-0 h-0.5 bg-black"
-              initial={{ width: 0 }}
-              whileInView={{ width: '100%' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            />
-          </h2>
-          <p className="font-serif text-black/70 max-w-3xl mx-auto mt-4 md:mt-6 text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
+          {/* Title with animated border */}
+          <div className="inline-block relative px-6 py-3">
+            <AnimatedBorder isInView={isTitleInView} />
+            <h2 
+              ref={titleRef}
+              className="font-serif text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-[#1a1a1a] relative z-10"
+            >
+              Votre <span style={{ color: ACCENT_BLUE }}>Satisfaction</span> est Notre Priorité
+            </h2>
+          </div>
+          
+          <p className="font-serif text-black/70 max-w-3xl mx-auto mt-6 md:mt-8 text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
             Basé à Aix-en-Provence, Taxi Malacrida allie rigueur et excellence pour vous mener à bon port. 
             Disponibilité 24/7 dans toute la région PACA, ponctualité et tranquillité d'esprit garanties.
           </p>
         </motion.div>
 
-        {/* Carousel Container with CSS Scroll Snap */}
+        {/* Carousel Container */}
         <div 
           ref={carouselRef}
           className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 md:gap-6"
           style={{ 
-            scrollBehavior: 'smooth',
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
           }}
-          onScroll={(e) => {
-            const target = e.target as HTMLDivElement;
-            const newIndex = Math.round(target.scrollLeft / target.offsetWidth);
-            if (newIndex !== currentIndex && newIndex >= 0 && newIndex < totalSlides) {
-              setCurrentIndex(newIndex);
-            }
-          }}
+          onScroll={handleScroll}
         >
           {services.map((service, index) => (
             <div
               key={index}
-              className="snap-center flex-shrink-0 overflow-hidden rounded-xl"
+              className="snap-start flex-shrink-0 overflow-hidden rounded-xl"
               style={{
                 background: '#000000',
                 height: isMobile ? '520px' : '600px',
@@ -165,7 +240,7 @@ export default function ServicesSection() {
 
         {/* Dots indicator */}
         <div className="flex justify-center gap-2 mt-6 md:mt-8">
-          {Array.from({ length: totalSlides }).map((_, index) => (
+          {Array.from({ length: maxDots }).map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
