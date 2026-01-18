@@ -45,7 +45,7 @@ const HeroSection = () => {
               fontFamily: 'Inter, system-ui, sans-serif'
             }}
           >
-            Votre chauffeur privé Tesla à Aix-en-Provence
+            Chauffeur privé Tesla • Aix-en-Provence • 24h/24
           </motion.h2>
           
           {/* Baseline */}
@@ -61,7 +61,7 @@ const HeroSection = () => {
               fontFamily: 'Inter, system-ui, sans-serif'
             }}
           >
-            Confort électrique • Ponctualité • Discrétion
+            Gare • Aéroport • Toutes distances
           </motion.p>
         </div>
         

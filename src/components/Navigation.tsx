@@ -54,11 +54,11 @@ const Navigation = () => {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-6">
             <a
-              href="tel:+33600000000"
+              href="tel:+33633788690"
               className="flex items-center gap-2 text-sm font-light text-charcoal-light hover:text-charcoal transition-colors"
             >
               <Phone className="w-4 h-4" />
-              <span>+33 6 00 00 00 00</span>
+              <span>06 33 78 86 90</span>
             </a>
             <a href="#contact" className="btn-gold">
               <span>Réserver</span>
@@ -106,7 +106,7 @@ const Navigation = () => {
                     <a
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-2xl font-serif text-charcoal hover:text-gold transition-colors"
+                      className="text-2xl font-serif text-charcoal hover:text-navy transition-colors"
                     >
                       {link.name}
                     </a>
