@@ -113,7 +113,7 @@ const AboutSection = () => {
                 transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
                 className="card-elegant rounded-2xl p-6"
               >
-                <value.icon className="w-8 h-8 text-gold mb-4" />
+                <value.icon className="w-8 h-8 mb-4" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
                 <h3 className="font-serif text-lg mb-2">{value.title}</h3>
                 <p className="text-sm font-light text-muted-foreground leading-relaxed">
                   {value.description}
