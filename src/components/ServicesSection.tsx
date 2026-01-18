@@ -1,5 +1,4 @@
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const services = [
   {
@@ -41,45 +40,6 @@ const services = [
 ];
 
 export default function ServicesSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const controls = useAnimation();
-  const cardsPerView = 3;
-
-  // Auto-scroll every 8 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => {
-        const nextIndex = prev + cardsPerView;
-        return nextIndex >= services.length ? 0 : nextIndex;
-      });
-    }, 8000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // Animation on index change
-  useEffect(() => {
-    const offset = -(currentIndex * (100 / cardsPerView));
-    controls.start({
-      x: `${offset}%`,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    });
-  }, [currentIndex, controls]);
-
-  const totalPages = Math.ceil(services.length / cardsPerView);
-  const currentPage = Math.floor(currentIndex / cardsPerView);
-
-  const handlePrev = () => {
-    setCurrentIndex(Math.max(0, currentIndex - cardsPerView));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex(Math.min(services.length - cardsPerView, currentIndex + cardsPerView));
-  };
-
   return (
     <section className="relative bg-white py-16 md:py-24 px-6" aria-label="Nos Services">
       <div className="max-w-7xl mx-auto">
@@ -100,90 +60,47 @@ export default function ServicesSection() {
           </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="relative">
-          <div className="overflow-hidden">
-            <motion.div
-              className="flex"
-              animate={controls}
-              style={{ width: `${(services.length / cardsPerView) * 100}%` }}
+        {/* Grid of 6 cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {services.map((service, index) => (
+            <motion.article
+              key={service.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group flex w-full max-w-[380px] h-[400px] bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300"
+              style={{
+                boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
+              }}
+              whileHover={{
+                boxShadow: '0 0 30px rgba(0, 0, 0, 0.5)',
+              }}
             >
-              {services.map((service) => (
-                <div
-                  key={service.id}
-                  className="flex-shrink-0 px-3"
-                  style={{ width: `${100 / services.length * cardsPerView}%` }}
-                >
-                  <motion.article
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: service.id * 0.1 }}
-                    className="group flex h-[400px] bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300"
-                  >
-                    {/* Left side - Text */}
-                    <div className="w-1/2 p-6 flex flex-col justify-center bg-white">
-                      <span className="font-serif text-sm text-gray-400 mb-3">
-                        {String(service.id).padStart(2, '0')}
-                      </span>
-                      <h3 className="font-serif text-xl font-medium text-black mb-3">
-                        {service.title}
-                      </h3>
-                      <div className="w-12 h-px bg-black mb-4" />
-                      <p className="font-serif text-sm text-gray-600 leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
+              {/* Left side - Text */}
+              <div className="w-1/2 p-5 flex flex-col justify-center bg-white">
+                <span className="font-serif text-sm text-gray-400 mb-2">
+                  {String(service.id).padStart(2, '0')}
+                </span>
+                <h3 className="font-serif text-lg font-medium text-black mb-2">
+                  {service.title}
+                </h3>
+                <div className="w-10 h-px bg-black mb-3" />
+                <p className="font-serif text-xs text-gray-600 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
 
-                    {/* Right side - Image */}
-                    <div className="w-1/2 overflow-hidden">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                  </motion.article>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Pagination indicators */}
-          <div className="flex justify-center items-center gap-3 mt-10">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index * cardsPerView)}
-                className="group relative"
-                aria-label={`Aller à la page ${index + 1}`}
-              >
-                <div className={`h-1 rounded-full transition-all duration-500 ${
-                  currentPage === index 
-                    ? 'bg-black w-16' 
-                    : 'bg-gray-300 w-8 hover:bg-gray-500'
-                }`} />
-              </button>
-            ))}
-          </div>
-
-          {/* Navigation buttons */}
-          <div className="flex justify-center gap-4 mt-8">
-            <button
-              onClick={handlePrev}
-              className="px-6 py-2.5 border border-black text-black text-sm font-light rounded-full hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-              disabled={currentIndex === 0}
-            >
-              ← Précédent
-            </button>
-            <button
-              onClick={handleNext}
-              className="px-6 py-2.5 border border-black text-black text-sm font-light rounded-full hover:bg-black hover:text-white transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed"
-              disabled={currentIndex >= services.length - cardsPerView}
-            >
-              Suivant →
-            </button>
-          </div>
+              {/* Right side - Image */}
+              <div className="w-1/2 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </motion.article>
+          ))}
         </div>
 
         {/* Footer CTA */}
