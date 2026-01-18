@@ -42,7 +42,7 @@ const ProcessSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 md:py-28 bg-white overflow-hidden"
+      className="py-10 md:py-16 bg-white overflow-hidden"
       aria-labelledby="process-title"
     >
       <div className="container mx-auto px-6 max-w-[1200px]">
@@ -51,7 +51,7 @@ const ProcessSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12 md:mb-20"
+          className="text-center mb-8 md:mb-14"
         >
           <h2 
             id="process-title"
@@ -143,7 +143,7 @@ const ProcessSection = () => {
                     </motion.div>
 
                     {/* Content */}
-                    <h3 className="font-serif text-[20px] font-normal text-[#1a1a1a] mb-3 text-center tracking-[0.02em]">
+                    <h3 className="font-serif text-[20px] font-normal mb-3 text-center tracking-[0.02em]" style={{ color: ACCENT_BLUE }}>
                       {step.title}
                     </h3>
                     <p className="text-[14px] font-light text-[#4a4a4a] leading-[1.7] text-center">
@@ -191,7 +191,7 @@ const ProcessSection = () => {
                     </span>
                   </motion.div>
 
-                  <h3 className="font-serif text-[17px] font-normal text-[#1a1a1a] mb-2 text-center">
+                  <h3 className="font-serif text-[17px] font-normal mb-2 text-center" style={{ color: ACCENT_BLUE }}>
                     {step.title}
                   </h3>
                   <p className="text-[13px] font-light text-[#4a4a4a] leading-relaxed text-center">
@@ -257,7 +257,7 @@ const ProcessSection = () => {
                       boxShadow: '0 2px 10px rgba(0,0,0,0.04)'
                     }}
                   >
-                    <h3 className="font-serif text-[15px] font-normal text-[#1a1a1a] mb-1.5">
+                    <h3 className="font-serif text-[15px] font-normal mb-1.5" style={{ color: ACCENT_BLUE }}>
                       {step.title}
                     </h3>
                     <p className="text-[12px] font-light text-[#4a4a4a] leading-relaxed">
@@ -275,14 +275,14 @@ const ProcessSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 1.4 }}
-          className="text-center mt-16 md:mt-20"
+          className="flex justify-center mt-10 md:mt-14"
         >
           <a
             href="#contact"
-            className="inline-block text-white font-serif text-[13px] md:text-[14px] font-light tracking-[0.12em] uppercase px-10 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5"
+            className="inline-block text-white font-serif text-[13px] md:text-[14px] font-light tracking-[0.1em] uppercase px-8 py-3 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
             style={{
               backgroundColor: ACCENT_BLUE,
-              boxShadow: '0 6px 25px rgba(14,77,100,0.25)'
+              boxShadow: '0 4px 16px rgba(14,77,100,0.2)'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = '#0a3d50';
