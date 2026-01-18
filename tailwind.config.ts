@@ -57,11 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Premium palette
-        gold: {
-          DEFAULT: "hsl(var(--gold))",
-          light: "hsl(var(--gold-light))",
-          dark: "hsl(var(--gold-dark))",
+        // Premium palette - Monochrome + Navy
+        navy: {
+          DEFAULT: "hsl(var(--navy))",
+          light: "hsl(var(--navy-light))",
+          dark: "hsl(var(--navy-dark))",
         },
         charcoal: {
           DEFAULT: "hsl(var(--charcoal))",
@@ -72,6 +72,7 @@ export default {
           dark: "hsl(var(--cream-dark))",
         },
         stone: "hsl(var(--stone))",
+        gray: "hsl(var(--gray))",
         success: {
           DEFAULT: "hsl(var(--success))",
           foreground: "hsl(var(--success-foreground))",
