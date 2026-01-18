@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, Flag, Clock } from 'lucide-react';
+import BookingForm from './BookingForm';
 
 const HeroSection = () => {
   return (
@@ -8,7 +8,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/Section%20hero%20Taxi%20Malacrida%20%20(1).png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9TZWN0aW9uIGhlcm8gVGF4aSBNYWxhY3JpZGEgICgxKS5wbmciLCJpYXQiOjE3Njg3NDEyMjMsImV4cCI6MTgwMDI3NzIyM30.cWkcMnO_d242lDDRk6Q3cO-aBUb6ZkUPz7V7CA3p3qg')`
+          backgroundImage: `url('https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/Section%20hero%20Taxi%20Malacrida%20%20(1).png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4NDQ4ZSIsImFsZyI6IkhTMjU2In0.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9TZWN0aW9uIGhlcm8gVGF4aSBNYWxhY3JpZGEgICgxKS5wbmciLCJpYXQiOjE3Njg3NDEyMjMsImV4cCI6MTgwMDI3NzIyM30.cWkcMnO_d242lDDRk6Q3cO-aBUb6ZkUPz7V7CA3p3qg')`
         }}
       />
       
@@ -65,63 +65,14 @@ const HeroSection = () => {
           </motion.p>
         </div>
         
-        {/* Booking Form - Bottom right, transparent */}
+        {/* Booking Form - Bottom right */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6, ease: 'easeOut' }}
           className="self-end mb-12 md:mb-16"
         >
-          <div className="flex flex-col sm:flex-row gap-3">
-            {/* Départ Input */}
-            <div className="relative">
-              <MapPin 
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60" 
-                size={16} 
-                strokeWidth={1.5}
-              />
-              <input
-                type="text"
-                placeholder="Adresse de départ"
-                className="w-full sm:w-44 pl-10 pr-3 py-3 bg-transparent border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 transition-colors duration-300 font-extralight text-sm"
-              />
-            </div>
-            
-            {/* Arrivée Input */}
-            <div className="relative">
-              <Flag 
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60" 
-                size={16} 
-                strokeWidth={1.5}
-              />
-              <input
-                type="text"
-                placeholder="Adresse d'arrivée"
-                className="w-full sm:w-44 pl-10 pr-3 py-3 bg-transparent border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 transition-colors duration-300 font-extralight text-sm"
-              />
-            </div>
-            
-            {/* Date/Heure Input */}
-            <div className="relative">
-              <Clock 
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-white/60" 
-                size={16} 
-                strokeWidth={1.5}
-              />
-              <input
-                type="text"
-                placeholder="19/01/2026 16:05"
-                className="w-full sm:w-40 pl-10 pr-3 py-3 bg-transparent border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 transition-colors duration-300 font-extralight text-sm"
-              />
-            </div>
-            
-            {/* Submit Button */}
-            <button
-              className="bg-white text-black px-6 py-3 rounded font-light transition-all duration-300 hover:bg-black hover:text-white hover:border-white border border-transparent text-sm tracking-widest"
-            >
-              RÉSERVER
-            </button>
-          </div>
+          <BookingForm />
         </motion.div>
       </div>
     </section>
