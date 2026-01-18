@@ -170,12 +170,17 @@ export default function ServicesSection() {
             <AnimatedUnderline isInView={isTitleInView} />
           </div>
           
-          <p className="font-sans text-black/70 max-w-3xl mx-auto mt-6 md:mt-8 text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
-            Basé à Aix-en-Provence, Taxi Malacrida allie rigueur et excellence pour vous mener à bon port. 
-            Disponibilité 24/7 dans toute la région PACA, ponctualité et tranquillité d'esprit garanties.
+          <h3 className="font-serif text-lg md:text-xl font-light mt-6 md:mt-8 mb-4" style={{ color: ACCENT_BLUE }}>
+            L'Excellence au Service de vos Déplacements
+          </h3>
+          <p className="font-sans text-black/70 max-w-3xl mx-auto text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
+            Depuis notre installation à Aix-en-Provence, Taxi Malacrida s'est donné une mission : transformer chaque trajet en une expérience premium et mémorable. Notre Tesla Model Y 2025 incarne notre engagement envers l'innovation, le confort et le respect de l'environnement.
           </p>
-          <p className="font-sans text-black/60 max-w-2xl mx-auto mt-4 text-[14px] md:text-[15px] font-light leading-relaxed px-2">
-            Que ce soit pour un rendez-vous d'affaires crucial ou un départ en vacances, nous ne laissons rien au hasard. Votre chauffeur s'adapte à votre rythme.
+          <p className="font-sans text-black/60 max-w-3xl mx-auto mt-4 text-[14px] md:text-[15px] font-light leading-relaxed px-2">
+            Que vous rejoigniez un aéroport à l'aube, assistiez à un événement exceptionnel ou voyagiez pour affaires, nous comprenons que votre temps est précieux. C'est pourquoi nous mettons un point d'honneur à la ponctualité, la discrétion et l'attention aux détails. Notre connaissance approfondie de la région PACA, de Marseille à Monaco, garantit des trajets optimisés et une disponibilité 24h/24, 7j/7.
+          </p>
+          <p className="font-sans text-black/60 max-w-3xl mx-auto mt-4 text-[14px] md:text-[15px] font-light leading-relaxed px-2">
+            Plus qu'un simple transport, nous offrons une bulle de sérénité où technologie et élégance se rencontrent pour vous permettre de voyager dans les meilleures conditions.
           </p>
         </motion.div>
 
