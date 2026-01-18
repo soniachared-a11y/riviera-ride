@@ -19,14 +19,16 @@ const steps = [
   },
   {
     number: '4',
-    title: 'Paiement simple',
-    description: 'Règlement facile à bord : espèces ou Carte Bancaire.',
+    title: 'Paiement & Arrivée',
+    description: 'Voyage serein et règlement facile à bord : espèces ou Carte Bancaire.',
   }
 ];
 
+const ACCENT_BLUE = '#0E4D64';
+
 const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   return (
     <section 
@@ -34,7 +36,7 @@ const ProcessSection = () => {
       className="py-20 md:py-28 bg-white overflow-hidden"
       aria-labelledby="process-title"
     >
-      <div className="container mx-auto px-6 md:px-12">
+      <div className="container mx-auto px-6 max-w-[1200px]">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,121 +46,99 @@ const ProcessSection = () => {
         >
           <h2 
             id="process-title"
-            className="font-serif text-[32px] md:text-[48px] font-light text-black tracking-[0.02em] mb-4"
+            className="font-serif text-[28px] md:text-[42px] lg:text-[48px] font-light tracking-[0.02em] leading-tight"
           >
-            Votre Trajet en 4 Étapes
+            <span className="text-[#1a1a1a]">Réservez votre trajet avec </span>
+            <span style={{ color: ACCENT_BLUE }}>Taxi Malacrida</span>
           </h2>
-          <div className="w-16 h-px bg-black/30 mx-auto" />
         </motion.div>
 
         {/* Desktop Zig-Zag Layout */}
-        <div className="hidden lg:block relative max-w-5xl mx-auto">
-          {/* Winding SVG Path */}
+        <div className="hidden lg:block relative">
+          {/* Animated SVG Roadmap */}
           <svg 
-            className="absolute left-1/2 top-0 -translate-x-1/2 w-full h-full pointer-events-none"
-            viewBox="0 0 800 600"
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 1000 500"
             fill="none"
             preserveAspectRatio="xMidYMid meet"
           >
             <motion.path
-              d="M400 0 
-                 C400 40, 200 60, 200 100 
-                 C200 140, 600 160, 600 200 
-                 C600 240, 200 260, 200 300 
-                 C200 340, 600 360, 600 400
-                 C600 440, 200 460, 200 500
-                 C200 540, 400 560, 400 600"
-              stroke="black"
-              strokeWidth="2"
-              strokeDasharray="8 12"
+              d="M200 80 
+                 C350 80, 350 80, 500 80
+                 C650 80, 650 80, 800 80
+                 C900 80, 900 180, 800 180
+                 C650 180, 650 180, 500 180
+                 C350 180, 350 180, 200 180
+                 C100 180, 100 280, 200 280
+                 C350 280, 350 280, 500 280
+                 C650 280, 650 280, 800 280
+                 C900 280, 900 380, 800 380
+                 C650 380, 650 380, 500 380
+                 C350 380, 350 380, 200 380"
+              stroke={ACCENT_BLUE}
+              strokeWidth="4"
+              strokeDasharray="12 8"
               strokeLinecap="round"
               fill="none"
               initial={{ pathLength: 0, opacity: 0 }}
-              animate={isInView ? { pathLength: 1, opacity: 0.15 } : {}}
-              transition={{ duration: 2, ease: "easeOut" }}
+              animate={isInView ? { pathLength: 1, opacity: 0.4 } : {}}
+              transition={{ duration: 2.5, ease: "easeOut" }}
             />
           </svg>
 
-          {/* Steps Grid */}
-          <div className="relative space-y-8">
+          {/* Grid Layout - 2 Rows x 2 Columns */}
+          <div className="relative grid grid-cols-2 gap-x-24 gap-y-16">
             {steps.map((step, index) => {
+              const isTopRow = index < 2;
               const isLeft = index % 2 === 0;
               
               return (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
-                  className={`grid grid-cols-[1fr_auto_1fr] gap-8 items-center ${
-                    index !== steps.length - 1 ? 'pb-8' : ''
-                  }`}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.3 }}
+                  className={`relative ${isLeft ? 'justify-self-end' : 'justify-self-start'}`}
                 >
-                  {/* Left Card or Spacer */}
-                  {isLeft ? (
-                    <div className="justify-self-end">
-                      <div 
-                        className="bg-white rounded-lg p-6 max-w-sm text-right"
-                        style={{
-                          boxShadow: '0 4px 30px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)'
-                        }}
-                      >
-                        <h3 className="font-serif text-[18px] font-normal text-black mb-2 tracking-[0.02em]">
-                          {step.title}
-                        </h3>
-                        <p className="text-[14px] font-light text-black/60 leading-relaxed">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
-
-                  {/* Center Number */}
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: 0.5 + index * 0.2,
-                      type: "spring",
-                      stiffness: 200
+                  {/* Card */}
+                  <div 
+                    className="bg-white border border-[#e5e5e5] rounded-lg p-8 max-w-[380px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group"
+                    style={{
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
                     }}
-                    className="relative z-10"
                   >
-                    <div 
-                      className="w-16 h-16 rounded-full bg-white border-2 border-black flex items-center justify-center"
+                    {/* Number Circle */}
+                    <motion.div
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: 0.2 + index * 0.3,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                      className="w-20 h-20 rounded-full bg-white border-2 flex items-center justify-center mb-6 mx-auto transition-all duration-300 group-hover:scale-105"
                       style={{
-                        boxShadow: '0 8px 30px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.08)'
+                        borderColor: ACCENT_BLUE,
+                        boxShadow: '0 6px 25px rgba(14,77,100,0.15)'
                       }}
                     >
-                      <span className="font-serif text-[24px] font-light text-black">
+                      <span 
+                        className="font-serif text-[2.5rem] font-light"
+                        style={{ color: ACCENT_BLUE }}
+                      >
                         {step.number}
                       </span>
-                    </div>
-                  </motion.div>
+                    </motion.div>
 
-                  {/* Right Card or Spacer */}
-                  {!isLeft ? (
-                    <div className="justify-self-start">
-                      <div 
-                        className="bg-white rounded-lg p-6 max-w-sm text-left"
-                        style={{
-                          boxShadow: '0 4px 30px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05)'
-                        }}
-                      >
-                        <h3 className="font-serif text-[18px] font-normal text-black mb-2 tracking-[0.02em]">
-                          {step.title}
-                        </h3>
-                        <p className="text-[14px] font-light text-black/60 leading-relaxed">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div />
-                  )}
+                    {/* Content */}
+                    <h3 className="font-serif text-[20px] font-normal text-[#1a1a1a] mb-3 text-center tracking-[0.02em]">
+                      {step.title}
+                    </h3>
+                    <p className="text-[14px] font-light text-[#4a4a4a] leading-[1.7] text-center">
+                      {step.description}
+                    </p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -166,103 +146,44 @@ const ProcessSection = () => {
         </div>
 
         {/* Tablet Layout */}
-        <div className="hidden md:block lg:hidden relative max-w-2xl mx-auto">
-          <div className="space-y-6">
-            {steps.map((step, index) => {
-              const isLeft = index % 2 === 0;
-              
-              return (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
-                  className={`flex items-center gap-6 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}
-                >
-                  {/* Card */}
-                  <div 
-                    className={`flex-1 bg-white rounded-lg p-5 ${isLeft ? 'text-right' : 'text-left'}`}
-                    style={{
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
-                    }}
-                  >
-                    <h3 className="font-serif text-[17px] font-normal text-black mb-1.5">
-                      {step.title}
-                    </h3>
-                    <p className="text-[13px] font-light text-black/55 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-
-                  {/* Number */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : {}}
-                    transition={{ duration: 0.4, delay: 0.35 + index * 0.15 }}
-                    className="w-14 h-14 rounded-full bg-white border-2 border-black flex items-center justify-center flex-shrink-0"
-                    style={{
-                      boxShadow: '0 6px 20px rgba(0,0,0,0.1)'
-                    }}
-                  >
-                    <span className="font-serif text-[20px] font-light text-black">
-                      {step.number}
-                    </span>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="md:hidden relative">
-          {/* Vertical dashed line */}
-          <motion.div 
-            className="absolute left-7 top-4 bottom-4 w-px"
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.2 }}
-            style={{ 
-              backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 4px, rgba(0,0,0,0.2) 4px, rgba(0,0,0,0.2) 10px)',
-              transformOrigin: 'top'
-            }}
-          />
-
-          <div className="space-y-6 pl-20">
+        <div className="hidden md:block lg:hidden relative">
+          <div className="grid grid-cols-2 gap-6">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, x: 20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.12 }}
-                className="relative"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
               >
-                {/* Number Circle */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={isInView ? { scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 + index * 0.12 }}
-                  className="absolute -left-[68px] top-2 w-12 h-12 rounded-full bg-white border-2 border-black flex items-center justify-center"
-                  style={{
-                    boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-                  }}
-                >
-                  <span className="font-serif text-[18px] font-light text-black">
-                    {step.number}
-                  </span>
-                </motion.div>
-
-                {/* Card */}
                 <div 
-                  className="bg-white rounded-lg p-4"
+                  className="bg-white border border-[#e5e5e5] rounded-lg p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   style={{
-                    boxShadow: '0 2px 15px rgba(0,0,0,0.06)'
+                    boxShadow: '0 2px 15px rgba(0,0,0,0.05)'
                   }}
                 >
-                  <h3 className="font-serif text-[16px] font-normal text-black mb-1.5">
+                  {/* Number Circle */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.15 + index * 0.2 }}
+                    className="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-5 mx-auto"
+                    style={{
+                      borderColor: ACCENT_BLUE,
+                      boxShadow: '0 4px 15px rgba(14,77,100,0.12)'
+                    }}
+                  >
+                    <span 
+                      className="font-serif text-[1.75rem] font-light"
+                      style={{ color: ACCENT_BLUE }}
+                    >
+                      {step.number}
+                    </span>
+                  </motion.div>
+
+                  <h3 className="font-serif text-[17px] font-normal text-[#1a1a1a] mb-2 text-center">
                     {step.title}
                   </h3>
-                  <p className="text-[13px] font-light text-black/55 leading-relaxed">
+                  <p className="text-[13px] font-light text-[#4a4a4a] leading-relaxed text-center">
                     {step.description}
                   </p>
                 </div>
@@ -271,18 +192,87 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* CTA Button - Refined Pill Shape */}
+        {/* Mobile Layout - Vertical with Blue Line */}
+        <div className="md:hidden relative">
+          {/* Vertical Blue Dashed Line */}
+          <motion.div 
+            className="absolute left-8 top-6 bottom-6 w-1"
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1.5 }}
+            style={{ 
+              backgroundImage: `repeating-linear-gradient(to bottom, transparent, transparent 6px, ${ACCENT_BLUE} 6px, ${ACCENT_BLUE} 14px)`,
+              transformOrigin: 'top',
+              opacity: 0.5
+            }}
+          />
+
+          <div className="space-y-6 pl-20">
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, x: 30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
+                className="relative"
+              >
+                {/* Number Circle */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={isInView ? { scale: 1 } : {}}
+                  transition={{ duration: 0.4, delay: 0.3 + index * 0.15 }}
+                  className="absolute -left-[72px] top-4 w-14 h-14 rounded-full bg-white border-2 flex items-center justify-center"
+                  style={{
+                    borderColor: ACCENT_BLUE,
+                    boxShadow: '0 4px 15px rgba(14,77,100,0.15)'
+                  }}
+                >
+                  <span 
+                    className="font-serif text-[1.25rem] font-light"
+                    style={{ color: ACCENT_BLUE }}
+                  >
+                    {step.number}
+                  </span>
+                </motion.div>
+
+                {/* Card */}
+                <div 
+                  className="bg-white border border-[#e5e5e5] rounded-lg p-5"
+                  style={{
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.05)'
+                  }}
+                >
+                  <h3 className="font-serif text-[16px] font-normal text-[#1a1a1a] mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-[13px] font-light text-[#4a4a4a] leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 1.2 }}
+          transition={{ duration: 0.5, delay: 1.4 }}
           className="text-center mt-16 md:mt-20"
         >
           <a
             href="#contact"
-            className="inline-block bg-black text-white font-serif text-[13px] md:text-[14px] font-light tracking-[0.15em] uppercase px-10 py-3.5 rounded-full transition-all duration-300 hover:bg-black/90 hover:-translate-y-0.5"
+            className="inline-block text-white font-serif text-[13px] md:text-[14px] font-light tracking-[0.12em] uppercase px-10 py-4 rounded-full transition-all duration-300 hover:-translate-y-0.5"
             style={{
-              boxShadow: '0 4px 20px rgba(0,0,0,0.15)'
+              backgroundColor: ACCENT_BLUE,
+              boxShadow: '0 6px 25px rgba(14,77,100,0.25)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#0a3d50';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = ACCENT_BLUE;
             }}
           >
             Réserver mon chauffeur
