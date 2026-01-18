@@ -282,14 +282,14 @@ const ProcessSection = () => {
             href="#contact"
             className="inline-block text-white font-serif text-[13px] md:text-[14px] font-light tracking-[0.1em] uppercase px-8 py-3 rounded-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
             style={{
-              backgroundColor: ACCENT_BLUE,
-              boxShadow: '0 4px 16px rgba(14,77,100,0.2)'
+              backgroundColor: '#000000',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.2)'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#0a3d50';
+              e.currentTarget.style.backgroundColor = ACCENT_BLUE;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = ACCENT_BLUE;
+              e.currentTarget.style.backgroundColor = '#000000';
             }}
           >
             Réserver mon chauffeur
