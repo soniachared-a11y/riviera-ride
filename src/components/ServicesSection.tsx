@@ -18,7 +18,7 @@ const services = [
     id: 2,
     title: "Service à la journée",
     description: "Bénéficiez d'un chauffeur privé pour la journée entière, idéal pour vos rendez-vous professionnels.",
-    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=800&h=600&fit=crop&q=80"
+    image: "https://images.unsplash.com/photo-1617704548623-340376564e68?w=800&h=600&fit=crop&q=80"
   },
   {
     id: 3,
