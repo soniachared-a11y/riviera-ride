@@ -60,7 +60,11 @@ const Navigation = () => {
               <Phone className="w-4 h-4" />
               <span>06 33 78 86 90</span>
             </a>
-            <a href="#contact" className="btn-gold">
+            <a 
+              href="#contact" 
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-light tracking-wide text-white rounded-md transition-all duration-300 hover:opacity-90"
+              style={{ backgroundColor: '#0E4D64' }}
+            >
               <span>Réserver</span>
               <ChevronRight className="w-4 h-4" />
             </a>
@@ -119,7 +123,12 @@ const Navigation = () => {
                 transition={{ delay: 0.4 }}
                 className="mt-12 pt-8 border-t border-stone"
               >
-                <a href="#contact" className="btn-gold w-full justify-center" onClick={() => setIsMobileMenuOpen(false)}>
+                <a 
+                  href="#contact" 
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-light tracking-wide text-white rounded-md transition-all duration-300"
+                  style={{ backgroundColor: '#0E4D64' }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   <span>Réserver</span>
                 </a>
               </motion.div>

@@ -44,14 +44,14 @@ const AboutSection = () => {
           >
             <div className="divider-elegant mb-6" />
             <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-4 block">
-              Pourquoi Macrida
+              Pourquoi Malacrida
             </span>
             <h2 className="text-3xl md:text-4xl font-serif mb-6">
-              Votre Partenaire de Confiance pour un{' '}
+              Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span> pour un{' '}
               <span className="text-gold">Voyage Premium</span>
             </h2>
             <p className="text-muted-foreground mb-6 font-light leading-relaxed">
-              Macrida a été fondée sur une conviction simple : le transport privé doit être 
+              Taxi Malacrida a été fondée sur une conviction simple : le transport privé doit être 
               une expérience, pas seulement un service. Notre engagement envers la sécurité, 
               le confort et le professionnalisme fait de nous le choix privilégié des voyageurs 
               exigeants sur la Côte d'Azur et en Provence.
