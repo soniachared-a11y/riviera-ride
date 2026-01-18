@@ -170,9 +170,12 @@ export default function ServicesSection() {
             <AnimatedUnderline isInView={isTitleInView} />
           </div>
           
-          <p className="font-serif text-black/70 max-w-3xl mx-auto mt-6 md:mt-8 text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
+          <p className="font-sans text-black/70 max-w-3xl mx-auto mt-6 md:mt-8 text-[15px] md:text-[17px] font-light leading-relaxed md:leading-[1.8] px-2">
             Basé à Aix-en-Provence, Taxi Malacrida allie rigueur et excellence pour vous mener à bon port. 
             Disponibilité 24/7 dans toute la région PACA, ponctualité et tranquillité d'esprit garanties.
+          </p>
+          <p className="font-sans text-black/60 max-w-2xl mx-auto mt-4 text-[14px] md:text-[15px] font-light leading-relaxed px-2">
+            Que ce soit pour un rendez-vous d'affaires crucial ou un départ en vacances, nous ne laissons rien au hasard. Votre chauffeur s'adapte à votre rythme.
           </p>
         </motion.div>
 

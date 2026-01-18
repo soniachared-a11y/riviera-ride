@@ -57,11 +57,12 @@ const ProcessSection = () => {
             id="process-title"
             className="font-serif text-[26px] md:text-[42px] lg:text-[48px] font-light tracking-[0.02em] leading-tight mb-4"
           >
-            <span className="text-[#1a1a1a]">Réservez votre trajet avec </span>
-            <span style={{ color: ACCENT_BLUE }}>Taxi Malacrida</span>
+            <span className="text-[#1a1a1a]">Votre </span>
+            <span style={{ color: ACCENT_BLUE }}>Trajet</span>
+            <span className="text-[#1a1a1a]"> en 4 Étapes Simples</span>
           </h2>
           <p className="font-sans text-[14px] md:text-[16px] text-[#666666] font-light max-w-xl mx-auto">
-            Une organisation fluide et transparente pour votre tranquillité d'esprit.
+            Une organisation millimétrée pour supprimer tout stress. De la réservation à l'arrivée, tout est clair.
           </p>
         </motion.div>
         {/* Desktop Zig-Zag Layout */}

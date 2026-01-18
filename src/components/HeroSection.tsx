@@ -63,6 +63,22 @@ const HeroSection = () => {
           >
             Gare • Aéroport • Toutes distances
           </motion.p>
+          
+          {/* Extended description */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.5, ease: 'easeOut' }}
+            className="mt-5 font-light max-w-lg"
+            style={{
+              fontSize: '15px',
+              color: 'rgba(255, 255, 255, 0.85)',
+              lineHeight: '1.7',
+              fontFamily: 'Inter, system-ui, sans-serif'
+            }}
+          >
+            Spécialiste des transferts gares et aéroports en Provence. Une alternative haut de gamme au taxi traditionnel, alliant ponctualité, discrétion et confort absolu.
+          </motion.p>
         </div>
         
         {/* Booking Form - Bottom right */}
