@@ -1,106 +1,83 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 const services = [
   {
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=800&fit=crop&q=80',
-    alt: 'Transfert aéroport VTC Tesla Aix-en-Provence',
-    title: 'Transferts Aéroport',
-    description: 'Marseille Provence, Nice Côte d\'Azur, Toulon Hyères. Ponctualité garantie, suivi de vol en temps réel, service porte-à-porte.',
+    id: 1,
+    title: "Confort Premium",
+    description: "Intérieur cuir premium, climatisation bi-zone, sièges chauffants. Profitez d'un silence de roulage exceptionnel grâce à la motorisation 100% électrique de notre Tesla Model Y 2025.",
+    image: "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&h=800&fit=crop&q=80",
+    alt: "Intérieur luxueux Tesla Model Y confort premium Aix-en-Provence"
   },
   {
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=800&fit=crop&q=80',
-    alt: 'Transport mariage événement privé Provence',
-    title: 'Événements Privés',
-    description: 'Mariages, anniversaires, soirées de gala. Notre Tesla apporte une touche d\'élégance à vos moments exceptionnels avec un service discret.',
+    id: 2,
+    title: "Disponibilité 24/7",
+    description: "Service disponible jour et nuit, 7 jours sur 7. Réservation simple par téléphone ou en ligne. Prise en charge rapide partout dans la région PACA.",
+    image: "https://images.unsplash.com/photo-1551817958-20e86ca1d6b4?w=600&h=800&fit=crop&q=80",
+    alt: "Service VTC disponible 24h/24 Provence Côte d'Azur"
   },
   {
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=800&fit=crop&q=80',
-    alt: 'Chauffeur professionnel entreprise PACA',
-    title: 'Déplacements Professionnels',
-    description: 'Réunions, conférences, rendez-vous clients. WiFi à bord, confidentialité assurée, facturation simplifiée pour entreprises.',
+    id: 3,
+    title: "Événements Spéciaux",
+    description: "Mariages, soirées de gala, anniversaires. Notre Tesla apporte une touche d'élégance moderne à vos moments exceptionnels. Service discret et professionnel.",
+    image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=800&fit=crop&q=80",
+    alt: "Transport mariage événement VTC Tesla Aix-en-Provence"
   },
   {
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=800&fit=crop&q=80',
-    alt: 'Course longue distance Tesla Côte d\'Azur',
-    title: 'Courses Longue Distance',
-    description: 'Nice, Cannes, Monaco, Marseille. Voyagez confortablement dans toute la région PACA sans contrainte de recharge ou d\'autonomie.',
-  },
+    id: 4,
+    title: "Transferts Aéroports",
+    description: "Marseille Provence, Nice Côte d'Azur, Toulon Hyères. Ponctualité garantie, suivi de vol en temps réel. Prise en charge directe terminal, aide aux bagages.",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=800&fit=crop&q=80",
+    alt: "Transfert aéroport VTC Tesla Marseille Nice Toulon"
+  }
 ];
 
-const ServicesSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2
+    }
+  }
+};
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 60 
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1] as const
+    }
+  }
+};
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' as const },
-    },
-  };
-
-  // Schema.org structured data for services
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": services.map((service, index) => ({
-      "@type": "ListItem",
-      "position": index + 1,
-      "item": {
-        "@type": "Service",
-        "name": service.title,
-        "description": service.description,
-        "provider": {
-          "@type": "LocalBusiness",
-          "name": "Taxi Malacrida"
-        },
-        "areaServed": "Provence-Alpes-Côte d'Azur"
-      }
-    }))
-  };
+export default function ServicesSection() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
-    <section 
-      id="services" 
-      aria-label="Nos Services"
-      className="bg-white py-20 md:py-[120px] px-6 md:px-10"
-      ref={ref}
-    >
-      {/* Schema.org JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-      />
-
-      <div className="max-w-[1400px] mx-auto">
+    <section className="relative bg-white py-24 md:py-32 px-6" aria-label="Nos Services">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-20"
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-20"
         >
-          <h2 
-            className="text-[32px] md:text-[48px] font-light text-black tracking-[-0.02em] mb-6"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <h2 className="text-5xl md:text-6xl font-light text-black mb-6 tracking-tight">
             Nos Services
           </h2>
-          <p className="text-base md:text-lg font-light text-[#666666] max-w-[800px] mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl font-light text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Taxi Malacrida vous propose un service de transport premium 24h/24 dans toute la région PACA. 
-            Avec notre Tesla Model Y 2025, profitez d'un confort électrique pour tous vos déplacements 
-            professionnels et privés.
+            Avec notre Tesla Model Y 2025, profitez d'un confort électrique pour tous vos déplacements.
           </p>
         </motion.div>
 
@@ -108,54 +85,111 @@ const ServicesSection = () => {
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {services.map((service) => (
             <motion.article
-              key={service.title}
-              variants={itemVariants}
-              className="group bg-white border border-[#E5E5E5] rounded-lg overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)]"
+              key={service.id}
+              variants={cardVariants}
+              onHoverStart={() => setHoveredCard(service.id)}
+              onHoverEnd={() => setHoveredCard(null)}
+              className="group relative bg-white rounded-lg overflow-hidden border border-gray-100 hover:border-black transition-all duration-500"
+              style={{
+                boxShadow: hoveredCard === service.id 
+                  ? '0 25px 50px -12px rgba(0, 0, 0, 0.15)' 
+                  : '0 4px 6px -1px rgba(0, 0, 0, 0.05)'
+              }}
             >
-              {/* Image container */}
-              <div className="relative h-[300px] md:h-[400px] overflow-hidden">
-                <img
+              {/* Image Container */}
+              <div className="relative h-80 overflow-hidden">
+                <motion.img
                   src={service.image}
                   alt={service.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                {/* Gradient overlay */}
-                <div 
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ 
-                    background: 'linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 100%)' 
+                  className="w-full h-full object-cover"
+                  animate={{
+                    scale: hoveredCard === service.id ? 1.08 : 1
                   }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                
+                {/* Number Badge */}
+                <motion.div
+                  className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20"
+                  animate={{
+                    scale: hoveredCard === service.id ? 1.1 : 1
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <span className="text-white font-light text-lg">
+                    {String(service.id).padStart(2, '0')}
+                  </span>
+                </motion.div>
               </div>
 
               {/* Content */}
               <div className="p-8">
-                <h3 
-                  className="text-2xl font-medium text-black tracking-[-0.01em] mb-4"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
-                >
+                <h3 className="text-2xl font-medium text-black mb-4 tracking-tight">
                   {service.title}
                 </h3>
                 
-                {/* Underline */}
-                <div className="w-10 h-[3px] bg-black mb-4" />
+                {/* Animated Underline */}
+                <motion.div
+                  className="h-0.5 bg-black mb-6"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 48 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                />
                 
-                <p className="text-[15px] font-light text-[#666666] leading-[1.7]">
+                <p className="text-gray-600 leading-relaxed font-light text-sm">
                   {service.description}
                 </p>
+
+                {/* Hover Arrow */}
+                <motion.div
+                  className="mt-6 flex items-center text-black font-medium text-sm"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{
+                    opacity: hoveredCard === service.id ? 1 : 0,
+                    x: hoveredCard === service.id ? 0 : -10
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <span className="mr-2">En savoir plus</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </motion.div>
               </div>
+
+              {/* Decorative Corner */}
+              <motion.div
+                className="absolute bottom-0 left-0 w-16 h-16 border-l-2 border-b-2 border-black/10"
+                animate={{
+                  width: hoveredCard === service.id ? 24 : 16,
+                  height: hoveredCard === service.id ? 24 : 16
+                }}
+                transition={{ duration: 0.3 }}
+              />
             </motion.article>
           ))}
         </motion.div>
       </div>
     </section>
   );
-};
-
-export default ServicesSection;
+}
