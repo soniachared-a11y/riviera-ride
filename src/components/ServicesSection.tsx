@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const services = [
@@ -11,7 +12,7 @@ const services = [
     id: 2,
     title: "Service à la journée",
     description: "Bénéficiez d'un chauffeur privé pour la journée entière, idéal pour vos rendez-vous professionnels ou vos activités personnelles.",
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop&q=80"
+    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/Vieux-Port-de-Marseille%20(1).jpeg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4NDQ4ZSIsImFsZyI6IkhTMjU2In0.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9WaWV1eC1Qb3J0LWRlLU1hcnNlaWxsZSAoMSkuanBlZyIsImlhdCI6MTc2ODc2MzIyNSwiZXhwIjoxODAwMjk5MjI1fQ.ZlUm9tdnP_MkFryhlgHlbk2bLHZZNneUcJXMpnt6Zlw"
   },
   {
     id: 3,
@@ -33,15 +34,26 @@ const services = [
   },
   {
     id: 6,
-    title: "Transferts Gares",
-    description: "TGV Aix-en-Provence, Marseille Saint-Charles. Prise en charge directe à quai.",
-    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/gare.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4NDQ4ZSIsImFsZyI6IkhTMjU2In0.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9nYXJlLnBuZyIsImlhdCI6MTc2ODc1NzU3NCwiZXhwIjoxODAwMjkzNTc0fQ.QIwDTb1biOFIXpjMZ5yuUTiEbHdcxb0wxATFblSeTVQ"
+    title: "Location à l'heure",
+    description: "Réservez notre service à l'heure pour tous vos besoins de déplacements ponctuels.",
+    image: "https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&h=800&fit=crop&q=80"
   }
 ];
 
 export default function ServicesSection() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const totalSlides = 2; // 6 cards / 3 per slide = 2 slides on desktop
+
+  // Auto-scroll every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="services" className="bg-white py-20">
+    <section id="services" className="bg-white py-20 overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Titre avec animation */}
         <motion.div
@@ -85,51 +97,58 @@ export default function ServicesSection() {
           De l'aéroport aux événements, notre Tesla Model Y 2025 vous accompagne avec élégance dans tous vos déplacements.
         </motion.p>
 
-        {/* Grid des cartes - 3 colonnes desktop, 2 tablet, 1 mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white overflow-hidden group cursor-pointer"
-              style={{
-                borderRadius: '16px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-              }}
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Desktop: 3 cards per slide, auto-scroll */}
+          <div className="hidden lg:block overflow-hidden">
+            <motion.div 
+              className="flex gap-6"
+              animate={{ x: `-${currentSlide * 100}%` }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              style={{ width: '200%' }}
             >
-              {/* Image */}
-              <div className="overflow-hidden" style={{ height: '280px' }}>
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              {/* Slide 1: Cards 1-3 */}
+              <div className="flex gap-6 w-full flex-shrink-0">
+                {services.slice(0, 3).map((service) => (
+                  <ServiceCard key={service.id} service={service} />
+                ))}
               </div>
-              
-              {/* Contenu texte */}
-              <div style={{ padding: '24px' }}>
-                <span className="font-serif text-xs uppercase tracking-widest" style={{ color: '#999' }}>
-                  {String(service.id).padStart(2, '0')}
-                </span>
-                <h3 
-                  className="font-serif text-black mt-2 mb-3"
-                  style={{ fontSize: '22px', fontWeight: 500 }}
-                >
-                  {service.title}
-                </h3>
-                <div className="w-10 h-px bg-black mb-4" />
-                <p 
-                  className="font-serif leading-relaxed"
-                  style={{ fontSize: '14px', fontWeight: 300, color: '#666' }}
-                >
-                  {service.description}
-                </p>
+              {/* Slide 2: Cards 4-6 */}
+              <div className="flex gap-6 w-full flex-shrink-0">
+                {services.slice(3, 6).map((service) => (
+                  <ServiceCard key={service.id} service={service} />
+                ))}
               </div>
             </motion.div>
-          ))}
+          </div>
+
+          {/* Tablet: 2 columns grid */}
+          <div className="hidden md:grid lg:hidden grid-cols-2 gap-6">
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+
+          {/* Mobile: 1 column grid */}
+          <div className="grid md:hidden grid-cols-1 gap-6">
+            {services.map((service) => (
+              <ServiceCard key={service.id} service={service} />
+            ))}
+          </div>
+
+          {/* Dots indicator - Desktop only */}
+          <div className="hidden lg:flex justify-center gap-3 mt-8">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  currentSlide === index ? 'bg-black scale-110' : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* CTA */}
@@ -143,5 +162,57 @@ export default function ServicesSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+// Square Service Card Component
+function ServiceCard({ service }: { service: typeof services[0] }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="bg-white overflow-hidden group cursor-pointer flex-1"
+      style={{
+        borderRadius: '16px',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+        aspectRatio: '1 / 1',
+      }}
+    >
+      {/* Image - Square format */}
+      <div className="overflow-hidden relative" style={{ height: '60%' }}>
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute top-4 left-4">
+          <span 
+            className="font-serif text-xs uppercase tracking-widest bg-white/90 px-3 py-1 rounded-full"
+            style={{ color: '#333' }}
+          >
+            {String(service.id).padStart(2, '0')}
+          </span>
+        </div>
+      </div>
+      
+      {/* Contenu texte */}
+      <div className="p-5" style={{ height: '40%' }}>
+        <h3 
+          className="font-serif text-black mb-2"
+          style={{ fontSize: '20px', fontWeight: 500 }}
+        >
+          {service.title}
+        </h3>
+        <div className="w-8 h-px bg-black mb-3" />
+        <p 
+          className="font-serif leading-relaxed line-clamp-3"
+          style={{ fontSize: '13px', fontWeight: 300, color: '#666' }}
+        >
+          {service.description}
+        </p>
+      </div>
+    </motion.div>
   );
 }
