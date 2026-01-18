@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const services = [
@@ -41,68 +40,19 @@ const services = [
 ];
 
 export default function ServicesSection() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef<HTMLElement>(null);
-  const lastCardRef = useRef<HTMLDivElement>(null);
-  const [hasReachedEnd, setHasReachedEnd] = useState(false);
-
-  useEffect(() => {
-    const lastCard = lastCardRef.current;
-    if (!lastCard) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setHasReachedEnd(true);
-          }
-        });
-      },
-      { threshold: 0.8 }
-    );
-
-    observer.observe(lastCard);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    const scrollContainer = scrollContainerRef.current;
-    if (!section || !scrollContainer) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (hasReachedEnd) return;
-
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainer;
-      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
-
-      if (!isAtEnd) {
-        e.preventDefault();
-        scrollContainer.scrollLeft += e.deltaY;
-      }
-    };
-
-    section.addEventListener('wheel', handleWheel, { passive: false });
-    return () => section.removeEventListener('wheel', handleWheel);
-  }, [hasReachedEnd]);
-
   return (
-    <section 
-      ref={sectionRef}
-      id="services" 
-      className="bg-white py-20 overflow-hidden"
-    >
-      <div className="text-center px-6">
+    <section id="services" className="bg-white py-20">
+      <div className="container mx-auto px-6">
         {/* Titre avec animation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="inline-block"
+          className="text-center"
         >
           <h2 
-            className="font-serif text-black mb-2"
+            className="font-serif text-black mb-2 inline-block"
             style={{ fontSize: '48px', fontWeight: 300 }}
           >
             Nos Services
@@ -122,7 +72,7 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true }}
-          className="font-serif mx-auto"
+          className="font-serif text-center mx-auto"
           style={{ 
             fontSize: '18px', 
             fontWeight: 300, 
@@ -134,84 +84,63 @@ export default function ServicesSection() {
         >
           De l'aéroport aux événements, notre Tesla Model Y 2025 vous accompagne avec élégance dans tous vos déplacements.
         </motion.p>
-      </div>
 
-      {/* Container scroll horizontal */}
-      <div
-        ref={scrollContainerRef}
-        className="flex overflow-x-auto overflow-y-hidden"
-        style={{
-          scrollSnapType: 'x mandatory',
-          padding: '40px',
-          gap: '24px',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none',
-        }}
-      >
-        <style>{`
-          div::-webkit-scrollbar { display: none; }
-        `}</style>
-        
-        {services.map((service, index) => (
-          <motion.div
-            key={service.id}
-            ref={index === services.length - 1 ? lastCardRef : null}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="flex-shrink-0 bg-white overflow-hidden group cursor-pointer"
-            style={{
-              width: '380px',
-              height: '500px',
-              borderRadius: '16px',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-              scrollSnapAlign: 'center',
-            }}
+        {/* Grid des cartes - 3 colonnes desktop, 2 tablet, 1 mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white overflow-hidden group cursor-pointer"
+              style={{
+                borderRadius: '16px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+              }}
+            >
+              {/* Image */}
+              <div className="overflow-hidden" style={{ height: '280px' }}>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              
+              {/* Contenu texte */}
+              <div style={{ padding: '24px' }}>
+                <span className="font-serif text-xs uppercase tracking-widest" style={{ color: '#999' }}>
+                  {String(service.id).padStart(2, '0')}
+                </span>
+                <h3 
+                  className="font-serif text-black mt-2 mb-3"
+                  style={{ fontSize: '22px', fontWeight: 500 }}
+                >
+                  {service.title}
+                </h3>
+                <div className="w-10 h-px bg-black mb-4" />
+                <p 
+                  className="font-serif leading-relaxed"
+                  style={{ fontSize: '14px', fontWeight: 300, color: '#666' }}
+                >
+                  {service.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <a 
+            href="tel:0784628640" 
+            className="inline-block px-8 py-3.5 bg-black text-white font-serif text-sm rounded-full hover:bg-gray-900 transition-all"
           >
-            {/* Image */}
-            <div className="overflow-hidden" style={{ height: '280px' }}>
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            
-            {/* Contenu texte */}
-            <div style={{ padding: '24px' }}>
-              <span className="font-serif text-xs uppercase tracking-widest" style={{ color: '#999' }}>
-                {String(service.id).padStart(2, '0')}
-              </span>
-              <h3 
-                className="font-serif text-black mt-2 mb-3"
-                style={{ fontSize: '22px', fontWeight: 500 }}
-              >
-                {service.title}
-              </h3>
-              <div className="w-10 h-px bg-black mb-4" />
-              <p 
-                className="font-serif leading-relaxed"
-                style={{ fontSize: '14px', fontWeight: 300, color: '#666' }}
-              >
-                {service.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-        
-        {/* Spacer à la fin pour le scroll */}
-        <div className="flex-shrink-0" style={{ width: '40px' }} />
-      </div>
-
-      {/* CTA */}
-      <div className="text-center mt-10">
-        <a 
-          href="tel:0784628640" 
-          className="inline-block px-8 py-3.5 bg-black text-white font-serif text-sm rounded-full hover:bg-gray-900 transition-all"
-        >
-          Réserver maintenant : 07 84 62 86 40
-        </a>
+            Réserver maintenant : 07 84 62 86 40
+          </a>
+        </div>
       </div>
     </section>
   );
