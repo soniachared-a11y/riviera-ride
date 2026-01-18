@@ -1,8 +1,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowUpDown } from 'lucide-react';
+import pricingMobile from '@/assets/pricing-mobile.png';
 
 const ACCENT_BLUE = '#0E4D64';
+const PRICING_DESKTOP_URL = 'https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/transferts-courants%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS90cmFuc2ZlcnRzLWNvdXJhbnRzIC5wbmciLCJpYXQiOjE3Njg3Nzc0NTQsImV4cCI6MTgwMDMxMzQ1NH0.YJ2x5CEZDOgdSUhcXJXSR5zvLfgyDmMGf967Q_VNkmo';
 
 const pricingData = [
   {
@@ -31,12 +33,16 @@ const PricingSection = () => {
       ref={ref}
       className="relative w-full py-16 md:py-20 overflow-hidden"
     >
-      {/* Background with dark overlay */}
+      {/* Mobile Background */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ 
-          backgroundImage: `url(https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/transferts-courants%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS90cmFuc2ZlcnRzLWNvdXJhbnRzIC5wbmciLCJpYXQiOjE3Njg3Nzc0NTQsImV4cCI6MTgwMDMxMzQ1NH0.YJ2x5CEZDOgdSUhcXJXSR5zvLfgyDmMGf967Q_VNkmo)` 
-        }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
+        style={{ backgroundImage: `url('${pricingMobile}')` }}
+      />
+      
+      {/* Desktop Background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
+        style={{ backgroundImage: `url('${PRICING_DESKTOP_URL}')` }}
       />
       
       {/* Dark overlay with blur effect to hide original cards */}
