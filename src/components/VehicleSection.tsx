@@ -27,11 +27,41 @@ const VehicleSection = () => {
       />
       
       <div className="relative max-w-6xl mx-auto flex flex-col items-center">
+        {/* Title & Description */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-center mb-8"
+        >
+          <h2 
+            className="text-white font-light mb-4"
+            style={{
+              fontSize: 'clamp(28px, 4vw, 40px)',
+              letterSpacing: '3px',
+              fontFamily: 'Inter, system-ui, sans-serif'
+            }}
+          >
+            TESLA MODEL Y
+          </h2>
+          <p 
+            className="text-white/70 font-extralight max-w-md mx-auto"
+            style={{
+              fontSize: '14px',
+              letterSpacing: '1px',
+              lineHeight: '1.8',
+              fontFamily: 'Inter, system-ui, sans-serif'
+            }}
+          >
+            Une expérience de voyage premium à bord du véhicule électrique le plus avancé de sa catégorie.
+          </p>
+        </motion.div>
+
         {/* Vehicle Image */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1, delay: 0.2 }}
+          transition={{ duration: 1, delay: 0.3 }}
           className="mb-12 flex justify-center w-full"
         >
           <img 
