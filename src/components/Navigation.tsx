@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone, ChevronRight } from 'lucide-react';
+import { Menu, X, Phone, ChevronRight, MapPin } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,9 +31,10 @@ const Navigation = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8">
           {/* Logo */}
-          <a href="#" className="relative z-10">
-            <span className="text-2xl font-serif font-medium tracking-wide text-charcoal">
-              Macrida
+          <a href="#" className="relative z-10 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-charcoal" strokeWidth={1.5} />
+            <span className="text-2xl font-serif font-light tracking-wide text-charcoal">
+              Malacrida
             </span>
           </a>
 
