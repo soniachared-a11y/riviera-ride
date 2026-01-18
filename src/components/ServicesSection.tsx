@@ -1,5 +1,6 @@
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Award, Users, MapPin, Heart } from 'lucide-react';
+import { Award, Users, MapPin, Heart, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const scrollingItems = [
   {
@@ -35,7 +36,7 @@ const services = [
     id: 2,
     title: "Service à la journée",
     description: "Bénéficiez d'un chauffeur privé pour la journée entière, idéal pour vos rendez-vous professionnels ou vos activités personnelles.",
-    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=800&h=600&fit=crop&q=80"
+    image: "https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/gare.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS9nYXJlLnBuZyIsImlhdCI6MTc2ODc1NzU3NCwiZXhwIjoxODAwMjkzNTc0fQ.QIwDTb1biOFIXpjMZ5yuUTiEbHdcxb0wxATFblSeTVQ"
   },
   {
     id: 3,
@@ -64,14 +65,31 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = 2; // 6 cards / 3 visible = 2 pages
+  
   // Duplicate items for seamless loop
   const duplicatedItems = [...scrollingItems, ...scrollingItems, ...scrollingItems, ...scrollingItems];
 
+  const nextPage = useCallback(() => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  }, []);
+
+  const prevPage = useCallback(() => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  }, []);
+
+  // Auto-scroll every 8 seconds
+  useEffect(() => {
+    const interval = setInterval(nextPage, 8000);
+    return () => clearInterval(interval);
+  }, [nextPage]);
+
   return (
-    <section className="relative bg-white py-20 md:py-20" aria-label="Nos Services">
+    <section className="relative bg-white pt-5 pb-10 px-10" aria-label="Nos Services">
       
-      {/* Scrolling Banner */}
-      <div className="w-full overflow-hidden mb-16" style={{ backgroundColor: '#F9FAFB', height: '180px' }}>
+      {/* Scrolling Banner - White background, close to hero */}
+      <div className="w-full overflow-hidden mb-10 bg-white" style={{ height: '180px' }}>
         <motion.div
           className="flex items-center h-full"
           animate={{
@@ -104,50 +122,91 @@ export default function ServicesSection() {
         </motion.div>
       </div>
 
-      {/* Cards Grid */}
-      <div className="max-w-7xl mx-auto px-20">
-        <div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center"
-          style={{ gap: '40px' }}
+      {/* Carousel Section */}
+      <div className="max-w-7xl mx-auto relative" style={{ marginTop: '60px' }}>
+        
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevPage}
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-10 w-10 h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:border-black hover:bg-gray-50 transition-all duration-300"
+          aria-label="Précédent"
         >
-          {services.map((service, index) => (
-            <motion.article
-              key={service.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group flex w-full max-w-[380px] h-[400px] bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300"
-              style={{
-                boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
-              }}
-              whileHover={{
-                boxShadow: '0 0 30px rgba(0, 0, 0, 0.5)',
-              }}
-            >
-              {/* Left side - Text */}
-              <div className="w-1/2 p-5 flex flex-col justify-center bg-white">
-                <span className="font-serif text-sm text-gray-400 mb-2">
-                  {String(service.id).padStart(2, '0')}
-                </span>
-                <h3 className="font-serif text-lg font-medium text-black mb-2">
-                  {service.title}
-                </h3>
-                <div className="w-3 h-px bg-black mb-3" />
-                <p className="font-serif text-xs text-gray-600 leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
+          <ChevronLeft size={20} className="text-black" />
+        </button>
+        
+        <button
+          onClick={nextPage}
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-10 w-10 h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center hover:border-black hover:bg-gray-50 transition-all duration-300"
+          aria-label="Suivant"
+        >
+          <ChevronRight size={20} className="text-black" />
+        </button>
 
-              {/* Right side - Image */}
-              <div className="w-1/2 h-full overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            </motion.article>
+        {/* Cards Container */}
+        <div className="overflow-hidden">
+          <motion.div
+            className="flex"
+            style={{ gap: '32px' }}
+            animate={{ x: `calc(-${currentPage * 100}% - ${currentPage * 32}px)` }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
+          >
+            {services.map((service, index) => (
+              <motion.article
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group flex flex-shrink-0 bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-black transition-all duration-300"
+                style={{
+                  width: 'calc((100% - 64px) / 3)',
+                  height: '400px',
+                  boxShadow: '0 0 20px rgba(0, 0, 0, 0.3)',
+                }}
+                whileHover={{
+                  boxShadow: '0 0 30px rgba(0, 0, 0, 0.5)',
+                }}
+              >
+                {/* Left side - Text */}
+                <div className="w-1/2 p-5 flex flex-col justify-center bg-white">
+                  <span className="font-serif text-sm text-gray-400 mb-2">
+                    {String(service.id).padStart(2, '0')}
+                  </span>
+                  <h3 className="font-serif text-lg font-medium text-black mb-2">
+                    {service.title}
+                  </h3>
+                  <div className="w-3 h-px bg-black mb-3" />
+                  <p className="font-serif text-xs text-gray-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+
+                {/* Right side - Image with contain */}
+                <div className="w-1/2 h-full overflow-hidden flex items-center justify-center bg-gray-50 p-2">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Pagination Indicators */}
+        <div className="flex justify-center gap-3 mt-8">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentPage(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                currentPage === index 
+                  ? 'bg-black' 
+                  : 'bg-gray-300 hover:bg-gray-400'
+              }`}
+              aria-label={`Page ${index + 1}`}
+            />
           ))}
         </div>
 
@@ -157,7 +216,7 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="text-center mt-14"
+          className="text-center mt-10"
         >
           <a 
             href="tel:0784628640"
