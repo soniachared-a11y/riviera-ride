@@ -32,8 +32,9 @@ const ContactSection = () => {
         style={{ backgroundImage: `url(${contactBgImage})` }}
       />
       
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60" />
+      {/* Gradient Overlay - Dark at top/left for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40 lg:bg-gradient-to-r" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/30 lg:from-black/70 lg:via-transparent lg:to-transparent" />
       
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10 w-full">
@@ -50,7 +51,8 @@ const ContactSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight mb-4"
+              className="font-serif text-2xl md:text-3xl lg:text-4xl text-white leading-tight mb-4 drop-shadow-lg"
+              style={{ textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6)' }}
             >
               Voyagez l'Esprit Libre.
               <br />
@@ -61,7 +63,8 @@ const ContactSection = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-gray-300 font-light text-sm md:text-base leading-relaxed"
+              className="text-gray-200 font-light text-sm md:text-base leading-relaxed drop-shadow-md"
+              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7)' }}
             >
               Ne laissez plus vos déplacements au hasard. Que ce soit pour un transfert 
               aéroportuaire stratégique ou un retour tardif de gare TGV, nous garantissons 
