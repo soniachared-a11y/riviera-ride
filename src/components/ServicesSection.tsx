@@ -73,8 +73,38 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="bg-white py-12">
+    <section id="services" className="bg-white py-16">
       <div className="container mx-auto px-4 md:px-8">
+        {/* Titre et présentation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 
+            className="font-serif text-black mb-4 inline-block relative"
+            style={{ fontSize: '42px', fontWeight: 300, letterSpacing: '0.03em' }}
+          >
+            L'Excellence au Service de vos Déplacements
+            <motion.span
+              className="absolute bottom-0 left-0 h-0.5 bg-black"
+              initial={{ width: 0 }}
+              whileInView={{ width: '100%' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+          </h2>
+          <p 
+            className="font-serif text-black/70 max-w-3xl mx-auto mt-6"
+            style={{ fontSize: '17px', fontWeight: 300, lineHeight: 1.8 }}
+          >
+            Notre Tesla Model Y 2025 incarne notre engagement envers l'innovation et le confort. 
+            Ponctualité, discrétion et disponibilité 24h/24 de Marseille à Monaco.
+          </p>
+        </motion.div>
+
         {/* Carousel Container */}
         <div className="relative overflow-hidden">
           <AnimatePresence mode="wait">
