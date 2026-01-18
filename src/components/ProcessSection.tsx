@@ -30,102 +30,115 @@ const steps = [
 
 const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-50px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   return (
     <section 
       ref={sectionRef}
-      className="py-20 md:py-32 bg-white overflow-hidden"
+      className="py-16 md:py-24 bg-white overflow-hidden"
       aria-labelledby="process-title"
     >
       <div className="container mx-auto px-6 md:px-12">
-        {/* Title */}
+        {/* Title & Subtitle */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-24"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12 md:mb-16"
         >
           <h2 
             id="process-title"
-            className="font-serif text-[32px] md:text-[44px] font-light text-black tracking-[0.02em] mb-6"
+            className="font-serif text-[36px] md:text-[52px] font-light text-black tracking-[0.01em] mb-3"
           >
             Votre Trajet en 4 Étapes Simples
           </h2>
-          <div className="w-20 h-[1px] bg-black/30 mx-auto" />
+          <p className="text-[14px] md:text-[15px] font-light text-black/50 tracking-[0.15em] uppercase">
+            L'excellence en quelques clics
+          </p>
         </motion.div>
 
         {/* Winding Road Timeline - Desktop */}
-        <div className="hidden md:block relative max-w-5xl mx-auto">
-          {/* SVG Winding Path */}
+        <div className="hidden md:block relative max-w-4xl mx-auto">
+          {/* SVG Winding Path - Tighter curves */}
           <svg 
-            className="absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-32"
-            viewBox="0 0 120 800"
-            preserveAspectRatio="none"
-            style={{ height: '100%' }}
+            className="absolute left-1/2 top-0 transform -translate-x-1/2 pointer-events-none"
+            width="100"
+            height="520"
+            viewBox="0 0 100 520"
+            fill="none"
           >
             <motion.path
-              d="M60 0 
-                 C60 50, 20 80, 20 130 
-                 C20 180, 100 210, 100 260 
-                 C100 310, 20 340, 20 390 
-                 C20 440, 100 470, 100 520 
-                 C100 570, 20 600, 20 650 
-                 C20 700, 60 730, 60 800"
+              d="M50 0 
+                 C50 30, 15 50, 15 80 
+                 C15 110, 85 130, 85 160 
+                 C85 190, 15 210, 15 240 
+                 C15 270, 85 290, 85 320 
+                 C85 350, 15 370, 15 400 
+                 C15 430, 50 450, 50 520"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeDasharray="6 8"
+              strokeLinecap="round"
               fill="none"
-              stroke="#e5e5e5"
-              strokeWidth="3"
-              strokeDasharray="8 6"
-              initial={{ pathLength: 0 }}
-              animate={isInView ? { pathLength: 1 } : {}}
-              transition={{ duration: 2, ease: "easeInOut" }}
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={isInView ? { pathLength: 1, opacity: 0.25 } : {}}
+              transition={{ duration: 1.8, ease: "easeOut" }}
             />
           </svg>
 
-          {/* Steps Container */}
-          <div className="relative space-y-24">
+          {/* Steps Container - Compact spacing */}
+          <div className="relative" style={{ minHeight: '520px' }}>
             {steps.map((step, index) => {
               const isLeft = step.side === 'left';
-              const yPosition = index * 200;
+              const topPosition = index * 130;
               
               return (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.4 + index * 0.25 }}
-                  className="relative flex items-center min-h-[140px]"
+                  initial={{ opacity: 0, y: 25, x: isLeft ? -20 : 20 }}
+                  animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.3 + index * 0.18 }}
+                  className="absolute flex items-center w-full"
+                  style={{ top: `${topPosition}px` }}
                 >
                   {/* Left Side Content */}
                   {isLeft && (
-                    <div className="w-[45%] pr-16 text-right">
-                      <h3 className="font-serif text-[24px] font-medium text-black mb-3 tracking-wide">
+                    <div className="w-[42%] pr-10 text-right">
+                      <h3 className="font-serif text-[20px] font-normal text-black mb-1.5 tracking-[0.02em]">
                         {step.title}
                       </h3>
-                      <p className="font-serif text-[15px] text-black/60 leading-[1.8]">
+                      <p className="text-[13px] font-light text-black/55 leading-[1.7]">
                         {step.description}
                       </p>
                     </div>
                   )}
-                  {!isLeft && <div className="w-[45%]" />}
+                  {!isLeft && <div className="w-[42%]" />}
 
-                  {/* Center - Number Circle with Connectors */}
-                  <div className="w-[10%] flex justify-center relative">
-                    {/* Horizontal Connector Line */}
+                  {/* Center - Number Circle */}
+                  <div className="w-[16%] flex justify-center relative">
+                    {/* Horizontal Connector */}
                     <div 
-                      className={`absolute top-1/2 transform -translate-y-1/2 w-16 border-t-2 border-dashed border-black/20 ${
-                        isLeft ? 'right-full mr-2' : 'left-full ml-2'
+                      className={`absolute top-1/2 transform -translate-y-1/2 w-8 border-t border-dashed border-black/20 ${
+                        isLeft ? 'right-[calc(50%+28px)]' : 'left-[calc(50%+28px)]'
                       }`}
                     />
                     
-                    {/* Number Circle */}
+                    {/* Number Circle with Shadow */}
                     <motion.div
-                      initial={{ scale: 0 }}
-                      animate={isInView ? { scale: 1 } : {}}
-                      transition={{ duration: 0.5, delay: 0.6 + index * 0.25 }}
-                      className="w-16 h-16 rounded-full bg-white border-2 border-black flex items-center justify-center shadow-lg z-10"
+                      initial={{ scale: 0, rotate: -180 }}
+                      animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: 0.45 + index * 0.18,
+                        type: "spring",
+                        stiffness: 200
+                      }}
+                      className="w-14 h-14 rounded-full bg-white border border-black/80 flex items-center justify-center z-10"
+                      style={{
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.08)'
+                      }}
                     >
-                      <span className="font-serif text-[24px] font-light text-black">
+                      <span className="font-serif text-[22px] font-light text-black">
                         {step.number}
                       </span>
                     </motion.div>
@@ -133,65 +146,69 @@ const ProcessSection = () => {
 
                   {/* Right Side Content */}
                   {!isLeft && (
-                    <div className="w-[45%] pl-16 text-left">
-                      <h3 className="font-serif text-[24px] font-medium text-black mb-3 tracking-wide">
+                    <div className="w-[42%] pl-10 text-left">
+                      <h3 className="font-serif text-[20px] font-normal text-black mb-1.5 tracking-[0.02em]">
                         {step.title}
                       </h3>
-                      <p className="font-serif text-[15px] text-black/60 leading-[1.8]">
+                      <p className="text-[13px] font-light text-black/55 leading-[1.7]">
                         {step.description}
                       </p>
                     </div>
                   )}
-                  {isLeft && <div className="w-[45%]" />}
+                  {isLeft && <div className="w-[42%]" />}
                 </motion.div>
               );
             })}
           </div>
         </div>
 
-        {/* Mobile Timeline */}
-        <div className="md:hidden relative">
-          {/* Vertical Winding Path */}
-          <div className="absolute left-8 top-0 bottom-0 w-[2px]">
-            <motion.div
-              className="h-full w-full bg-gradient-to-b from-black/20 via-black/30 to-black/20"
-              style={{ backgroundSize: '2px 12px', backgroundImage: 'repeating-linear-gradient(to bottom, #000 0, #000 6px, transparent 6px, transparent 12px)' }}
-              initial={{ scaleY: 0 }}
-              animate={isInView ? { scaleY: 1 } : {}}
-              transition={{ duration: 1.5 }}
-            />
-          </div>
+        {/* Mobile Timeline - Compact */}
+        <div className="md:hidden relative pl-16">
+          {/* Vertical Path */}
+          <motion.div 
+            className="absolute left-6 top-2 bottom-2 w-px bg-black/15"
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1.2 }}
+            style={{ 
+              backgroundImage: 'repeating-linear-gradient(to bottom, transparent, transparent 4px, rgba(0,0,0,0.2) 4px, rgba(0,0,0,0.2) 10px)',
+              transformOrigin: 'top'
+            }}
+          />
 
-          <div className="space-y-10 pl-20">
+          <div className="space-y-8">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, x: 30 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
+                transition={{ duration: 0.5, delay: 0.25 + index * 0.15 }}
                 className="relative"
               >
                 {/* Number Circle */}
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={isInView ? { scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.2 }}
-                  className="absolute -left-[52px] top-1 w-10 h-10 rounded-full bg-white border-2 border-black flex items-center justify-center shadow-md"
+                  transition={{ duration: 0.4, delay: 0.35 + index * 0.15 }}
+                  className="absolute -left-[52px] top-0 w-11 h-11 rounded-full bg-white border border-black/70 flex items-center justify-center"
+                  style={{
+                    boxShadow: '0 3px 12px rgba(0,0,0,0.1)'
+                  }}
                 >
-                  <span className="font-serif text-[16px] font-light text-black">
+                  <span className="font-serif text-[18px] font-light text-black">
                     {step.number}
                   </span>
                 </motion.div>
 
-                {/* Horizontal Connector */}
-                <div className="absolute -left-[12px] top-5 w-4 border-t-2 border-dashed border-black/30" />
+                {/* Connector */}
+                <div className="absolute -left-[8px] top-5 w-3 border-t border-dashed border-black/25" />
 
                 {/* Content */}
                 <div>
-                  <h3 className="font-serif text-[18px] font-medium text-black mb-2 tracking-wide">
+                  <h3 className="font-serif text-[17px] font-normal text-black mb-1 tracking-[0.02em]">
                     {step.title}
                   </h3>
-                  <p className="font-serif text-[14px] text-black/60 leading-[1.7]">
+                  <p className="text-[13px] font-light text-black/55 leading-[1.65]">
                     {step.description}
                   </p>
                 </div>
@@ -202,14 +219,14 @@ const ProcessSection = () => {
 
         {/* CTA Button */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.4 }}
-          className="text-center mt-16 md:mt-24"
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="text-center mt-14 md:mt-16"
         >
           <a
             href="#contact"
-            className="inline-block bg-black text-white font-serif text-[15px] md:text-[16px] font-light tracking-[0.08em] uppercase px-12 py-5 hover:bg-black/90 transition-all duration-300 hover:tracking-[0.12em]"
+            className="inline-block bg-black text-white font-serif text-[14px] md:text-[15px] font-light tracking-[0.12em] uppercase px-14 py-4 transition-all duration-300 hover:bg-black/85 hover:tracking-[0.16em]"
           >
             Réserver mon chauffeur maintenant
           </a>
