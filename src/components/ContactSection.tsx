@@ -20,13 +20,13 @@ const ContactSection = () => {
   const benefits = [
     'Réponse sous 30 minutes',
     'Devis gratuit et sans engagement',
-    'Annulation gratuite 24h avant',
+    'Disponible 24h/24, 7j/7',
   ];
 
   const contactInfo = [
-    { icon: Phone, label: 'Téléphone', value: '+33 6 00 00 00 00', href: 'tel:+33600000000' },
-    { icon: Mail, label: 'Email', value: 'contact@macrida.fr', href: 'mailto:contact@macrida.fr' },
-    { icon: MapPin, label: 'Zone', value: 'Côte d\'Azur & Provence' },
+    { icon: Phone, label: 'Téléphone', value: '07 84 62 86 40', href: 'tel:0784628640' },
+    { icon: Mail, label: 'Email', value: 'contact@taximalacrida.fr', href: 'mailto:contact@taximalacrida.fr' },
+    { icon: MapPin, label: 'Adresse', value: '18 av. Henri Malacrida, Aix-en-Provence' },
   ];
 
   return (
