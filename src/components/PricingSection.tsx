@@ -1,6 +1,6 @@
 const PricingSection = () => {
   return (
-    <section className="w-full py-12">
+    <section className="w-full">
       {/* Desktop Image - Hidden on Mobile, Visible on md+ */}
       <img
         src="https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/transferts-courants%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS90cmFuc2ZlcnRzLWNvdXJhbnRzIC5wbmciLCJpYXQiOjE3Njg3Nzc0NTQsImV4cCI6MTgwMDMxMzQ1NH0.YJ2x5CEZDOgdSUhcXJXSR5zvLfgyDmMGf967Q_VNkmo"
