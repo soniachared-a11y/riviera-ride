@@ -38,7 +38,7 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-10 md:py-14 texture-overlay bg-secondary" ref={ref}>
+    <section id="about" className="py-12 md:py-16 texture-overlay bg-secondary" ref={ref}>
       <div className="max-w-5xl mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -47,40 +47,40 @@ const AboutSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8"
         >
-          <span className="text-xs font-light tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
+          <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
             Pourquoi Malacrida
           </span>
-          <h2 className="text-2xl md:text-3xl font-serif mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif mb-4">
             Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span>
           </h2>
-          <p className="text-muted-foreground font-light leading-relaxed text-sm max-w-xl mx-auto">
+          <p className="text-muted-foreground font-light leading-relaxed text-base max-w-2xl mx-auto">
             Plus de 5 ans d'expérience au service de clients exigeants. 
             Disponibilité 24h/24, véhicule 100% électrique et équipements adaptés 
             pour voyager en famille ou en toute discrétion.
           </p>
           
           {/* Happy Clients Images - centered */}
-          <div className="flex items-center justify-center gap-3 mt-5">
+          <div className="flex items-center justify-center gap-4 mt-6">
             <div className="flex -space-x-3">
               <img
                 src={clientHappy1}
                 alt="Cliente satisfaite"
-                className="w-10 h-10 rounded-full object-cover avatar-ring"
+                className="w-12 h-12 rounded-full object-cover avatar-ring"
               />
               <img
                 src={clientHappy2}
                 alt="Client satisfait"
-                className="w-10 h-10 rounded-full object-cover avatar-ring"
+                className="w-12 h-12 rounded-full object-cover avatar-ring"
               />
               <img
                 src={clientHappy3}
                 alt="Clients satisfaits"
-                className="w-10 h-10 rounded-full object-cover avatar-ring"
+                className="w-12 h-12 rounded-full object-cover avatar-ring"
               />
             </div>
             <div className="text-left">
-              <div className="font-serif text-base">2000+</div>
-              <div className="text-xs font-light text-muted-foreground">Clients Satisfaits</div>
+              <div className="font-serif text-lg">2000+</div>
+              <div className="text-sm font-light text-muted-foreground">Clients Satisfaits</div>
             </div>
           </div>
         </motion.div>
@@ -95,15 +95,15 @@ const AboutSection = () => {
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
           
-          <div className="flex animate-marquee-slow gap-3">
+          <div className="flex animate-marquee-slow gap-4">
             {[...values, ...values, ...values].map((value, index) => (
               <div
                 key={`${value.title}-${index}`}
-                className="flex-shrink-0 card-elegant rounded-xl p-3 w-36 bg-white/80 backdrop-blur-sm"
+                className="flex-shrink-0 card-elegant rounded-xl p-4 w-44 bg-white/80 backdrop-blur-sm"
               >
-                <value.icon className="w-5 h-5 mb-1.5" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
-                <h3 className="font-serif text-xs mb-0.5">{value.title}</h3>
-                <p className="text-[9px] font-light text-muted-foreground leading-tight">
+                <value.icon className="w-6 h-6 mb-2" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
+                <h3 className="font-serif text-sm mb-1">{value.title}</h3>
+                <p className="text-xs font-light text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
               </div>
