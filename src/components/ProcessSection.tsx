@@ -55,14 +55,17 @@ const ProcessSection = () => {
         >
           <h2 
             id="process-title"
-            className="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.02em] leading-tight mb-6"
+            className="font-serif text-2xl md:text-4xl lg:text-5xl font-light tracking-wide leading-tight text-[#1a1a1a] mb-6"
           >
-            <span className="text-[#1a1a1a]">Votre </span>
-            <span style={{ color: ACCENT_BLUE }}>Trajet</span>
-            <span className="text-[#1a1a1a]"> en 4 Étapes Simples</span>
+            Votre <span style={{ color: ACCENT_BLUE }}>Trajet</span> en 4 Étapes Simples
           </h2>
-          <p className="font-sans text-base md:text-lg text-[#666666] font-light max-w-2xl mx-auto">
-            Une organisation millimétrée pour supprimer tout stress. De la réservation à l'arrivée, tout est clair.
+          <p className="font-sans text-base md:text-lg text-black/70 font-light max-w-2xl mx-auto mb-4">
+            Une organisation millimétrée pour supprimer tout stress. De la réservation à l'arrivée, tout est clair et transparent.
+          </p>
+          <p className="font-sans text-sm md:text-base text-black/60 font-light max-w-2xl mx-auto">
+            Nous avons simplifié chaque étape de votre expérience pour vous offrir un service fluide et sans surprise. 
+            Réservez en quelques clics, recevez une confirmation immédiate avec le tarif exact, 
+            et profitez d'un suivi en temps réel jusqu'à votre destination. Notre objectif : vous faire gagner du temps et de la sérénité.
           </p>
         </motion.div>
 
