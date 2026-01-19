@@ -42,7 +42,7 @@ const ProcessSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 md:py-24 bg-white overflow-hidden"
+      className="py-20 md:py-32 lg:py-40 bg-white overflow-hidden"
       aria-labelledby="process-title"
     >
       <div className="container mx-auto px-6 max-w-[1200px]">
@@ -51,45 +51,46 @@ const ProcessSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-8 md:mb-14"
+          className="text-center mb-12 md:mb-20"
         >
           <h2 
             id="process-title"
-            className="font-serif text-[26px] md:text-[42px] lg:text-[48px] font-light tracking-[0.02em] leading-tight mb-4"
+            className="font-serif text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.02em] leading-tight mb-6"
           >
             <span className="text-[#1a1a1a]">Votre </span>
             <span style={{ color: ACCENT_BLUE }}>Trajet</span>
             <span className="text-[#1a1a1a]"> en 4 Étapes Simples</span>
           </h2>
-          <p className="font-sans text-[14px] md:text-[16px] text-[#666666] font-light max-w-xl mx-auto">
+          <p className="font-sans text-base md:text-lg text-[#666666] font-light max-w-2xl mx-auto">
             Une organisation millimétrée pour supprimer tout stress. De la réservation à l'arrivée, tout est clair.
           </p>
         </motion.div>
+
         {/* Desktop Zig-Zag Layout */}
         <div className="hidden lg:block relative">
           {/* Animated SVG Roadmap */}
           <svg 
             className="absolute inset-0 w-full h-full pointer-events-none"
-            viewBox="0 0 1000 500"
+            viewBox="0 0 1000 700"
             fill="none"
             preserveAspectRatio="xMidYMid meet"
           >
             <motion.path
-              d="M200 80 
-                 C350 80, 350 80, 500 80
-                 C650 80, 650 80, 800 80
-                 C900 80, 900 180, 800 180
-                 C650 180, 650 180, 500 180
-                 C350 180, 350 180, 200 180
-                 C100 180, 100 280, 200 280
-                 C350 280, 350 280, 500 280
-                 C650 280, 650 280, 800 280
-                 C900 280, 900 380, 800 380
-                 C650 380, 650 380, 500 380
-                 C350 380, 350 380, 200 380"
+              d="M200 100 
+                 C350 100, 350 100, 500 100
+                 C650 100, 650 100, 800 100
+                 C920 100, 920 250, 800 250
+                 C650 250, 650 250, 500 250
+                 C350 250, 350 250, 200 250
+                 C80 250, 80 400, 200 400
+                 C350 400, 350 400, 500 400
+                 C650 400, 650 400, 800 400
+                 C920 400, 920 550, 800 550
+                 C650 550, 650 550, 500 550
+                 C350 550, 350 550, 200 550"
               stroke={ACCENT_BLUE}
-              strokeWidth="4"
-              strokeDasharray="12 8"
+              strokeWidth="5"
+              strokeDasharray="14 10"
               strokeLinecap="round"
               fill="none"
               initial={{ pathLength: 0, opacity: 0 }}
@@ -99,9 +100,8 @@ const ProcessSection = () => {
           </svg>
 
           {/* Grid Layout - 2 Rows x 2 Columns */}
-          <div className="relative grid grid-cols-2 gap-x-24 gap-y-16">
+          <div className="relative grid grid-cols-2 gap-x-20 gap-y-12">
             {steps.map((step, index) => {
-              const isTopRow = index < 2;
               const isLeft = index % 2 === 0;
               
               return (
@@ -114,9 +114,9 @@ const ProcessSection = () => {
                 >
                   {/* Card */}
                   <div 
-                    className="bg-white border border-[#e5e5e5] rounded-lg p-8 max-w-[380px] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group"
+                    className="bg-white border border-[#e5e5e5] rounded-xl p-10 max-w-[420px] min-h-[300px] flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group"
                     style={{
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.08)'
                     }}
                   >
                     {/* Number Circle */}
@@ -129,14 +129,15 @@ const ProcessSection = () => {
                         type: "spring",
                         stiffness: 200
                       }}
-                      className="w-20 h-20 rounded-full bg-white border-2 flex items-center justify-center mb-6 mx-auto transition-all duration-300 group-hover:scale-105"
+                      className="w-24 h-24 rounded-full bg-white border-3 flex items-center justify-center mb-8 transition-all duration-300 group-hover:scale-110"
                       style={{
                         borderColor: ACCENT_BLUE,
-                        boxShadow: '0 6px 25px rgba(14,77,100,0.15)'
+                        borderWidth: '3px',
+                        boxShadow: '0 8px 30px rgba(14,77,100,0.2)'
                       }}
                     >
                       <span 
-                        className="font-serif text-[2.5rem] font-light"
+                        className="font-serif text-5xl font-light"
                         style={{ color: ACCENT_BLUE }}
                       >
                         {step.number}
@@ -144,10 +145,10 @@ const ProcessSection = () => {
                     </motion.div>
 
                     {/* Content */}
-                    <h3 className="font-serif text-[20px] font-normal mb-3 text-center tracking-[0.02em]" style={{ color: ACCENT_BLUE }}>
+                    <h3 className="font-serif text-2xl font-medium mb-4 text-center tracking-[0.02em]" style={{ color: ACCENT_BLUE }}>
                       {step.title}
                     </h3>
-                    <p className="text-[14px] font-light text-[#4a4a4a] leading-[1.7] text-center">
+                    <p className="text-base font-light text-[#4a4a4a] leading-relaxed text-center">
                       {step.description}
                     </p>
                   </div>
@@ -159,7 +160,7 @@ const ProcessSection = () => {
 
         {/* Tablet Layout */}
         <div className="hidden md:block lg:hidden relative">
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-8">
             {steps.map((step, index) => (
               <motion.div
                 key={step.number}
@@ -168,9 +169,9 @@ const ProcessSection = () => {
                 transition={{ duration: 0.5, delay: index * 0.2 }}
               >
                 <div 
-                  className="bg-white border border-[#e5e5e5] rounded-lg p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  className="bg-white border border-[#e5e5e5] rounded-xl p-8 h-full min-h-[280px] flex flex-col items-center justify-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   style={{
-                    boxShadow: '0 2px 15px rgba(0,0,0,0.05)'
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.06)'
                   }}
                 >
                   {/* Number Circle */}
@@ -178,24 +179,24 @@ const ProcessSection = () => {
                     initial={{ scale: 0 }}
                     animate={isInView ? { scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: 0.15 + index * 0.2 }}
-                    className="w-16 h-16 rounded-full bg-white border-2 flex items-center justify-center mb-5 mx-auto"
+                    className="w-20 h-20 rounded-full bg-white border-2 flex items-center justify-center mb-6"
                     style={{
                       borderColor: ACCENT_BLUE,
-                      boxShadow: '0 4px 15px rgba(14,77,100,0.12)'
+                      boxShadow: '0 6px 20px rgba(14,77,100,0.15)'
                     }}
                   >
                     <span 
-                      className="font-serif text-[1.75rem] font-light"
+                      className="font-serif text-4xl font-light"
                       style={{ color: ACCENT_BLUE }}
                     >
                       {step.number}
                     </span>
                   </motion.div>
 
-                  <h3 className="font-serif text-[17px] font-normal mb-2 text-center" style={{ color: ACCENT_BLUE }}>
+                  <h3 className="font-serif text-xl font-medium mb-3 text-center" style={{ color: ACCENT_BLUE }}>
                     {step.title}
                   </h3>
-                  <p className="text-[13px] font-light text-[#4a4a4a] leading-relaxed text-center">
+                  <p className="text-base font-light text-[#4a4a4a] leading-relaxed text-center">
                     {step.description}
                   </p>
                 </div>
@@ -276,7 +277,7 @@ const ProcessSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 1.4 }}
-          className="flex justify-center mt-10 md:mt-14"
+          className="flex justify-center mt-16 md:mt-20"
         >
           <a
             href="#contact"
