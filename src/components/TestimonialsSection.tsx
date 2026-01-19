@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Star, Quote, ChevronLeft, ChevronRight, PenLine } from 'lucide-react';
 
 const testimonials = [
   {
@@ -166,13 +166,8 @@ const TestimonialsSection = () => {
                     "{testimonials[current].content}"
                   </blockquote>
 
-                  <div>
-                    <div className="font-serif text-base text-charcoal">
-                      {testimonials[current].name}
-                    </div>
-                    <div className="text-xs text-charcoal-light font-light">
-                      {testimonials[current].role}
-                    </div>
+                  <div className="font-serif text-base text-charcoal">
+                    {testimonials[current].name}
                   </div>
                 </div>
               </motion.div>
@@ -213,6 +208,19 @@ const TestimonialsSection = () => {
                 </button>
               </div>
             </div>
+          </div>
+
+          {/* CTA Déposer un avis */}
+          <div className="text-center mt-8">
+            <a
+              href="https://g.page/r/YOUR_GOOGLE_REVIEW_LINK/review"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#0E4D64] text-white rounded-full font-medium hover:bg-[#0E4D64]/90 transition-colors"
+            >
+              <PenLine className="w-4 h-4" />
+              Déposer un avis
+            </a>
           </div>
         </motion.div>
       </div>
