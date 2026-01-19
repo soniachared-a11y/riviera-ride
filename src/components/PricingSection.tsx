@@ -31,7 +31,7 @@ const PricingSection = () => {
   return (
     <section 
       ref={ref}
-      className="relative w-full py-16 md:py-20 overflow-hidden"
+      className="relative w-full min-h-auto md:min-h-[80vh] flex items-center justify-center py-12 md:py-0 overflow-hidden"
     >
       {/* Mobile Background */}
       <div 
