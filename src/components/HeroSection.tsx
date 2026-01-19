@@ -25,10 +25,11 @@ const HeroSection = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40" />
       
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col px-8 md:px-16 lg:px-24">
-        {/* Text Content - Left aligned */}
-        <div className="flex-1 flex flex-col justify-center max-w-xl">
+      {/* Content - Desktop: Side by side layout */}
+      <div className="relative z-10 h-full min-h-screen flex flex-col lg:flex-row lg:items-center lg:justify-between px-6 md:px-12 lg:px-20 pt-24 pb-8 lg:py-0">
+        
+        {/* Left Column - Text Content */}
+        <div className="flex-1 flex flex-col justify-center max-w-xl lg:max-w-lg xl:max-w-xl">
           {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -36,7 +37,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
             className="text-white font-light"
             style={{
-              fontSize: 'clamp(36px, 6vw, 56px)',
+              fontSize: 'clamp(32px, 5vw, 56px)',
               letterSpacing: '3px',
               fontFamily: 'Inter, system-ui, sans-serif'
             }}
@@ -51,7 +52,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8, ease: 'easeOut' }}
             className="text-white font-extralight mt-4"
             style={{
-              fontSize: 'clamp(16px, 2.5vw, 20px)',
+              fontSize: 'clamp(14px, 2vw, 20px)',
               fontFamily: 'Inter, system-ui, sans-serif'
             }}
           >
@@ -63,9 +64,9 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1.2, ease: 'easeOut' }}
-            className="mt-6 font-extralight"
+            className="mt-5 font-extralight"
             style={{
-              fontSize: '14px',
+              fontSize: '13px',
               color: 'rgba(255, 255, 255, 0.7)',
               letterSpacing: '2px',
               fontFamily: 'Inter, system-ui, sans-serif'
@@ -74,14 +75,14 @@ const HeroSection = () => {
             Gare • Aéroport • Toutes distances
           </motion.p>
           
-          {/* Extended description */}
+          {/* Extended description - Hidden on mobile for cleaner look */}
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.5, ease: 'easeOut' }}
-            className="mt-5 font-light max-w-lg"
+            className="mt-4 font-light max-w-lg hidden md:block"
             style={{
-              fontSize: '15px',
+              fontSize: '14px',
               color: 'rgba(255, 255, 255, 0.85)',
               lineHeight: '1.7',
               fontFamily: 'Inter, system-ui, sans-serif'
@@ -91,12 +92,12 @@ const HeroSection = () => {
           </motion.p>
         </div>
         
-        {/* Booking Form - Bottom right */}
+        {/* Right Column - Booking Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6, ease: 'easeOut' }}
-          className="self-end mb-12 md:mb-16"
+          className="mt-8 lg:mt-0 lg:ml-12 flex-shrink-0"
         >
           <BookingForm />
         </motion.div>
