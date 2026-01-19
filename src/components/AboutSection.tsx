@@ -34,115 +34,77 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="py-10 md:py-14 texture-overlay bg-secondary" ref={ref}>
-      <div className="container-narrow">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-xs font-light tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
-              Pourquoi Malacrida
-            </span>
-            <h2 className="text-2xl md:text-3xl font-serif mb-4">
-              Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span>
-            </h2>
-            <p className="text-muted-foreground mb-5 font-light leading-relaxed text-sm">
-              Taxi Malacrida a été fondée sur une conviction simple : le transport privé doit être 
-              une expérience. Notre engagement envers la sécurité et le professionnalisme fait de nous 
-              le choix privilégié des voyageurs exigeants.
-            </p>
-
-            {/* Happy Clients Images */}
-            <div className="flex items-center gap-3 mb-5">
-              <div className="flex -space-x-3">
-                <img
-                  src={clientHappy1}
-                  alt="Cliente satisfaite"
-                  className="w-10 h-10 rounded-full object-cover avatar-ring"
-                />
-                <img
-                  src={clientHappy2}
-                  alt="Client satisfait"
-                  className="w-10 h-10 rounded-full object-cover avatar-ring"
-                />
-                <img
-                  src={clientHappy3}
-                  alt="Clients satisfaits"
-                  className="w-10 h-10 rounded-full object-cover avatar-ring"
-                />
-              </div>
-              <div>
-                <div className="font-serif text-base">2000+</div>
-                <div className="text-xs font-light text-muted-foreground">Clients Satisfaits</div>
-              </div>
+      <div className="max-w-5xl mx-auto px-4">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
+        >
+          <span className="text-xs font-light tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
+            Pourquoi Malacrida
+          </span>
+          <h2 className="text-2xl md:text-3xl font-serif mb-4">
+            Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span>
+          </h2>
+          <p className="text-muted-foreground font-light leading-relaxed text-sm max-w-xl mx-auto">
+            Taxi Malacrida a été fondée sur une conviction simple : le transport privé doit être 
+            une expérience. Notre engagement envers la sécurité et le professionnalisme fait de nous 
+            le choix privilégié des voyageurs exigeants.
+          </p>
+          
+          {/* Happy Clients Images - centered */}
+          <div className="flex items-center justify-center gap-3 mt-5">
+            <div className="flex -space-x-3">
+              <img
+                src={clientHappy1}
+                alt="Cliente satisfaite"
+                className="w-10 h-10 rounded-full object-cover avatar-ring"
+              />
+              <img
+                src={clientHappy2}
+                alt="Client satisfait"
+                className="w-10 h-10 rounded-full object-cover avatar-ring"
+              />
+              <img
+                src={clientHappy3}
+                alt="Clients satisfaits"
+                className="w-10 h-10 rounded-full object-cover avatar-ring"
+              />
             </div>
+            <div className="text-left">
+              <div className="font-serif text-base">2000+</div>
+              <div className="text-xs font-light text-muted-foreground">Clients Satisfaits</div>
+            </div>
+          </div>
+        </motion.div>
 
-            {/* Stats Marquee */}
-            <div className="relative overflow-hidden">
-              <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
-              
-              <div className="flex animate-marquee-slow gap-4">
-                {[...Array(3)].map((_, setIndex) => (
-                  <div key={setIndex} className="flex gap-4 flex-shrink-0">
-                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
-                      <div className="text-xl font-serif text-gold mb-0.5">5+</div>
-                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Années</div>
-                    </div>
-                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
-                      <div className="text-xl font-serif text-gold mb-0.5">24/7</div>
-                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Disponible</div>
-                    </div>
-                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
-                      <div className="text-xl font-serif text-gold mb-0.5">5.0</div>
-                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Note</div>
-                    </div>
-                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
-                      <div className="text-xl font-serif text-gold mb-0.5">100%</div>
-                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Électrique</div>
-                    </div>
-                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
-                      <div className="text-xl font-serif text-gold mb-0.5">Tesla</div>
-                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Model Y</div>
-                    </div>
-                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
-                      <div className="text-xl font-serif text-gold mb-0.5">VIP</div>
-                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Service</div>
-                    </div>
-                  </div>
-                ))}
+        {/* Values Marquee - centered */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative overflow-hidden max-w-3xl mx-auto"
+        >
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+          
+          <div className="flex animate-marquee-slow gap-5">
+            {[...values, ...values, ...values].map((value, index) => (
+              <div
+                key={`${value.title}-${index}`}
+                className="flex-shrink-0 card-elegant rounded-xl p-4 w-44"
+              >
+                <value.icon className="w-5 h-5 mb-2" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
+                <h3 className="font-serif text-sm mb-1">{value.title}</h3>
+                <p className="text-[10px] font-light text-muted-foreground leading-relaxed">
+                  {value.description}
+                </p>
               </div>
-            </div>
-          </motion.div>
-
-          {/* Values Marquee */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative overflow-hidden"
-          >
-            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
-            
-            <div className="flex animate-marquee-slow gap-4">
-              {[...values, ...values, ...values].map((value, index) => (
-                <div
-                  key={`${value.title}-${index}`}
-                  className="flex-shrink-0 card-elegant rounded-xl p-5 w-48"
-                >
-                  <value.icon className="w-6 h-6 mb-2" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
-                  <h3 className="font-serif text-sm mb-1">{value.title}</h3>
-                  <p className="text-[10px] font-light text-muted-foreground leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
