@@ -1,39 +1,63 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import clientHappy1 from '@/assets/client-happy-1.jpg';
-import clientHappy2 from '@/assets/client-happy-2.jpg';
-import clientHappy3 from '@/assets/client-happy-3.jpg';
-import chauffeurSmile from '@/assets/chauffeur-smile.jpg';
 
 const testimonials = [
   {
     name: 'Sophie Laurent',
     role: 'Directrice Marketing',
-    content: 'Un service exceptionnel du début à la fin. Le chauffeur était d\'une ponctualité irréprochable et la Tesla d\'un confort remarquable. Je recommande sans hésitation.',
+    content: 'Un service exceptionnel du début à la fin. Le chauffeur était ponctuel et la Tesla d\'un confort remarquable.',
     rating: 5,
-    image: clientHappy1,
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face',
   },
   {
     name: 'Pierre Moreau',
     role: 'CEO, Tech Startup',
-    content: 'J\'utilise Macrida pour tous mes déplacements professionnels à Nice. Le service est constant, fiable et le niveau de discrétion est parfait pour mes clients VIP.',
+    content: 'J\'utilise Malacrida pour tous mes déplacements professionnels. Service constant et fiable.',
     rating: 5,
-    image: clientHappy2,
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
   },
   {
-    name: 'Marie & Julie',
-    role: 'Touristes, Canada',
-    content: 'Notre journée découverte en Provence était magique. Le chauffeur connaissait tous les endroits secrets et parlait parfaitement anglais. Une expérience inoubliable !',
+    name: 'Marie Dubois',
+    role: 'Touriste, Canada',
+    content: 'Notre journée découverte en Provence était magique. Une expérience inoubliable !',
     rating: 5,
-    image: clientHappy3,
+    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
   },
   {
     name: 'Thomas Bernard',
     role: 'Client Régulier',
-    content: 'Cela fait deux ans que je fais appel à Macrida pour mes transferts aéroport. Le professionnalisme et la qualité du service sont toujours au rendez-vous.',
+    content: 'Deux ans de transferts aéroport impeccables. Professionnalisme toujours au rendez-vous.',
     rating: 5,
-    image: chauffeurSmile,
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
+  },
+  {
+    name: 'Claudette Martin',
+    role: 'Retraitée',
+    content: 'Un chauffeur charmant et patient. Je me suis sentie en sécurité tout le trajet.',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1566616213894-2d4e1baee5d8?w=150&h=150&fit=crop&crop=face',
+  },
+  {
+    name: 'Lucas & Emma',
+    role: 'Jeunes Mariés',
+    content: 'Transport parfait pour notre mariage. Élégance et ponctualité au top !',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1522556189639-b150ed9c4330?w=150&h=150&fit=crop&crop=face',
+  },
+  {
+    name: 'Jean-Paul Roux',
+    role: 'Homme d\'Affaires',
+    content: 'Discrétion et confort pour mes rendez-vous clients. Je recommande vivement.',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face',
+  },
+  {
+    name: 'Amélie Chen',
+    role: 'Étudiante',
+    content: 'Transfert aéroport parfait pour mes retours de vacances. Prix correct et service pro.',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face',
   },
 ];
 
@@ -75,26 +99,28 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="py-16 md:py-24 section-cream relative overflow-hidden" ref={ref}>
+    <section id="testimonials" className="py-12 md:py-16 bg-[#f9f9f9] relative overflow-hidden" ref={ref}>
       {/* Decorative */}
       <div className="deco-circle w-80 h-80 -top-40 -left-40" />
       
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
-          <span className="accent-line mb-6 block mx-auto" />
-          <span className="text-sm font-light tracking-[0.2em] uppercase text-charcoal-light block mb-4">
+          <span className="text-sm font-light tracking-[0.2em] uppercase text-charcoal-light block mb-3">
             Témoignages
           </span>
-          <h2>
+          <h2 className="text-2xl md:text-4xl font-serif text-charcoal mb-3">
             Ils Nous Font{' '}
-            <span className="text-gold">Confiance</span>
+            <span className="text-[#0E4D64]">Confiance</span>
           </h2>
+          <p className="text-charcoal-light font-light max-w-xl mx-auto text-sm md:text-base">
+            Découvrez les retours de nos clients satisfaits qui nous font confiance pour leurs déplacements premium sur la Côte d'Azur.
+          </p>
         </motion.div>
 
         {/* Testimonial Carousel */}
@@ -102,10 +128,10 @@ const TestimonialsSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-3xl mx-auto"
         >
-          <div className="card-float !p-10 md:!p-14 relative">
-            <Quote className="absolute top-8 right-8 w-20 h-20 text-gold/10" />
+          <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 relative">
+            <Quote className="absolute top-4 right-4 w-12 h-12 text-[#0E4D64]/10" />
 
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
@@ -116,35 +142,35 @@ const TestimonialsSection = () => {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                className="flex flex-col md:flex-row gap-8 items-center"
+                className="flex flex-col md:flex-row gap-6 items-center"
               >
                 {/* Avatar */}
                 <div className="shrink-0">
                   <img
                     src={testimonials[current].image}
                     alt={testimonials[current].name}
-                    className="w-28 h-28 md:w-36 md:h-36 avatar-premium"
+                    className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-3 border-[#0E4D64]/20 shadow-md"
                   />
                 </div>
 
                 {/* Content */}
                 <div className="flex-1 text-center md:text-left">
                   {/* Rating */}
-                  <div className="flex gap-1 mb-4 justify-center md:justify-start">
+                  <div className="flex gap-1 mb-3 justify-center md:justify-start">
                     {[...Array(testimonials[current].rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-gold text-gold" />
+                      <Star key={i} className="w-4 h-4 fill-[#0E4D64] text-[#0E4D64]" />
                     ))}
                   </div>
 
-                  <blockquote className="text-xl md:text-2xl font-serif text-charcoal leading-relaxed mb-6 italic">
+                  <blockquote className="text-base md:text-lg font-serif text-charcoal leading-relaxed mb-4 italic">
                     "{testimonials[current].content}"
                   </blockquote>
 
                   <div>
-                    <div className="font-serif text-lg text-charcoal">
+                    <div className="font-serif text-base text-charcoal">
                       {testimonials[current].name}
                     </div>
-                    <div className="text-sm text-charcoal-light font-light">
+                    <div className="text-xs text-charcoal-light font-light">
                       {testimonials[current].role}
                     </div>
                   </div>
@@ -153,8 +179,8 @@ const TestimonialsSection = () => {
             </AnimatePresence>
 
             {/* Navigation */}
-            <div className="flex items-center justify-between mt-10 pt-8 border-t border-stone/30">
-              <div className="flex gap-2">
+            <div className="flex items-center justify-between mt-6 pt-6 border-t border-gray-100">
+              <div className="flex gap-1.5">
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
@@ -162,28 +188,28 @@ const TestimonialsSection = () => {
                       setDirection(i > current ? 1 : -1);
                       setCurrent(i);
                     }}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                      i === current ? 'w-8 bg-gold' : 'bg-stone hover:bg-charcoal-light'
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      i === current ? 'w-6 bg-[#0E4D64]' : 'bg-gray-300 hover:bg-gray-400'
                     }`}
                     aria-label={`Témoignage ${i + 1}`}
                   />
                 ))}
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 <button
                   onClick={prev}
-                  className="w-12 h-12 rounded-full border border-stone flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-[#0E4D64] hover:text-[#0E4D64] transition-colors"
                   aria-label="Précédent"
                 >
-                  <ChevronLeft className="w-5 h-5" />
+                  <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={next}
-                  className="w-12 h-12 rounded-full border border-stone flex items-center justify-center hover:border-gold hover:text-gold transition-colors"
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:border-[#0E4D64] hover:text-[#0E4D64] transition-colors"
                   aria-label="Suivant"
                 >
-                  <ChevronRight className="w-5 h-5" />
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
