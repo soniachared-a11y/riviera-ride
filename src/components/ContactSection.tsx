@@ -23,7 +23,7 @@ const ContactSection = () => {
   return (
     <section 
       id="contact" 
-      className="relative min-h-auto md:min-h-[80vh] flex items-center justify-center overflow-hidden py-12 md:py-0"
+      className="relative py-16 md:py-24 overflow-hidden"
       ref={ref}
     >
       {/* Background Image */}

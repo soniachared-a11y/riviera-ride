@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section id="testimonials" className="section-cream relative overflow-hidden" ref={ref}>
+    <section id="testimonials" className="py-16 md:py-24 section-cream relative overflow-hidden" ref={ref}>
       {/* Decorative */}
       <div className="deco-circle w-80 h-80 -top-40 -left-40" />
       

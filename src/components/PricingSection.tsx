@@ -31,19 +31,17 @@ const PricingSection = () => {
   return (
     <section 
       ref={ref}
-      className="relative w-full min-h-auto md:min-h-[80vh] flex items-center justify-center py-12 md:py-0 overflow-hidden"
+      className="relative w-full py-16 md:py-24 overflow-hidden"
     >
-      {/* Mobile Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
-        style={{ backgroundImage: `url('${pricingMobile}')` }}
-      />
-      
-      {/* Desktop Background */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
-        style={{ backgroundImage: `url('${PRICING_DESKTOP_URL}')` }}
-      />
+      {/* Mobile Background - Vertical image */}
+      <picture className="absolute inset-0">
+        <source media="(min-width: 768px)" srcSet={PRICING_DESKTOP_URL} />
+        <img 
+          src={pricingMobile}
+          alt="Pricing background"
+          className="w-full h-full object-cover"
+        />
+      </picture>
       
       {/* Dark overlay with blur effect to hide original cards */}
       <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" />

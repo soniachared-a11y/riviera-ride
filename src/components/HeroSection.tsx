@@ -6,12 +6,15 @@ const HERO_DESKTOP_URL = 'https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/ob
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-white">
-      {/* Mobile Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center md:hidden"
-        style={{ backgroundImage: `url('${heroMobile}')` }}
-      />
+    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Mobile Background Image - Full visibility */}
+      <div className="absolute inset-0 md:hidden">
+        <img 
+          src={heroMobile}
+          alt="Taxi Malacrida Hero"
+          className="w-full h-full object-cover object-top"
+        />
+      </div>
       
       {/* Desktop Background Image */}
       <div 

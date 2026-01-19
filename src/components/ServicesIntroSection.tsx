@@ -27,7 +27,7 @@ export default function ServicesIntroSection() {
   return (
     <section 
       id="services" 
-      className="bg-white min-h-auto md:min-h-[80vh] flex items-center justify-center py-12 md:py-0"
+      className="bg-white py-16 md:py-24"
     >
       <div className="container mx-auto px-4 md:px-8">
         <motion.div
