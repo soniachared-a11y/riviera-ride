@@ -1,15 +1,15 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Award, Users, MapPin, HeartHandshake, Baby } from 'lucide-react';
+import { ShieldCheck, Users, MapPin, HeartHandshake, Baby } from 'lucide-react';
 import clientHappy1 from '@/assets/client-happy-1.jpg';
 import clientHappy2 from '@/assets/client-happy-2.jpg';
 import clientHappy3 from '@/assets/client-happy-3.jpg';
 
 const values = [
   {
-    icon: Award,
-    title: 'Excellence',
-    description: 'Standards élevés à chaque trajet.',
+    icon: ShieldCheck,
+    title: 'Paiement Sécurisé',
+    description: 'CB, espèces ou virement.',
   },
   {
     icon: Users,
