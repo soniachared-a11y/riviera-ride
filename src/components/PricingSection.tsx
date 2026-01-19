@@ -32,12 +32,12 @@ const PricingSection = () => {
         >
           <div className="max-w-lg text-center">
             <motion.h2 
-              className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-[#0E4D64] mb-4"
+              className="font-serif text-2xl md:text-4xl lg:text-5xl font-light tracking-wide text-[#1a1a1a] mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              Tarification Claire & Fixe
+              Tarification <span style={{ color: '#0E4D64' }}>Claire</span> & Fixe
             </motion.h2>
 
             <motion.p 
