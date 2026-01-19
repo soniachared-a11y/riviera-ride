@@ -1,10 +1,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowUpDown } from 'lucide-react';
-import pricingMobile from '@/assets/pricing-mobile.png';
+import transfertsMobile from '@/assets/transferts-mobile.png';
+import transfertsCourants from '@/assets/transferts-courants.png';
 
 const ACCENT_BLUE = '#0E4D64';
-const PRICING_DESKTOP_URL = 'https://uqjftifudojfgfwfxxia.supabase.co/storage/v1/object/sign/image%20tesla/transferts-courants%20.png?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV9lMmY3N2MyMi0wNDFkLTQ5YWQtODE3ZC04MDJiY2M4ODQ0OGUiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJpbWFnZSB0ZXNsYS90cmFuc2ZlcnRzLWNvdXJhbnRzIC5wbmciLCJpYXQiOjE3Njg3Nzc0NTQsImV4cCI6MTgwMDMxMzQ1NH0.YJ2x5CEZDOgdSUhcXJXSR5zvLfgyDmMGf967Q_VNkmo';
 
 const pricingData = [
   {
@@ -36,13 +36,13 @@ const PricingSection = () => {
       {/* Mobile Background - Vertical image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
-        style={{ backgroundImage: `url('${pricingMobile}')` }}
+        style={{ backgroundImage: `url('${transfertsMobile}')` }}
       />
       
       {/* Desktop Background - Horizontal image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
-        style={{ backgroundImage: `url('${PRICING_DESKTOP_URL}')` }}
+        style={{ backgroundImage: `url('${transfertsCourants}')` }}
       />
       
       {/* Dark overlay with blur effect to hide original cards */}
