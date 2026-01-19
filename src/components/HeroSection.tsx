@@ -25,11 +25,11 @@ const HeroSection = () => {
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40" />
       
-      {/* Content - Desktop: Side by side layout */}
-      <div className="relative z-10 h-full min-h-screen flex flex-col lg:flex-row lg:items-center lg:justify-between px-6 md:px-12 lg:px-20 pt-24 pb-8 lg:py-0">
+      {/* Content Container */}
+      <div className="relative z-10 h-full min-h-screen px-6 md:px-12 lg:px-20">
         
         {/* Left Column - Text Content */}
-        <div className="flex-1 flex flex-col justify-center max-w-xl lg:max-w-lg xl:max-w-xl">
+        <div className="flex flex-col justify-center max-w-xl lg:max-w-lg xl:max-w-xl pt-24 pb-8 lg:pt-32">
           {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -92,12 +92,12 @@ const HeroSection = () => {
           </motion.p>
         </div>
         
-        {/* Right Column - Booking Form */}
+        {/* Booking Form - Bottom Right on Desktop, Centered on Mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6, ease: 'easeOut' }}
-          className="mt-8 lg:mt-0 lg:ml-12 flex-shrink-0"
+          className="w-full flex justify-center lg:absolute lg:bottom-10 lg:right-10 lg:w-auto pb-8 lg:pb-0"
         >
           <BookingForm />
         </motion.div>
