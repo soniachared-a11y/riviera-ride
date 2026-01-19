@@ -130,11 +130,13 @@ export default function ServicesCarouselSection() {
         {/* Carousel Container */}
         <div 
           ref={carouselRef}
-          className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide gap-4 md:gap-6"
+          className="flex overflow-x-auto overflow-y-visible snap-x snap-mandatory scrollbar-hide gap-4 md:gap-6"
           style={{ 
             WebkitOverflowScrolling: 'touch',
             scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
+            msOverflowStyle: 'none',
+            scrollPaddingLeft: '0px',
+            paddingLeft: '0px'
           }}
           onScroll={handleScroll}
         >

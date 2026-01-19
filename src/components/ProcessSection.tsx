@@ -1,5 +1,5 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 
 const steps = [
   {
@@ -29,7 +29,33 @@ const ACCENT_BLUE = '#0E4D64';
 const ProcessSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const mobileTimelineRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const [isInView, setIsInView] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
+  
+  // IntersectionObserver for strict visibility detection with replay
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Section enters viewport - trigger animation
+            setIsInView(true);
+            setAnimationKey(prev => prev + 1);
+          } else {
+            // Section leaves viewport - reset animation
+            setIsInView(false);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
   
   // Scroll progress for mobile timeline
   const { scrollYProgress } = useScroll({
@@ -79,6 +105,7 @@ const ProcessSection = () => {
             preserveAspectRatio="xMidYMid meet"
           >
             <motion.path
+              key={`path-${animationKey}`}
               d="M200 100 
                  C350 100, 350 100, 500 100
                  C650 100, 650 100, 800 100
@@ -97,7 +124,7 @@ const ProcessSection = () => {
               strokeLinecap="round"
               fill="none"
               initial={{ pathLength: 0, opacity: 0 }}
-              animate={isInView ? { pathLength: 1, opacity: 0.4 } : {}}
+              animate={isInView ? { pathLength: 1, opacity: 0.4 } : { pathLength: 0, opacity: 0 }}
               transition={{ duration: 2.5, ease: "easeOut" }}
             />
           </svg>
