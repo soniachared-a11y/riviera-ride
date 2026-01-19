@@ -125,7 +125,7 @@ export default function ServicesCarouselSection() {
   const maxDots = isMobile ? services.length : services.length - 1;
 
   return (
-    <section className="bg-[#f9f9f9] min-h-auto md:min-h-[80vh] flex flex-col items-center justify-center py-12 md:py-0">
+    <section className="bg-[#f9f9f9] py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-8 w-full">
         {/* Carousel Container */}
         <div 

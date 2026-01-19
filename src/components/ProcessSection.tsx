@@ -42,7 +42,7 @@ const ProcessSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="min-h-auto md:min-h-[80vh] flex flex-col items-center justify-center py-12 md:py-0 bg-white overflow-hidden"
+      className="py-16 md:py-24 bg-white overflow-hidden"
       aria-labelledby="process-title"
     >
       <div className="container mx-auto px-6 max-w-[1200px]">

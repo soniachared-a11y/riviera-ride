@@ -16,7 +16,7 @@ const VehicleSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} className="relative bg-black min-h-auto md:min-h-[80vh] flex items-center justify-center py-12 md:py-0 px-6 overflow-hidden">
+    <section ref={ref} className="relative bg-black py-16 md:py-24 px-6 overflow-hidden">
       {/* Subtle checkerboard pattern */}
       <div 
         className="absolute inset-0 opacity-[0.04]" 

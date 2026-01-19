@@ -33,7 +33,7 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="min-h-auto md:min-h-[80vh] flex items-center justify-center py-12 md:py-0 texture-overlay bg-secondary" ref={ref}>
+    <section id="about" className="py-16 md:py-24 texture-overlay bg-secondary" ref={ref}>
       <div className="container-narrow">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
