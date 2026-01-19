@@ -98,28 +98,32 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Values Grid */}
+          {/* Values Marquee */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
+            className="relative overflow-hidden"
           >
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                className="card-elegant rounded-2xl p-6"
-              >
-                <value.icon className="w-8 h-8 mb-4" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
-                <h3 className="font-serif text-lg mb-2">{value.title}</h3>
-                <p className="text-sm font-light text-muted-foreground leading-relaxed">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
+            {/* Gradient overlays */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+            
+            {/* Scrolling container */}
+            <div className="flex animate-marquee gap-6">
+              {[...values, ...values, ...values].map((value, index) => (
+                <div
+                  key={`${value.title}-${index}`}
+                  className="flex-shrink-0 card-elegant rounded-2xl p-6 w-56"
+                >
+                  <value.icon className="w-8 h-8 mb-3" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
+                  <h3 className="font-serif text-base mb-1">{value.title}</h3>
+                  <p className="text-xs font-light text-muted-foreground leading-relaxed">
+                    {value.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
