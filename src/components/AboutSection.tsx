@@ -38,49 +38,49 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-12 md:py-16 texture-overlay bg-secondary" ref={ref}>
-      <div className="max-w-5xl mx-auto px-4">
+    <section id="about" className="min-h-[80vh] py-16 md:py-24 texture-overlay bg-secondary flex items-center" ref={ref}>
+      <div className="max-w-5xl mx-auto px-4 w-full">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8"
+          className="text-center mb-12 md:mb-16"
         >
-          <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
+          <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-4 block">
             Pourquoi Malacrida
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif mb-4">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6">
             Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span>
           </h2>
-          <p className="text-muted-foreground font-light leading-relaxed text-base max-w-2xl mx-auto">
+          <p className="text-muted-foreground font-light leading-relaxed text-base md:text-lg max-w-2xl mx-auto">
             Plus de 5 ans d'expérience au service de clients exigeants. 
             Disponibilité 24h/24, véhicule 100% électrique et équipements adaptés 
             pour voyager en famille ou en toute discrétion.
           </p>
           
           {/* Happy Clients Images - centered */}
-          <div className="flex items-center justify-center gap-4 mt-6">
+          <div className="flex items-center justify-center gap-4 mt-8">
             <div className="flex -space-x-3">
               <img
                 src={clientHappy1}
                 alt="Cliente satisfaite"
-                className="w-12 h-12 rounded-full object-cover avatar-ring"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover avatar-ring"
               />
               <img
                 src={clientHappy2}
                 alt="Client satisfait"
-                className="w-12 h-12 rounded-full object-cover avatar-ring"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover avatar-ring"
               />
               <img
                 src={clientHappy3}
                 alt="Clients satisfaits"
-                className="w-12 h-12 rounded-full object-cover avatar-ring"
+                className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover avatar-ring"
               />
             </div>
             <div className="text-left">
-              <div className="font-serif text-lg">2000+</div>
-              <div className="text-sm font-light text-muted-foreground">Clients Satisfaits</div>
+              <div className="font-serif text-xl md:text-2xl">2000+</div>
+              <div className="text-sm md:text-base font-light text-muted-foreground">Clients Satisfaits</div>
             </div>
           </div>
         </motion.div>
@@ -95,15 +95,15 @@ const AboutSection = () => {
           <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
           
-          <div className="flex animate-marquee-slow gap-4">
+          <div className="flex animate-marquee-slow gap-5">
             {[...values, ...values, ...values].map((value, index) => (
               <div
                 key={`${value.title}-${index}`}
-                className="flex-shrink-0 card-elegant rounded-xl p-4 w-44 bg-white/80 backdrop-blur-sm"
+                className="flex-shrink-0 card-elegant rounded-xl p-5 md:p-6 w-48 md:w-56 bg-white/80 backdrop-blur-sm"
               >
-                <value.icon className="w-6 h-6 mb-2" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
-                <h3 className="font-serif text-sm mb-1">{value.title}</h3>
-                <p className="text-xs font-light text-muted-foreground leading-relaxed">
+                <value.icon className="w-7 h-7 md:w-8 md:h-8 mb-3" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
+                <h3 className="font-serif text-base md:text-lg mb-2">{value.title}</h3>
+                <p className="text-sm font-light text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
               </div>
