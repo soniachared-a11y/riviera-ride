@@ -27,7 +27,7 @@ const Navigation = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'nav-premium py-4' : 'py-6'
+          isScrolled ? 'bg-charcoal shadow-lg py-4' : 'bg-transparent py-6'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8">
@@ -46,7 +46,9 @@ const Navigation = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-light tracking-wide text-charcoal-light hover:text-charcoal transition-colors link-underline py-1"
+                className={`text-sm font-light tracking-wide transition-colors link-underline py-1 ${
+                  isScrolled ? 'text-white/80 hover:text-white' : 'text-white/90 hover:text-white'
+                }`}
               >
                 {link.name}
               </a>
@@ -56,15 +58,19 @@ const Navigation = () => {
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-6">
             <a
-              href="tel:+33633788690"
-              className="flex items-center gap-2 text-sm font-light text-charcoal-light hover:text-charcoal transition-colors"
+              href="tel:+33784628640"
+              className={`flex items-center gap-2 text-sm font-light transition-colors ${
+                isScrolled ? 'text-white/80 hover:text-white' : 'text-white/90 hover:text-white'
+              }`}
             >
               <Phone className="w-4 h-4" />
-              <span>06 33 78 86 90</span>
+              <span>07 84 62 86 40</span>
             </a>
             <a 
               href="#contact" 
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-light tracking-wide text-white bg-charcoal rounded-md transition-all duration-300 hover:bg-charcoal/90"
+              className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-light tracking-wide rounded-md transition-all duration-300 ${
+                isScrolled ? 'text-charcoal bg-white hover:bg-white/90' : 'text-charcoal bg-white hover:bg-white/90'
+              }`}
             >
               <span>Réserver</span>
               <ChevronRight className="w-4 h-4" />
@@ -74,7 +80,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-charcoal relative z-10"
+            className={`lg:hidden p-2 relative z-10 ${isScrolled ? 'text-white' : 'text-white'}`}
             aria-label="Menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
