@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Award, Users, MapPin, HeartHandshake } from 'lucide-react';
+import { Award, Users, MapPin, HeartHandshake, Baby } from 'lucide-react';
 import clientHappy1 from '@/assets/client-happy-1.jpg';
 import clientHappy2 from '@/assets/client-happy-2.jpg';
 import clientHappy3 from '@/assets/client-happy-3.jpg';
@@ -9,22 +9,27 @@ const values = [
   {
     icon: Award,
     title: 'Excellence',
-    description: 'Nous maintenons les plus hauts standards à chaque trajet.',
+    description: 'Standards élevés à chaque trajet.',
   },
   {
     icon: Users,
     title: 'Discrétion',
-    description: 'Votre vie privée est notre priorité absolue.',
+    description: 'Vie privée respectée.',
   },
   {
     icon: MapPin,
     title: 'Expertise Locale',
-    description: 'Une connaissance approfondie du Sud de la France.',
+    description: 'Connaissance du Sud.',
   },
   {
     icon: HeartHandshake,
-    title: 'Service Personnalisé',
-    description: 'Chaque voyage est adapté à vos préférences.',
+    title: 'Sur-Mesure',
+    description: 'Adapté à vos besoins.',
+  },
+  {
+    icon: Baby,
+    title: 'Équipement Bébé',
+    description: 'Siège enfant disponible.',
   },
 ];
 
@@ -49,9 +54,9 @@ const AboutSection = () => {
             Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span>
           </h2>
           <p className="text-muted-foreground font-light leading-relaxed text-sm max-w-xl mx-auto">
-            Taxi Malacrida a été fondée sur une conviction simple : le transport privé doit être 
-            une expérience. Notre engagement envers la sécurité et le professionnalisme fait de nous 
-            le choix privilégié des voyageurs exigeants.
+            Plus de 5 ans d'expérience au service de clients exigeants. 
+            Disponibilité 24h/24, véhicule 100% électrique et équipements adaptés 
+            pour voyager en famille ou en toute discrétion.
           </p>
           
           {/* Happy Clients Images - centered */}
@@ -85,20 +90,20 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative overflow-hidden max-w-3xl mx-auto"
+          className="relative overflow-hidden max-w-4xl mx-auto"
         >
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
           
-          <div className="flex animate-marquee-slow gap-5">
+          <div className="flex animate-marquee-slow gap-3">
             {[...values, ...values, ...values].map((value, index) => (
               <div
                 key={`${value.title}-${index}`}
-                className="flex-shrink-0 card-elegant rounded-xl p-4 w-44"
+                className="flex-shrink-0 card-elegant rounded-xl p-3 w-36 bg-white/80 backdrop-blur-sm"
               >
-                <value.icon className="w-5 h-5 mb-2" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
-                <h3 className="font-serif text-sm mb-1">{value.title}</h3>
-                <p className="text-[10px] font-light text-muted-foreground leading-relaxed">
+                <value.icon className="w-5 h-5 mb-1.5" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
+                <h3 className="font-serif text-xs mb-0.5">{value.title}</h3>
+                <p className="text-[9px] font-light text-muted-foreground leading-tight">
                   {value.description}
                 </p>
               </div>
