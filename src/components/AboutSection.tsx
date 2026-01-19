@@ -95,6 +95,10 @@ const AboutSection = () => {
                 <div className="text-2xl font-serif text-gold mb-1">5.0</div>
                 <div className="text-xs font-light text-muted-foreground">Note Moyenne</div>
               </div>
+              <div className="card-elegant rounded-xl px-6 py-4 text-center">
+                <div className="text-2xl font-serif text-gold mb-1">100%</div>
+                <div className="text-xs font-light text-muted-foreground">Véhicule Électrique</div>
+              </div>
             </div>
           </motion.div>
 
