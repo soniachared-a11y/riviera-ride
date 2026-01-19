@@ -82,22 +82,33 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4">
-              <div className="card-elegant rounded-xl px-6 py-4 text-center">
-                <div className="text-2xl font-serif text-gold mb-1">5+</div>
-                <div className="text-xs font-light text-muted-foreground">Années d'Expérience</div>
-              </div>
-              <div className="card-elegant rounded-xl px-6 py-4 text-center">
-                <div className="text-2xl font-serif text-gold mb-1">24/7</div>
-                <div className="text-xs font-light text-muted-foreground">Disponibilité</div>
-              </div>
-              <div className="card-elegant rounded-xl px-6 py-4 text-center">
-                <div className="text-2xl font-serif text-gold mb-1">5.0</div>
-                <div className="text-xs font-light text-muted-foreground">Note Moyenne</div>
-              </div>
-              <div className="card-elegant rounded-xl px-6 py-4 text-center">
-                <div className="text-2xl font-serif text-gold mb-1">100%</div>
-                <div className="text-xs font-light text-muted-foreground">Véhicule Électrique</div>
+            <div className="relative overflow-hidden">
+              {/* Gradient overlays */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+              
+              {/* Scrolling stats */}
+              <div className="flex animate-marquee-fast gap-6">
+                {[...Array(3)].map((_, setIndex) => (
+                  <div key={setIndex} className="flex gap-6 flex-shrink-0">
+                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
+                      <div className="text-2xl font-serif text-gold mb-1">5+</div>
+                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Années d'Expérience</div>
+                    </div>
+                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
+                      <div className="text-2xl font-serif text-gold mb-1">24/7</div>
+                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Disponibilité</div>
+                    </div>
+                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
+                      <div className="text-2xl font-serif text-gold mb-1">5.0</div>
+                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Note Moyenne</div>
+                    </div>
+                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
+                      <div className="text-2xl font-serif text-gold mb-1">100%</div>
+                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Véhicule Électrique</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>

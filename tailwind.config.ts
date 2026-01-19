@@ -143,6 +143,7 @@ export default {
         float: "float 5s ease-in-out infinite",
         "pulse-soft": "pulse-soft 3s ease-in-out infinite",
         marquee: "marquee 20s linear infinite",
+        "marquee-fast": "marquee 12s linear infinite",
       },
     },
   },
