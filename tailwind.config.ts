@@ -144,6 +144,7 @@ export default {
         "pulse-soft": "pulse-soft 3s ease-in-out infinite",
         marquee: "marquee 20s linear infinite",
         "marquee-fast": "marquee 12s linear infinite",
+        "marquee-slow": "marquee 30s linear infinite",
       },
     },
   },
