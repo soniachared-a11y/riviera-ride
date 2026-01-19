@@ -33,79 +33,83 @@ const AboutSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="about" className="py-16 md:py-24 texture-overlay bg-secondary" ref={ref}>
+    <section id="about" className="py-10 md:py-14 texture-overlay bg-secondary" ref={ref}>
       <div className="container-narrow">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="divider-elegant mb-6" />
-            <span className="text-sm font-light tracking-[0.2em] uppercase text-muted-foreground mb-4 block">
+            <span className="text-xs font-light tracking-[0.2em] uppercase text-muted-foreground mb-3 block">
               Pourquoi Malacrida
             </span>
-            <h2 className="text-3xl md:text-4xl font-serif mb-6">
-              Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span> pour un{' '}
-              <span className="text-gold">Voyage Premium</span>
+            <h2 className="text-2xl md:text-3xl font-serif mb-4">
+              Votre Partenaire de <span style={{ color: '#0E4D64' }}>Confiance</span>
             </h2>
-            <p className="text-muted-foreground mb-6 font-light leading-relaxed">
+            <p className="text-muted-foreground mb-5 font-light leading-relaxed text-sm">
               Taxi Malacrida a été fondée sur une conviction simple : le transport privé doit être 
-              une expérience, pas seulement un service. Notre engagement envers la sécurité, 
-              le confort et le professionnalisme fait de nous le choix privilégié des voyageurs 
-              exigeants sur la Côte d'Azur et en Provence.
+              une expérience. Notre engagement envers la sécurité et le professionnalisme fait de nous 
+              le choix privilégié des voyageurs exigeants.
             </p>
 
             {/* Happy Clients Images */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex -space-x-4">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="flex -space-x-3">
                 <img
                   src={clientHappy1}
                   alt="Cliente satisfaite"
-                  className="w-14 h-14 rounded-full object-cover avatar-ring"
+                  className="w-10 h-10 rounded-full object-cover avatar-ring"
                 />
                 <img
                   src={clientHappy2}
                   alt="Client satisfait"
-                  className="w-14 h-14 rounded-full object-cover avatar-ring"
+                  className="w-10 h-10 rounded-full object-cover avatar-ring"
                 />
                 <img
                   src={clientHappy3}
                   alt="Clients satisfaits"
-                  className="w-14 h-14 rounded-full object-cover avatar-ring"
+                  className="w-10 h-10 rounded-full object-cover avatar-ring"
                 />
               </div>
               <div>
-                <div className="font-serif text-lg">2000+</div>
-                <div className="text-sm font-light text-muted-foreground">Clients Satisfaits</div>
+                <div className="font-serif text-base">2000+</div>
+                <div className="text-xs font-light text-muted-foreground">Clients Satisfaits</div>
               </div>
             </div>
 
+            {/* Stats Marquee */}
             <div className="relative overflow-hidden">
-              {/* Gradient overlays */}
-              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+              <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
               
-              {/* Scrolling stats */}
-              <div className="flex animate-marquee-fast gap-6">
+              <div className="flex animate-marquee-slow gap-4">
                 {[...Array(3)].map((_, setIndex) => (
-                  <div key={setIndex} className="flex gap-6 flex-shrink-0">
-                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
-                      <div className="text-2xl font-serif text-gold mb-1">5+</div>
-                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Années d'Expérience</div>
+                  <div key={setIndex} className="flex gap-4 flex-shrink-0">
+                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
+                      <div className="text-xl font-serif text-gold mb-0.5">5+</div>
+                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Années</div>
                     </div>
-                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
-                      <div className="text-2xl font-serif text-gold mb-1">24/7</div>
-                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Disponibilité</div>
+                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
+                      <div className="text-xl font-serif text-gold mb-0.5">24/7</div>
+                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Disponible</div>
                     </div>
-                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
-                      <div className="text-2xl font-serif text-gold mb-1">5.0</div>
-                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Note Moyenne</div>
+                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
+                      <div className="text-xl font-serif text-gold mb-0.5">5.0</div>
+                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Note</div>
                     </div>
-                    <div className="card-elegant rounded-xl px-6 py-4 text-center flex-shrink-0">
-                      <div className="text-2xl font-serif text-gold mb-1">100%</div>
-                      <div className="text-xs font-light text-muted-foreground whitespace-nowrap">Véhicule Électrique</div>
+                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
+                      <div className="text-xl font-serif text-gold mb-0.5">100%</div>
+                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Électrique</div>
+                    </div>
+                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
+                      <div className="text-xl font-serif text-gold mb-0.5">Tesla</div>
+                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Model Y</div>
+                    </div>
+                    <div className="card-elegant rounded-lg px-4 py-3 text-center flex-shrink-0">
+                      <div className="text-xl font-serif text-gold mb-0.5">VIP</div>
+                      <div className="text-[10px] font-light text-muted-foreground whitespace-nowrap">Service</div>
                     </div>
                   </div>
                 ))}
@@ -120,20 +124,18 @@ const AboutSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative overflow-hidden"
           >
-            {/* Gradient overlays */}
-            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-secondary to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-secondary to-transparent z-10 pointer-events-none" />
             
-            {/* Scrolling container */}
-            <div className="flex animate-marquee gap-6">
+            <div className="flex animate-marquee-slow gap-4">
               {[...values, ...values, ...values].map((value, index) => (
                 <div
                   key={`${value.title}-${index}`}
-                  className="flex-shrink-0 card-elegant rounded-2xl p-6 w-56"
+                  className="flex-shrink-0 card-elegant rounded-xl p-5 w-48"
                 >
-                  <value.icon className="w-8 h-8 mb-3" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
-                  <h3 className="font-serif text-base mb-1">{value.title}</h3>
-                  <p className="text-xs font-light text-muted-foreground leading-relaxed">
+                  <value.icon className="w-6 h-6 mb-2" style={{ color: '#0E4D64' }} strokeWidth={1.5} />
+                  <h3 className="font-serif text-sm mb-1">{value.title}</h3>
+                  <p className="text-[10px] font-light text-muted-foreground leading-relaxed">
                     {value.description}
                   </p>
                 </div>
