@@ -50,6 +50,15 @@ const SCHEMA = {
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "ratingCount": "47" }
 };
 
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Taxi Aix-en-Provence", "item": "https://www.taximalacrida.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Taxi Gare TGV Aix-en-Provence", "item": "https://www.taximalacrida.fr/taxi-gare-tgv-aix" }
+  ]
+};
+
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -88,9 +97,16 @@ const TaxiGareTGVAix = () => {
     scriptFaq.textContent = JSON.stringify(FAQ_SCHEMA);
     document.head.appendChild(scriptFaq);
 
+    const scriptBreadcrumb = document.createElement('script');
+    scriptBreadcrumb.type = 'application/ld+json';
+    scriptBreadcrumb.id = 'schema-garetgv-breadcrumb';
+    scriptBreadcrumb.textContent = JSON.stringify(BREADCRUMB_SCHEMA);
+    document.head.appendChild(scriptBreadcrumb);
+
     return () => {
       document.getElementById('schema-garetgv-business')?.remove();
       document.getElementById('schema-garetgv-faq')?.remove();
+      document.getElementById('schema-garetgv-breadcrumb')?.remove();
     };
   }, []);
 
@@ -142,9 +158,9 @@ const TaxiGareTGVAix = () => {
           <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: '12px' }}>
             {[
               'Ponctualité absolue — départ calculé pour arriver 20 min avant le train',
-              "Prise en charge à domicile ou à l'adresse de votre choix",
+              'Prise en charge à domicile ou à l\'adresse de votre choix',
               'Véhicule Tesla — confort premium pour vos déplacements professionnels',
-              "Retour depuis la gare TGV vers tout le pays d'Aix disponible",
+              'Retour depuis la gare TGV vers tout le pays d\'Aix disponible',
               'Disponible aux premières heures du matin pour les TGV tôt',
             ].map((item) => (
               <li key={item} style={{ display: 'flex', gap: '12px', color: 'rgba(255,255,255,0.75)', fontSize: '15px' }}>

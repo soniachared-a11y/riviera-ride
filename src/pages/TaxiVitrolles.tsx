@@ -41,6 +41,15 @@ const SCHEMA = {
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "ratingCount": "47" }
 };
 
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Taxi Aix-en-Provence", "item": "https://www.taximalacrida.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Taxi Vitrolles", "item": "https://www.taximalacrida.fr/taxi-vitrolles" }
+  ]
+};
+
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -53,88 +62,42 @@ const FAQ_SCHEMA = {
     {
       "@type": "Question",
       "name": "Existe-t-il un taxi VTC Ã  Vitrolles disponible la nuit ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oui, Taxi Malacrida intervient Ã  Vitrolles 24h/24 7j/7, y compris la nuit et les jours fÃ©riÃ©s. Aucun supplÃ©ment de nuit appliquÃ© sur le tarif fixe." }
-    }
-  ]
-};
+      "acceptedAnswer": { "@type": "Answer", "text": "Oui, Taxi Malacrida intervient Ã  Vitrolles 24h/24 7j/7, y compris la nuit et les jours fÃ©r°ê\Ëˆ]Xİ[ˆİ\0ê[Y[HZ]\\]pêHİ\ˆH\šYˆš^KˆˆBˆBˆBŸNÂ‚˜ÛÛœİ^Uš]›Û\ÈH
 
-const TaxiVitrolles = () => {
-  useEffect(() => {
-    document.title = 'Taxi Vitrolles | Malacrida â€” AÃ©roport, Gare TGV, Aix-en-Provence, 24h/24';
+HOˆÂˆ\ÙQY™™Xİ
 
-    const s1 = document.createElement('script');
-    s1.type = 'application/ld+json'; s1.id = 'schema-vitrolles-business';
-    s1.textContent = JSON.stringify(SCHEMA);
-    document.head.appendChild(s1);
 
-    const s2 = document.createElement('script');
-    s2.type = 'application/ld+json'; s2.id = 'schema-vitrolles-faq';
-    s2.textContent = JSON.stringify(FAQ_SCHEMA);
-    document.head.appendChild(s2);
+HOˆÂˆØİ[Y[]HH	Õ^Hš]›Û\ÈX[XÜšYH8 %pê\›ÜÜØ\™HÕ‹Z^Y[‹T›İ™[˜ÙKÌ	ÎÂ‚ˆÛÛœİÌHHØİ[Y[˜Ü™X]Q[[Y[
+	ÜØÜš\	ÊNÂˆÌK\HH	Ø\XØ][Û‹Û
+ÚœÛÛ‰ÎÈÌKšYH	ÜØÚ[XK]š]›Û\ËX\Ú[™\ÜÉÎÂˆÌK^ÛÛ[H”ÓÓ‹œİš[™ÚYJĞÒSPJNÂˆØİ[Y[šXY˜\[™Ú[
+ÌJNÂ‚ˆÛÛœİÌˆHØİ[Y[˜Ü™X]Q[[Y[
+	ÜØÜš\	ÊNÂˆÌ‹\HH	Ø\XØ][Û‹Û
+ÚœÛÛ‰ÎÈÌ‹šYH	ÜØÚ[XK]š]›Û\ËY˜\IÎÂˆÌ‹^ÛÛ[H”ÓÓ‹œİš[™ÚYJTWÔĞÒSPJNÂˆØİ[Y[šXY˜\[™Ú[
+ÌŠNÂ‚ˆÛÛœİÌÈHØİ[Y[˜Ü™X]Q[[Y[
+	ÜØÜš\	ÊNÂˆÌË\HH	Ø\XØ][Û‹Û
+ÚœÛÛ‰ÎÈÌËšYH	ÜØÚ[XK]š]›Û\ËXœ™XYÜ[X‰ÎÂˆÌË^ÛÛ[H”ÓÓ‹œİš[™ÚYJ”‘PQÔ•SP—ÔĞÒSPJNÂˆØİ[Y[šXY˜\[™Ú[
+ÌÊNÂ‚ˆ™]\›ˆ
 
-    return () => {
-      document.getElementById('schema-vitrolles-business')?.remove();
-      document.getElementById('schema-vitrolles-faq')?.remove();
-    };
-  }, []);
+HOˆÂˆØİ[Y[™Ù][[Y[RY
+	ÜØÚ[XK]š]›Û\ËX\Ú[™\ÜÉÊOËœ™[[İ™J
+NÂˆØİ[Y[™Ù][[Y[RY
+	ÜØÚ[XK]š]›Û\ËY˜\IÊOËœ™[[İ™J
+NÂˆØİ[Y[™Ù][[Y[RY
+	ÜØÚ[XK]š]›Û\ËXœ™XYÜ[X‰ÊOËœ™[[İ™J
+NÂˆNÂˆK×JNÂ‚ˆ™]\›ˆ
+ˆXZ[ˆİ[O^ŞÈ˜XÚÙÜ›İ[™ˆ	ÈÌLLIËÛÛÜˆ	ÈÙ™™‰ËZ[’ZYÚˆ	ÌLš	Ë›Û˜[Z[Nˆ	Ò[\‹Ş\İ[K]ZKØ[œË\Ù\šY‰È_O‚ˆ]ˆİ[O^ŞÈX^ÚYˆ	Î	ËX\™Ú[ˆ	Ì]]ÉËY[™Îˆ	ÎŒ	È_O‚‚ˆ]ˆİ[O^ŞÈX\™Ú[›İÛNˆ	Í	È_O‚ˆİ[O^ŞÈÛÛÜˆ	ÈÍNLM	Ë›ÛÚ^™Nˆ	ÌLÜ	Ë]\”ÜXÚ[™Îˆ	Ìœ	Ë^˜[œÙ›Ü›Nˆ	İ\\˜Ø\ÙIËX\™Ú[›İÛNˆ	ÌMœ	È_O•^H	ˆ•È8 %š]›Û\ÏÜ‚ˆHİ[O^ŞÈ›ÛÚ^™Nˆ	ØÛ[\
+Ë
+IË›ÛÙZYÚˆÌ]\”ÜXÚ[™Îˆ	Ì\	Ë[™RZYÚˆKŒ‹X\™Ú[›İÛNˆ	Ì	È_O‚ˆ^Hš]›Û\ÂˆÜ[ˆİ[O^ŞÈ\Ü^Nˆ	Ø›ØÚÉËÛÛÜˆ	Ü™Ø˜JMKMKMKŠIË›ÛÚ^™Nˆ	Ì™[IË›ÛÙZYÚˆŒX\™Ú[•Üˆ	Î	È_O‚ˆpê\›ÜÜX\œÙZ[KØ\™HÕ‹Z^Y[‹T›İ™[˜ÙH8 %ÌˆÜÜ[‚ˆÚO‚ˆİ[O^ŞÈÛÛÜˆ	Ü™Ø˜JMKMKMKÍJIË›ÛÚ^™Nˆ	ÌMÜ	Ë[™RZYÚˆKËX^ÚYˆ	ÍŒ	È_O‚ˆ^HX[XÜšYH[\šY[0èİ›Û™Èİ[O^ŞÈÛÛÜˆ	ÈÙ™™‰È_O•š]›Û\ÏÜİ›Û™Ïˆİ\ˆİ\È›ÜÈ˜[œÙ™\Èˆpê\›ÜÜHX\šYÛ˜[™H0èLZ[‹Ø\™HÕ‹Ù[™H	ĞZ^Y[‹T›İ™[˜ÙKˆÚ]Y™™]\ˆ\ÛK\šYˆš^K\ÜÛšX›HÌ‚ˆÜ‚ˆÙ]‚‚ˆ]ˆİ[O^ŞÈ˜XÚÙÜ›İ[™ˆ	ÈÌLLIË›Ü™\ˆ	Ì\ÛÛY™Ø˜JMKMKMKŒ
+IË›Ü™\”˜Y]\Îˆ	ÌLœ	ËY[™Îˆ	ÌÌœ	ËX\™Ú[›İÛNˆ	Í	È_O‚ˆˆİ[O^ŞÈ›ÛÚ^™Nˆ	ÌM	Ë]\”ÜXÚ[™Îˆ	Ìœ	Ë^˜[œÙ›Ü›Nˆ	İ\\˜Ø\ÙIËÛÛÜˆ	Ü™Ø˜JMKMKMKJIËX\™Ú[›İÛNˆ	ÌŒ	Ë›ÛÙZYÚˆ_O•\šYœÈ\Z\Èš]›Û\ÏÚ‚ˆ]ˆİ[O^ŞÈ\Ü^Nˆ	ÙÜšY	ËØ\ˆ	ÌMœ	È_O‚ˆÖÂˆÈ\İˆ	Ğpê\›ÜÜX\œÙZ[KT›İ™[˜ÙIËšXÙNˆ	Ù0êÈx «	ÈKˆÈ\İˆ	ÑØ\™HÕˆZ^Y[‹T›İ™[˜ÙIËšXÙNˆ	Ù0êÈŒ8 «	ÈKˆÈ\İˆ	ĞÙ[™HZ^Y[‹T›İ™[˜ÙIËšXÙNˆ	Ù0êÈÍx «	ÈKˆÈ\İˆ	ÑØ\™HØZ[PÚ\›\ÈX\œÙZ[IËšXÙNˆ	Ù0êÈ8 «	ÈKˆK›X\
 
-  return (
-    <main style={{ background: '#0a0a0a', color: '#fff', minHeight: '100vh', fontFamily: 'Inter, system-ui, sans-serif' }}>
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '80px 24px 60px' }}>
+È\İšXÙHJHOˆ
+ˆ]ˆÙ^O^Ù\İHİ[O^ŞÈ\Ü^Nˆ	Ù›^	Ë\İYPÛÛ[ˆ	ÜÜXÙKX™]ÙY[‰Ë›Ü™\›İÛNˆ	Ì\ÛÛY™Ø˜JMKMKMKŒJIËY[™Ğ›İÛNˆ	ÌLœ	È_O‚ˆÜ[ˆİ[O^ŞÈÛÛÜˆ	Ü™Ø˜JMKMKMKÊIË›ÛÚ^™Nˆ	ÌM\	È_O•š]›Û\È8¡¤ˆÙ\İOÜÜ[‚ˆÜ[ˆİ[O^ŞÈ›ÛÙZYÚˆ›ÛÚ^™Nˆ	ÌMœ	È_OÜšXÙ_OÜÜ[‚ˆÙ]‚ˆ
+J_BˆÙ]‚ˆİ[O^ŞÈÛÛÜˆ	Ü™Ø˜JMKMKMKŒÍJIË›ÛÚ^™Nˆ	ÌLÜ	ËX\™Ú[•Üˆ	ÌMœ	È_O”š^š^\È8 (ˆØ[œÈİ\0ê[Y[Z]Ü‚ˆÙ]‚‚ˆ]ˆİ[O^ŞÈX\™Ú[›İÛNˆ	Í	È_O‚ˆˆİ[O^ŞÈ›ÛÚ^™Nˆ	ÌŒ	Ë›ÛÙZYÚˆÌX\™Ú[›İÛNˆ	Ì	È_O”]Y\İ[ÛœÈœ°ê\]Y[\ÏÚ‚ˆÑTWÔĞÒSPK›XZ[‘[]K›X\
 
-        <div style={{ marginBottom: '48px' }}>
-          <p style={{ color: '#4a90a4', fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '16px' }}>Taxi & VTC â€” Vitrolles</p>
-          <h1 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 300, letterSpacing: '1px', lineHeight: 1.2, marginBottom: '24px' }}>
-            Taxi Vitrolles
-            <span style={{ display: 'block', color: 'rgba(255,255,255,0.6)', fontSize: '0.6em', fontWeight: 200, marginTop: '8px' }}>
-              AÃ©roport Marseille, Gare TGV, Aix-en-Provence â€” 24h/24
-            </span>
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '17px', lineHeight: 1.7, maxWidth: '600px' }}>
-            Taxi Malacrida intervient Ã  <strong style={{ color: '#fff' }}>Vitrolles</strong> pour tous vos transferts : aÃ©roport de Marignane Ã  10 min, Gare TGV, centre d'Aix-en-Provence. Chauffeur Tesla, tarif fixe, disponible 24h/24.
-          </p>
-        </div>
-
-        <div style={{ background: '#111', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '12px', padding: '32px', marginBottom: '40px' }}>
-          <h2 style={{ fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', marginBottom: '20px', fontWeight: 400 }}>Tarifs depuis Vitrolles</h2>
-          <div style={{ display: 'grid', gap: '16px' }}>
-            {[
-              { dest: 'AÃ©roport Marseille-Provence', price: 'dÃ¨s 25â‚¬' },
-              { dest: 'Gare TGV Aix-en-Provence', price: 'dÃ¨s 20â‚¬' },
-              { dest: 'Centre Aix-en-Provence', price: 'dÃ¨s 35â‚¬' },
-              { dest: 'Gare Saint-Charles Marseille', price: 'dÃ¨s 40â‚¬' },
-            ].map(({ dest, price }) => (
-              <div key={dest} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '12px' }}>
-                <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '15px' }}>Vitrolles â†’ {dest}</span>
-                <span style={{ fontWeight: 400, fontSize: '16px' }}>{price}</span>
-              </div>
-            ))}
-          </div>
-          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '13px', marginTop: '16px' }}>Prix fixes â€¢ Sans supplÃ©ment nuit</p>
-        </div>
-
-        <div style={{ marginBottom: '48px' }}>
-          <h2 style={{ fontSize: '20px', fontWeight: 300, marginBottom: '24px' }}>Questions frÃ©quentes</h2>
-          {FAQ_SCHEMA.mainEntity.map((q) => (
-            <div key={q.name} style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '20px', paddingBottom: '20px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 400, marginBottom: '10px', color: '#fff' }}>{q.name}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '15px', lineHeight: 1.6 }}>{q.acceptedAnswer.text}</p>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ textAlign: 'center', paddingTop: '32px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '16px' }}>RÃ©servation & renseignements</p>
-          <a href="tel:+33784628640" style={{ display: 'inline-block', background: '#fff', color: '#000', padding: '16px 40px', borderRadius: '4px', fontSize: '18px', fontWeight: 500, textDecoration: 'none', letterSpacing: '1px' }}>
-            07 84 62 86 40
-          </a>
-          <p style={{ marginTop: '16px', color: 'rgba(255,255,255,0.35)', fontSize: '13px' }}>Disponible 24h/24</p>
-          <a href="/" style={{ display: 'block', marginTop: '32px', color: 'rgba(255,255,255,0.4)', fontSize: '13px', textDecoration: 'none' }}>â† Retour au site Taxi Malacrida</a>
-        </div>
-
-      </div>
-    </main>
-  );
-};
-
-export default TaxiVitrolles;
+JHOˆ
+ˆ]ˆÙ^O^ÜK›˜[Y_Hİ[O^ŞÈ›Ü™\•Üˆ	Ì\ÛÛY™Ø˜JMKMKMKŒ
+IËY[™ÕÜˆ	ÌŒ	ËY[™Ğ›İÛNˆ	ÌŒ	È_O‚ˆÈİ[O^ŞÈ›ÛÚ^™Nˆ	ÌMœ	Ë›ÛÙZYÚˆX\™Ú[›İÛNˆ	ÌL	ËÛÛÜˆ	ÈÙ™™‰È_OÜK›˜[Y_OÚÏ‚ˆİ[O^ŞÈÛÛÜˆ	Ü™Ø˜JMKMKMKŠIË›ÛÚ^™Nˆ	ÌM\	Ë[™RZYÚˆKˆ_OÜK˜XØÙ\Y[œİÙ\‹^OÜ‚ˆÙ]‚ˆ
+J_BˆÙ]‚‚ˆ]ˆİ[O^ŞÈ^[YÛˆ	ØÙ[\‰ËY[™ÕÜˆ	ÌÌœ	Ë›Ü™\•Üˆ	Ì\ÛÛY™Ø˜JMKMKMKŒ
+IÈ_O‚ˆİ[O^ŞÈÛÛÜˆ	Ü™Ø˜JMKMKMKJIË›ÛÚ^™Nˆ	ÌLÜ	Ë]\”ÜXÚ[™Îˆ	Ì\	Ë^˜[œÙ›Ü›Nˆ	İ\\˜Ø\ÙIËX\™Ú[›İÛNˆ	ÌMœ	È_O”°ê\Ù\˜][Ûˆ	ˆ™[œÙZYÛ™[Y[ÏÜ‚ˆH™YH[ŠÌÌÍÎŒˆİ[O^ŞÈ\Ü^Nˆ	Ú[›[™KX›ØÚÉË˜XÚÙÜ›İ[™ˆ	ÈÙ™™‰ËÛÛÜˆ	ÈÌ	ËY[™Îˆ	ÌMœ	Ë›Ü™\”˜Y]\Îˆ	Í	Ë›ÛÚ^™Nˆ	ÌN	Ë›ÛÙZYÚˆL^XÛÜ˜][Ûˆ	Û›Û™IË]\”ÜXÚ[™Îˆ	Ì\	È_O‚ˆÈŒˆˆˆØO‚ˆİ[O^ŞÈX\™Ú[•Üˆ	ÌMœ	ËÛÛÜˆ	Ü™Ø˜JMKMKMKŒÍJIË›ÛÚ^™Nˆ	ÌLÜ	È_O‘\ÜÛšX›HÌÜ‚ˆH™YH‹Èˆİ[O^ŞÈ\Ü^Nˆ	Ø›ØÚÉËX\™Ú[•Üˆ	ÌÌœ	ËÛÛÜˆ	Ü™Ø˜JMKMKMK
+IË›ÛÚ^™Nˆ	ÌLÜ	Ë^XÛÜ˜][Ûˆ	Û›Û™IÈ_O¸¡¤™]İ\ˆ]HÚ]H^HX[XÜšYOØO‚ˆÙ]‚‚ˆÙ]‚ˆÛXZ[‚ˆ
+NÂŸNÂ‚™^ÜY˜][^Uš]›Û\ÎÂ

@@ -17,8 +17,8 @@ const SCHEMA = {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
     "opens": "00:00", "closes": "23:59"
-  },                                                                                                                                  
-  "address": {                                                                                                                                  
+  },
+  "address": {
     "@type": "PostalAddress",
     "addressLocality": "Pertuis",
     "postalCode": "84120",
@@ -29,7 +29,8 @@ const SCHEMA = {
   "areaServed": [
     { "@type": "City", "name": "Pertuis" },
     { "@type": "City", "name": "Aix-en-Provence" },
-    { "@type": "City", "name": "Meyrargues" }
+    { "@type": "City", "name": "Meyrargues" },
+    { "@type": "City", "name": "La Roque-d'Anthéron" }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -39,6 +40,15 @@ const SCHEMA = {
     ]
   },
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "ratingCount": "47" }
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Taxi Aix-en-Provence", "item": "https://www.taximalacrida.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Taxi Pertuis", "item": "https://www.taximalacrida.fr/taxi-pertuis" }
+  ]
 };
 
 const FAQ_SCHEMA = {
@@ -72,9 +82,15 @@ const TaxiPertuis = () => {
     s2.textContent = JSON.stringify(FAQ_SCHEMA);
     document.head.appendChild(s2);
 
+    const s3 = document.createElement('script');
+    s3.type = 'application/ld+json'; s3.id = 'schema-pertuis-breadcrumb';
+    s3.textContent = JSON.stringify(BREADCRUMB_SCHEMA);
+    document.head.appendChild(s3);
+
     return () => {
       document.getElementById('schema-pertuis-business')?.remove();
       document.getElementById('schema-pertuis-faq')?.remove();
+      document.getElementById('schema-pertuis-breadcrumb')?.remove();
     };
   }, []);
 
@@ -91,7 +107,7 @@ const TaxiPertuis = () => {
             </span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '17px', lineHeight: 1.7, maxWidth: '600px' }}>
-            Taxi Malacrida dessert <strong style={{ color: '#fff' }}>Pertuis</strong> et ses environs pour tous vos transferts vers les gares, l'aéroport et les grandes villes de la région PACA. Véhicule Tesla, tarif fixe, 24h/24.
+            Taxi Malacrida dessert <strong style={{ color: '#fff' }}>Pertuis</strong> et ses environs (Meyrargues, La Roque-d'Anthéron) pour tous vos transferts vers les gares, l'aéroport et les grandes villes de la région PACA. Véhicule Tesla, tarif fixe, 24h/24.
           </p>
         </div>
 

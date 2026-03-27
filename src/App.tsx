@@ -14,12 +14,15 @@ import TaxiGareSaintCharles from "./pages/TaxiGareSaintCharles";
 import TaxiVitrolles from "./pages/TaxiVitrolles";
 import TaxiPertuis from "./pages/TaxiPertuis";
 import TaxiMeyreuil from "./pages/TaxiMeyreuil";
+import TaxiGardanne from "./pages/TaxiGardanne";
+import TaxiSalonDeProvence from "./pages/TaxiSalonDeProvence";
+import TaxiVenelles from "./pages/TaxiVenelles";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>                            
+    <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/taxi-vitrolles" element={<TaxiVitrolles />} />
           <Route path="/taxi-pertuis" element={<TaxiPertuis />} />
           <Route path="/taxi-meyreuil" element={<TaxiMeyreuil />} />
+          <Route path="/taxi-gardanne" element={<TaxiGardanne />} />
+          <Route path="/taxi-salon-de-provence" element={<TaxiSalonDeProvence />} />
+          <Route path="/taxi-venelles" element={<TaxiVenelles />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -9,7 +9,7 @@ const SCHEMA = {
   "@type": ["TaxiService", "LocalBusiness"],
   "@id": "https://www.taximalacrida.fr/taxi-meyreuil#service",
   "name": "Taxi Meyreuil — Malacrida",
-  "description": "Taxi et VTC à Meyreuil. Transferts vers l'Aéroport Marseille-Provence, la Gare TGV Aix-en-Provence et le centre d'Aix-en-Provence. Chauffeur Tesla 24h/24, tarif fixe garanti.",
+  "description": "Taxi et VTC à Meyreuil, commune proche d'Aix-en-Provence. Transferts vers l'Aéroport Marseille-Provence, la Gare TGV, Marseille. Chauffeur Tesla 24h/24, tarif fixe garanti.",
   "url": "https://www.taximalacrida.fr/taxi-meyreuil",
   "telephone": "+33784628640",
   "priceRange": "€€",
@@ -17,7 +17,7 @@ const SCHEMA = {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
     "opens": "00:00", "closes": "23:59"
-  },                                                    
+  },
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Meyreuil",
@@ -29,16 +29,26 @@ const SCHEMA = {
   "areaServed": [
     { "@type": "City", "name": "Meyreuil" },
     { "@type": "City", "name": "Aix-en-Provence" },
-    { "@type": "City", "name": "Gardanne" }
+    { "@type": "City", "name": "Gardanne" },
+    { "@type": "City", "name": "Trets" }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Taxi Meyreuil → Gare TGV Aix-en-Provence" }, "price": "40", "priceCurrency": "EUR" },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Taxi Meyreuil → Aéroport Marseille-Provence" }, "price": "55", "priceCurrency": "EUR" }
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Taxi Meyreuil → Aéroport Marseille-Provence" }, "price": "55", "priceCurrency": "EUR" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Taxi Meyreuil → Gare TGV Aix-en-Provence" }, "price": "40", "priceCurrency": "EUR" }
     ]
   },
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "ratingCount": "47" }
+};
+
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Taxi Aix-en-Provence", "item": "https://www.taximalacrida.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Taxi Meyreuil", "item": "https://www.taximalacrida.fr/taxi-meyreuil" }
+  ]
 };
 
 const FAQ_SCHEMA = {
@@ -47,13 +57,13 @@ const FAQ_SCHEMA = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Quel taxi appeler à Meyreuil pour l'aéroport de Marseille ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Taxi Malacrida intervient depuis Meyreuil pour l'Aéroport Marseille-Provence. Tarif fixe à partir de 55€, disponible 24h/24 7j/7. Appelez le 07 84 62 86 40." }
+      "name": "Quel taxi appeler à Meyreuil ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Taxi Malacrida dessert Meyreuil et ses environs pour tous vos déplacements. Disponible 24h/24, tarif fixe garanti. Appelez le 07 84 62 86 40 pour réserver." }
     },
     {
       "@type": "Question",
-      "name": "Combien coûte un taxi de Meyreuil à la Gare TGV d'Aix-en-Provence ?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Le tarif fixe entre Meyreuil et la Gare TGV Aix-en-Provence est de 40€. Prise en charge à domicile, dépose directement à la gare, sans supplément nuit." }
+      "name": "Quel est le prix d'un taxi de Meyreuil à l'aéroport de Marseille ?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Le tarif fixe depuis Meyreuil vers l'Aéroport Marseille-Provence est à partir de 55€. Prix annoncé à la réservation, sans supplément." }
     }
   ]
 };
@@ -72,9 +82,15 @@ const TaxiMeyreuil = () => {
     s2.textContent = JSON.stringify(FAQ_SCHEMA);
     document.head.appendChild(s2);
 
+    const s3 = document.createElement('script');
+    s3.type = 'application/ld+json'; s3.id = 'schema-meyreuil-breadcrumb';
+    s3.textContent = JSON.stringify(BREADCRUMB_SCHEMA);
+    document.head.appendChild(s3);
+
     return () => {
       document.getElementById('schema-meyreuil-business')?.remove();
       document.getElementById('schema-meyreuil-faq')?.remove();
+      document.getElementById('schema-meyreuil-breadcrumb')?.remove();
     };
   }, []);
 
@@ -87,11 +103,11 @@ const TaxiMeyreuil = () => {
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 300, letterSpacing: '1px', lineHeight: 1.2, marginBottom: '24px' }}>
             Taxi Meyreuil
             <span style={{ display: 'block', color: 'rgba(255,255,255,0.6)', fontSize: '0.6em', fontWeight: 200, marginTop: '8px' }}>
-              Aéroport, Gare TGV, Aix-en-Provence — 24h/24
+              Proche Aix-en-Provence — Transferts gares & aéroport
             </span>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '17px', lineHeight: 1.7, maxWidth: '600px' }}>
-            Taxi Malacrida dessert <strong style={{ color: '#fff' }}>Meyreuil</strong> pour tous vos transferts : aéroport de Marseille-Provence, Gare TGV d'Aix-en-Provence, centre-ville d'Aix. Véhicule Tesla, tarif fixe, disponible 24h/24.
+            Taxi Malacrida intervient à <strong style={{ color: '#fff' }}>Meyreuil</strong> pour vos transferts vers l'aéroport de Marseille, la Gare TGV d'Aix, Gardanne et Trets. Chauffeur Tesla disponible 24h/24, tarif fixe.
           </p>
         </div>
 
@@ -101,7 +117,7 @@ const TaxiMeyreuil = () => {
             {[
               { dest: 'Gare TGV Aix-en-Provence', price: 'dès 40€' },
               { dest: 'Aéroport Marseille-Provence', price: 'dès 55€' },
-              { dest: 'Centre Aix-en-Provence', price: 'dès 25€' },
+              { dest: 'Centre Aix-en-Provence', price: 'dès 30€' },
               { dest: 'Gare Saint-Charles Marseille', price: 'dès 60€' },
             ].map(({ dest, price }) => (
               <div key={dest} style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '12px' }}>

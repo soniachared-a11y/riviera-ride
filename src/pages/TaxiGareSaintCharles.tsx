@@ -43,6 +43,15 @@ const SCHEMA = {
   "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "bestRating": "5", "ratingCount": "47" }
 };
 
+const BREADCRUMB_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Taxi Aix-en-Provence", "item": "https://www.taximalacrida.fr/" },
+    { "@type": "ListItem", "position": 2, "name": "Taxi Gare Saint-Charles Marseille", "item": "https://www.taximalacrida.fr/taxi-gare-saint-charles" }
+  ]
+};
+
 const FAQ_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -79,9 +88,15 @@ const TaxiGareSaintCharles = () => {
     s2.textContent = JSON.stringify(FAQ_SCHEMA);
     document.head.appendChild(s2);
 
+    const s3 = document.createElement('script');
+    s3.type = 'application/ld+json'; s3.id = 'schema-stcharles-breadcrumb';
+    s3.textContent = JSON.stringify(BREADCRUMB_SCHEMA);
+    document.head.appendChild(s3);
+
     return () => {
       document.getElementById('schema-stcharles-business')?.remove();
       document.getElementById('schema-stcharles-faq')?.remove();
+      document.getElementById('schema-stcharles-breadcrumb')?.remove();
     };
   }, []);
 
@@ -115,7 +130,7 @@ const TaxiGareSaintCharles = () => {
           <h2 style={{ fontSize: '20px', fontWeight: 300, marginBottom: '20px' }}>Le service</h2>
           <ul style={{ listStyle: 'none', padding: 0, display: 'grid', gap: '12px' }}>
             {[
-              "Prise en charge à domicile ou à l'adresse de votre choix à Aix-en-Provence",
+              'Prise en charge à domicile ou à l\'adresse de votre choix à Aix-en-Provence',
               'Dépose directement devant la Gare Saint-Charles, accès immédiat aux quais',
               'Retour depuis la gare : service aller-retour disponible',
               'Idéal pour les déplacements professionnels vers Marseille',
