@@ -10,5 +10,21 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# Moteurs IA — GEO (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://www.taximalacrida.fr/sitemap.xml
