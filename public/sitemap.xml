@@ -4,12 +4,55 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Page principale — priorité maximale -->
-  <url>
+  <!-- Page principale -->
+  <url>                                        
     <loc>https://www.taximalacrida.fr/</loc>
     <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>                            
+
+  <!-- Pages SEO locales — destinations & villes -->
+  <url>                            
+    <loc>https://www.taximalacrida.fr/taxi-aeroport-marignane</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>                            
+
+  <url>
+    <loc>https://www.taximalacrida.fr/taxi-gare-tgv-aix</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.taximalacrida.fr/taxi-gare-saint-charles</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.taximalacrida.fr/taxi-vitrolles</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.taximalacrida.fr/taxi-pertuis</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.taximalacrida.fr/taxi-meyreuil</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Mentions légales -->
