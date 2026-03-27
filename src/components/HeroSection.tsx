@@ -43,6 +43,8 @@ const HeroSection = () => {
             }}
           >
             TAXI MALACRIDA
+            {/* Texte SEO masqué — enrichit le H1 pour Google sans altérer le design */}
+            <span className="sr-only"> — VTC Aix-en-Provence, Transferts Gare TGV &amp; Aéroport Marseille</span>
           </motion.h1>
           
           {/* Subtitle */}
